@@ -58,6 +58,12 @@ body {
 .cover-container {
     max-width: 800px;
     padding: 2rem;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .cover-title {
@@ -182,6 +188,12 @@ body {
     font-size: 1.1rem;
 }
 
+.opening-closing {
+    margin-top: 2rem;
+    font-style: italic;
+    color: var(--primary);
+}
+
 /* Detail Pengantin */
 #detail {
     background: linear-gradient(to bottom, #e6e9f0 0%, #eef1f5 100%);
@@ -236,6 +248,21 @@ body {
     font-size: 2.5rem;
 }
 
+.couple-quote {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--light);
+    border-radius: 10px;
+    font-style: italic;
+    position: relative;
+}
+
+.couple-quote i {
+    color: var(--secondary);
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
 /* Events Page */
 #events {
     background: linear-gradient(to right, #fdfbfb 0%, #ebedee 100%);
@@ -258,10 +285,24 @@ body {
     min-width: 300px;
     text-align: center;
     transition: var(--transition);
+    position: relative;
 }
 
 .event-card:hover {
     transform: translateY(-5px);
+}
+
+.event-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
 }
 
 .event-card h3 {
@@ -345,6 +386,7 @@ body {
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    text-align: center;
 }
 
 .gallery-item:hover {
@@ -353,13 +395,19 @@ body {
 
 .gallery-img {
     width: 100%;
-    height: 100%;
+    height: 80%;
     background: linear-gradient(135deg, var(--primary), var(--accent));
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 3rem;
+}
+
+.gallery-item p {
+    padding: 1rem;
+    font-weight: 500;
+    color: var(--primary);
 }
 
 /* Countdown Page */
@@ -409,6 +457,11 @@ body {
     margin: 0;
 }
 
+.countdown-message {
+    margin-top: 2rem;
+    font-style: italic;
+}
+
 /* Closing Page */
 #closing {
     background: linear-gradient(to right, #fdfbfb 0%, #ebedee 100%);
@@ -441,6 +494,27 @@ body {
     font-size: 1.5rem;
     margin: 1rem 0;
     color: var(--primary);
+}
+
+.closing-quote {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--light);
+    border-radius: 10px;
+    font-style: italic;
+    position: relative;
+}
+
+.closing-quote i {
+    color: var(--secondary);
+    font-size: 1rem;
+    margin-right: 5px;
+}
+
+.quote-source {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--accent);
 }
 
 /* Envelope Page */
@@ -478,6 +552,24 @@ body {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.bank-option:hover {
+    transform: translateY(-5px);
+}
+
+.bank-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
 }
 
 .bank-option h3 {
@@ -490,6 +582,14 @@ body {
 .bank-detail p {
     margin: 0.8rem 0;
     font-size: 1.1rem;
+}
+
+.envelope-note {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 10px;
+    color: var(--primary);
 }
 
 /* Comments Page */
@@ -542,6 +642,18 @@ body {
     box-shadow: var(--shadow);
     max-height: 400px;
     overflow-y: auto;
+}
+
+.comment-placeholder {
+    text-align: center;
+    padding: 2rem;
+    color: #777;
+}
+
+.comment-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
 }
 
 .comment-item {
