@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Navigasi underbar
     const underbarItems = document.querySelectorAll('.underbar-item');
+    const underbar = document.querySelector('.underbar');
+    const musicControl = document.querySelector('.music-control');
     
     // Hitung mundur
     const weddingDate = new Date('December 21, 2025 09:00:00').getTime();
@@ -76,52 +78,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Fungsi untuk berpindah halaman
-    function navigateToPage(pageId) {
-        // Sembunyikan semua halaman
-        document.querySelectorAll('.page').forEach(page => {
-            page.classList.remove('active');
-        });
+    // Fungsi untuk membuka undangan (pindah dari cover ke single page)
+    function openInvitation() {
+        const cover = document.getElementById('cover');
+        const mainContent = document.getElementById('main-content');
         
-        // Tampilkan halaman yang dipilih
-        const targetPage = document.getElementById(pageId);
-        if (targetPage) {
-            targetPage.classList.add('active');
-            
-            // Update underbar aktif
-            underbarItems.forEach(item => {
-                if (item.getAttribute('data-target') === pageId) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            
-            // Scroll ke atas halaman
-            window.scrollTo(0, 0);
-            
-            // Jika berpindah dari halaman cover, pastikan musik diputar
-            if (pageId !== 'cover' && !isMusicPlaying) {
+        if (cover && mainContent) {
+            cover.classList.add('hidden');
+            setTimeout(() => {
+                cover.style.display = 'none';
+                mainContent.classList.add('active');
+                underbar.classList.add('active');
+                musicControl.classList.add('active');
                 playMusic();
-            }
-        } else {
-            console.error("Halaman tidak ditemukan:", pageId);
+                
+                // Scroll ke bagian pembuka
+                const openingSection = document.getElementById('opening');
+                if (openingSection) {
+                    openingSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 800);
         }
     }
     
     // Event listener untuk tombol buka undangan
     if (openInvitationBtn) {
-        openInvitationBtn.addEventListener('click', function() {
-            navigateToPage('opening');
-            playMusic();
-        });
+        openInvitationBtn.addEventListener('click', openInvitation);
     }
     
     // Event listener untuk underbar navigasi
     underbarItems.forEach(item => {
         item.addEventListener('click', function() {
-            const targetPage = this.getAttribute('data-target');
-            navigateToPage(targetPage);
+            const targetSectionId = this.getAttribute('data-target');
+            const targetSection = document.getElementById(targetSectionId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update underbar aktif
+                underbarItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                this.classList.add('active');
+            }
         });
     });
     
@@ -135,6 +134,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Fungsi untuk mengupdate underbar aktif berdasarkan scroll
+    function updateActiveUnderbar() {
+        const sections = document.querySelectorAll('.content-section');
+        const scrollPos = window.scrollY + 100; // Offset untuk underbar
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                // Hapus active dari semua underbar items
+                underbarItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Tambahkan active ke underbar item yang sesuai
+                const activeUnderbarItem = document.querySelector(`.underbar-item[data-target="${sectionId}"]`);
+                if (activeUnderbarItem) {
+                    activeUnderbarItem.classList.add('active');
+                }
+            }
+        });
+    }
+    
+    // Event listener untuk scroll
+    window.addEventListener('scroll', updateActiveUnderbar);
     
     // Fungsi hitung mundur
     function updateCountdown() {
@@ -368,20 +395,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
-    // Inisialisasi underbar untuk halaman aktif
-    function initializeUnderbar() {
-        const activePage = document.querySelector('.page.active');
-        if (activePage && activePage.id !== 'cover') {
-            const activeUnderbarItem = document.querySelector(`.underbar-item[data-target="${activePage.id}"]`);
-            if (activeUnderbarItem) {
-                activeUnderbarItem.classList.add('active');
-            }
-        }
-    }
-    
-    // Panggil inisialisasi underbar
-    initializeUnderbar();
     
     console.log("Aplikasi undangan berhasil diinisialisasi");
 });
