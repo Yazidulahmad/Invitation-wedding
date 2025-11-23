@@ -1,0 +1,722 @@
+:root {
+    --primary: #8B7355;
+    --secondary: #D4AF37;
+    --accent: #C19A6B;
+    --light: #F5F5F5;
+    --dark: #2C2C2C;
+    --text: #333333;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text);
+    background-color: var(--light);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Cover Page */
+#cover {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.cover-container {
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.cover-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cover-names {
+    margin: 2rem 0;
+}
+
+.cover-names h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin: 1rem 0;
+    font-weight: 600;
+}
+
+.cover-names span {
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    color: var(--secondary);
+}
+
+.cover-date {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+}
+
+.guest-name {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+.btn-primary {
+    background: var(--secondary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow);
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Section Titles */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: var(--secondary);
+    margin: 0.5rem auto;
+}
+
+/* Opening Page */
+#opening {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.opening-content {
+    text-align: center;
+    max-width: 800px;
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.opening-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.opening-names {
+    margin: 2rem 0;
+}
+
+.opening-names h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin: 1rem 0;
+    color: var(--primary);
+}
+
+.and-symbol {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    margin: 0 1rem;
+}
+
+.opening-parents p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+/* Detail Pengantin */
+#detail {
+    background: linear-gradient(to bottom, #e6e9f0 0%, #eef1f5 100%);
+}
+
+.couple-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.bride, .groom {
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.bride:hover, .groom:hover {
+    transform: translateY(-10px);
+}
+
+.couple-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 4rem;
+}
+
+.bride h3, .groom h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.heart-divider {
+    color: var(--secondary);
+    font-size: 2.5rem;
+}
+
+/* Events Page */
+#events {
+    background: linear-gradient(to right, #fdfbfb 0%, #ebedee 100%);
+}
+
+.events-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.event-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.event-info {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    gap: 1rem;
+}
+
+.event-info i {
+    color: var(--secondary);
+    font-size: 1.2rem;
+    width: 30px;
+}
+
+.location-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.location-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.map-container {
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-map {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.btn-map:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Gallery Page */
+#gallery {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.gallery-item {
+    aspect-ratio: 1/1;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+}
+
+/* Countdown Page */
+#countdown {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.countdown-text {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 1.5rem;
+    min-width: 120px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-item span {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.countdown-item p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Closing Page */
+#closing {
+    background: linear-gradient(to right, #fdfbfb 0%, #ebedee 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closing-content {
+    text-align: center;
+    max-width: 800px;
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.closing-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.closing-names {
+    margin-top: 2rem;
+}
+
+.closing-names h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: var(--primary);
+}
+
+/* Envelope Page */
+#envelope {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.envelope-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.envelope-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.envelope-options {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.bank-option {
+    flex: 1;
+    min-width: 250px;
+    background: var(--light);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.bank-option h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.bank-detail p {
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
+}
+
+/* Comments Page */
+#comments {
+    background: linear-gradient(to right, #fdfbfb 0%, #ebedee 100%);
+}
+
+.comments-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.comment-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.comments-list {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.comment-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.comment-name {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.comment-date {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.comment-message {
+    line-height: 1.5;
+}
+
+/* Navigation Underbar */
+.underbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 0;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.underbar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0.5rem;
+    border-radius: 8px;
+    min-width: 60px;
+}
+
+.underbar-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.underbar-item.active {
+    color: var(--secondary);
+}
+
+.underbar-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.underbar-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+/* Music Control */
+.music-control {
+    position: fixed;
+    bottom: 5rem;
+    right: 2rem;
+    z-index: 100;
+}
+
+.music-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--secondary);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    font-size: 1.2rem;
+}
+
+.music-btn:hover {
+    background: var(--accent);
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cover-title {
+        font-size: 2.5rem;
+    }
+    
+    .cover-names h2 {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .couple-container {
+        flex-direction: column;
+    }
+    
+    .heart-divider {
+        transform: rotate(90deg);
+        margin: 1rem 0;
+    }
+    
+    .underbar-label {
+        display: none;
+    }
+    
+    .underbar-item {
+        min-width: 50px;
+    }
+    
+    .music-control {
+        bottom: 4.5rem;
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .cover-container {
+        padding: 1rem;
+    }
+    
+    .cover-title {
+        font-size: 2rem;
+    }
+    
+    .cover-names h2 {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .opening-content, .closing-content, .envelope-content {
+        padding: 1.5rem;
+    }
+    
+    .event-card, .bank-option {
+        min-width: 100%;
+    }
+    
+    .countdown-item {
+        min-width: 80px;
+        padding: 1rem;
+    }
+    
+    .countdown-item span {
+        font-size: 2rem;
+    }
+}
