@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fungsi untuk memutar musik
     function playMusic() {
         if (backgroundMusic) {
-            backgroundMusic.volume = 0.5;
+            backgroundMusic.volume = 0.3;
             const playPromise = backgroundMusic.play();
             
             if (playPromise !== undefined) {
@@ -260,12 +260,13 @@ document.addEventListener('DOMContentLoaded', function() {
             right: 20px;
             background: var(--secondary);
             color: white;
-            padding: 1rem 1.5rem;
+            padding: 0.8rem 1.2rem;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             z-index: 1000;
-            max-width: 300px;
+            max-width: 280px;
             animation: slideIn 0.3s ease;
+            font-size: 0.9rem;
         `;
         
         notification.textContent = message;
