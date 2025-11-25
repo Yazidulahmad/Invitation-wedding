@@ -38,6 +38,14 @@ $(document).ready(function() {
             musicIcon.classList.add('fa-pause');
         }).catch(function(error) {
             console.log('Autoplay prevented:', error);
+            // Tampilkan pesan bahwa musik tidak bisa diputar otomatis
+            Swal.fire({
+                title: 'Musik Undangan',
+                text: 'Klik tombol musik di pojok kiri bawah untuk memutar musik.',
+                icon: 'info',
+                confirmButtonText: 'Mengerti',
+                timer: 3000
+            });
         });
     }
     
@@ -62,6 +70,9 @@ $(document).ready(function() {
         $('html, body').animate({
             scrollTop: $('#pembuka').offset().top
         }, 1000);
+        
+        // Sembunyikan nama tamu setelah membuka undangan
+        $('#guest-name').fadeOut(500);
     });
     
     // Navigasi
@@ -72,6 +83,10 @@ $(document).ready(function() {
     // Tutup menu navigasi saat item diklik
     $('.nav-item').click(function() {
         $('#nav-menu').removeClass('active');
+        
+        // Tambahkan class active ke item yang diklik
+        $('.nav-item').removeClass('active');
+        $(this).addClass('active');
     });
     
     // Hitung mundur
@@ -188,7 +203,13 @@ $(document).ready(function() {
         var comment = {
             name: name,
             message: message,
-            date: new Date().toLocaleDateString('id-ID')
+            date: new Date().toLocaleDateString('id-ID', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
         };
         
         // Tambahkan komentar ke daftar
@@ -212,7 +233,8 @@ $(document).ready(function() {
             title: 'Terima Kasih',
             text: 'Ucapan Anda telah terkirim',
             icon: 'success',
-            confirmButtonText: 'Baik'
+            confirmButtonText: 'Baik',
+            timer: 2000
         });
     });
     
@@ -223,5 +245,49 @@ $(document).ready(function() {
         $('html, body').animate({
             scrollTop: $($(this).attr('href')).offset().top
         }, 500, 'linear');
+    });
+    
+    // Deteksi scroll untuk mengaktifkan navigasi
+    $(window).scroll(function() {
+        var scrollPosition = $(window).scrollTop();
+        
+        $('.section').each(function() {
+            var sectionId = $(this).attr('id');
+            var sectionTop = $(this).offset().top - 100;
+            var sectionBottom = sectionTop + $(this).outerHeight();
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                $('.nav-item').removeClass('active');
+                $('.nav-item[href="#' + sectionId + '"]').addClass('active');
+            }
+        });
+    });
+    
+    // Inisialisasi komentar contoh
+    var sampleComments = [
+        {
+            name: "Keluarga Supriyadi",
+            message: "Semoga pernikahan kalian diberkahi Allah SWT dan menjadi keluarga yang sakinah, mawaddah, wa rahmah.",
+            date: "15 November 2025, 10:30"
+        },
+        {
+            name: "Sahabat Hartini",
+            message: "Selamat menempuh hidup baru! Semoga kalian selalu bahagia dan kompak selamanya.",
+            date: "14 November 2025, 16:45"
+        }
+    ];
+    
+    // Tambahkan komentar contoh
+    sampleComments.forEach(function(comment) {
+        var commentHtml = `
+            <div class="comment-item" data-aos="fade-up">
+                <div class="comment-header">
+                    <span class="comment-name">${comment.name}</span>
+                    <span class="comment-date">${comment.date}</span>
+                </div>
+                <p>${comment.message}</p>
+            </div>
+        `;
+        $('#comments-container').prepend(commentHtml);
     });
 });
