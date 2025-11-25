@@ -100,6 +100,16 @@ h1, h2, h3, h4, h5 {
     color: var(--white);
     text-align: center;
     position: relative;
+    transition: all 0.8s ease;
+}
+
+.cover-section.hidden {
+    min-height: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .cover-content {
@@ -705,7 +715,7 @@ textarea.form-control {
 }
 
 /* Hide bottom nav on cover */
-.cover-section ~ .bottom-nav {
+.cover-section:not(.hidden) ~ .bottom-nav {
     display: none;
 }
 
