@@ -3,490 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan Hartini & Ahmad</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Undangan Pernikahan Hartini & Ahmad Yazidul Jihad</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lightbox -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Audio untuk musik latar -->
-    <audio id="backgroundMusic" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-moment-358.mp3" type="audio/mp3">
+    <!-- Audio Element -->
+    <audio id="wedding-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         Browser Anda tidak mendukung elemen audio.
     </audio>
     
-    <!-- Ornamen Janur Kuning -->
-    <div class="janur-decoration top-janur">
-        <div class="janur-leaf"></div>
-        <div class="janur-leaf"></div>
-        <div class="janur-leaf"></div>
-        <div class="janur-leaf"></div>
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="music-btn" id="music-toggle">
+            <i class="fas fa-play" id="music-icon"></i>
+        </div>
     </div>
     
-    <!-- Ornamen Bunga -->
-    <div class="flower-decoration flower-1">
-        <i class="fas fa-leaf"></i>
-    </div>
-    <div class="flower-decoration flower-2">
-        <i class="fas fa-leaf"></i>
-    </div>
-    <div class="flower-decoration flower-3">
-        <i class="fas fa-leaf"></i>
-    </div>
-    <div class="flower-decoration flower-4">
-        <i class="fas fa-leaf"></i>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-btn" id="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-menu" id="nav-menu">
+            <a href="#cover" class="nav-item">Cover</a>
+            <a href="#pembuka" class="nav-item">Pembuka</a>
+            <a href="#detail-pengantin" class="nav-item">Pengantin</a>
+            <a href="#detail-acara" class="nav-item">Acara</a>
+            <a href="#galeri" class="nav-item">Galeri</a>
+            <a href="#hitung-mundur" class="nav-item">Hitung Mundur</a>
+            <a href="#penutup" class="nav-item">Penutup</a>
+            <a href="#amplop-digital" class="nav-item">Amplop Digital</a>
+            <a href="#ucapan" class="nav-item">Ucapan</a>
+        </div>
     </div>
     
-    <!-- Halaman Cover -->
-    <section id="cover" class="page active">
-        <div class="cover-container">
-            <!-- Ornamen Khas Sunda -->
-            <div class="sunda-ornament top-ornament">
-                <div class="sunda-pattern"></div>
+    <!-- Cover Section -->
+    <section id="cover" class="section">
+        <div class="container">
+            <div class="cover-content" data-aos="fade-up">
+                <h1 class="cover-title">The Wedding</h1>
+                <h2 class="cover-subtitle">Hartini & Ahmad Yazidul Jihad</h2>
+                <div class="to-guest" id="guest-name">Kepada Yth. Bapak/Ibu/Saudara/i</div>
+                <button class="btn" id="open-invitation">Buka Undangan</button>
             </div>
-            
-            <div class="cover-content">
-                <div class="cover-header">
-                    <div class="cover-icon left-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h1 class="cover-title">Undangan Pernikahan</h1>
-                    <div class="cover-icon right-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                </div>
-                
-                <div class="cover-names">
-                    <h2>Hartini</h2>
-                    <span class="cover-and">&</span>
-                    <h2>Ahmad Yazidul Jihad</h2>
-                </div>
-                
-                <div class="cover-date-container">
-                    <div class="date-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <p class="cover-date">21 Desember 2025</p>
-                    <div class="date-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                </div>
-                
-                <p class="guest-name" id="guestName">Kepada Yth: Bapak/Ibu/Saudara/i</p>
-                
-                <button id="openInvitation" class="btn-primary">
-                    <span>Buka Undangan</span>
-                    <i class="fas fa-envelope-open"></i>
-                </button>
+        </div>
+    </section>
+    
+    <!-- Pembuka Section -->
+    <section id="pembuka" class="section">
+        <div class="container">
+            <div data-aos="fade-up">
+                <p class="opening-quote">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir."</p>
+                <p class="opening-quote">(QS. Ar-Rum: 21)</p>
+                <h2 class="couple-names">Hartini & Ahmad Yazidul Jihad</h2>
+                <p>Dengan penuh rasa syukur dan kebahagiaan, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami.</p>
             </div>
-            
-            <!-- Ornamen Bawah -->
-            <div class="sunda-ornament bottom-ornament">
-                <div class="sunda-pattern"></div>
+        </div>
+    </section>
+    
+    <!-- Detail Pengantin Section -->
+    <section id="detail-pengantin" class="section">
+        <div class="container">
+            <h2 data-aos="fade-up">Mempelai</h2>
+            <div class="couple-container">
+                <div class="couple-card" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pengantin Wanita" class="couple-img">
+                    <h3 class="couple-name">Hartini</h3>
+                    <p class="couple-parents">Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
+                </div>
+                <div class="couple-card" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pengantin Pria" class="couple-img">
+                    <h3 class="couple-name">Ahmad Yazidul Jihad</h3>
+                    <p class="couple-parents">Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Detail Acara Section -->
+    <section id="detail-acara" class="section">
+        <div class="container">
+            <h2 data-aos="fade-up">Detail Acara</h2>
+            <div class="event-details">
+                <div class="event-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="event-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3 class="event-title">Akad Nikah</h3>
+                    <p class="event-info"><i class="far fa-calendar"></i> Sabtu, 21 Desember 2025</p>
+                    <p class="event-info"><i class="far fa-clock"></i> 09:00 WIB</p>
+                    <p class="event-info"><i class="fas fa-map-marker-alt"></i> Kediaman Mempelai Wanita</p>
+                    <button class="btn btn-outline mt-3" id="save-akad">Simpan ke Kalender</button>
+                </div>
+                <div class="event-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="event-icon">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3 class="event-title">Resepsi</h3>
+                    <p class="event-info"><i class="far fa-calendar"></i> Sabtu, 21 Desember 2025</p>
+                    <p class="event-info"><i class="far fa-clock"></i> 11:00 - 14:00 WIB</p>
+                    <p class="event-info"><i class="fas fa-map-marker-alt"></i> Gedung Serba Guna</p>
+                    <button class="btn btn-outline mt-3" id="save-resepsi">Simpan ke Kalender</button>
+                </div>
+                <div class="event-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="event-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="event-title">Lokasi Acara</h3>
+                    <p class="event-info">Jl. Merdeka No. 123, Jakarta Pusat</p>
+                    <div id="map" style="height: 200px; width: 100%; border-radius: 10px; margin-top: 15px;"></div>
+                    <button class="btn btn-outline mt-3" id="open-map">Buka di Google Maps</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Galeri Section -->
+    <section id="galeri" class="section">
+        <div class="container">
+            <h2 data-aos="fade-up">Galeri Kami</h2>
+            <div class="gallery-grid">
+                <a href="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" data-lightbox="gallery" class="gallery-item" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Prewedding 1">
+                </a>
+                <a href="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Prewedding 2">
+                </a>
+                <a href="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Prewedding 3">
+                </a>
+                <a href="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Prewedding 4">
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hitung Mundur Section -->
+    <section id="hitung-mundur" class="section">
+        <div class="container">
+            <h2 data-aos="fade-up">Hitung Mundur</h2>
+            <div class="countdown-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Hari</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Jam</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Menit</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Detik</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Penutup Section -->
+    <section id="penutup" class="section">
+        <div class="container">
+            <div data-aos="fade-up">
+                <h2>Terima Kasih</h2>
+                <p class="closing-message">Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih. Semoga Allah SWT senantiasa meridhoi pernikahan kami dan memberikan keberkahan dalam rumah tangga yang akan kami bangun.</p>
+                <p class="closing-message">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+                <p class="closing-message">Kami yang berbahagia,</p>
+                <h3 class="couple-names">Hartini & Ahmad Yazidul Jihad</h3>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Amplop Digital Section -->
+    <section id="amplop-digital" class="section">
+        <div class="container">
+            <h2 data-aos="fade-up">Amplop Digital</h2>
+            <p data-aos="fade-up">Untuk yang ingin memberikan tanda kasih, dapat melalui transfer ke:</p>
+            <div class="bank-options">
+                <div class="bank-card" data-aos="fade-right">
+                    <h3 class="bank-name">Bank BCA</h3>
+                    <p class="account-number">123 456 7890</p>
+                    <p class="account-name">Hartini</p>
+                </div>
+                <div class="bank-card" data-aos="fade-up">
+                    <h3 class="bank-name">Bank Mandiri</h3>
+                    <p class="account-number">098 765 4321</p>
+                    <p class="account-name">Ahmad Yazidul Jihad</p>
+                </div>
+                <div class="bank-card" data-aos="fade-left">
+                    <h3 class="bank-name">Bank BRI</h3>
+                    <p class="account-number">567 890 1234</p>
+                    <p class="account-name">Hartini & Ahmad Yazidul Jihad</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Ucapan Section -->
+    <section id="ucapan" class="section">
+        <div class="container">
+            <h2 data-aos="fade-up">Kirim Ucapan</h2>
+            <div class="comment-form" data-aos="fade-up">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="comment-name" placeholder="Nama Anda">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="comment-message" placeholder="Tulis ucapan dan doa Anda di sini..."></textarea>
+                </div>
+                <button class="btn" id="submit-comment">Kirim Ucapan</button>
+            </div>
+            <div class="comments-list" id="comments-container">
+                <!-- Komentar akan ditampilkan di sini -->
             </div>
         </div>
     </section>
 
-    <!-- Konten Utama (Single Page) -->
-    <main id="main-content" class="single-page">
-        <!-- Ornamen Pembatas Section -->
-        <div class="section-divider">
-            <div class="divider-icon">
-                <i class="fas fa-heart"></i>
-            </div>
-        </div>
-
-        <!-- Halaman Pembuka -->
-        <section id="opening" class="content-section">
-            <div class="section-ornament left-ornament">
-                <i class="fas fa-leaf"></i>
-            </div>
-            <div class="section-ornament right-ornament">
-                <i class="fas fa-leaf"></i>
-            </div>
-            
-            <div class="section-content">
-                <div class="opening-content traditional-card">
-                    <h2 class="section-title">Assalamu'alaikum Warahmatullahi Wabarakatuh</h2>
-                    <p class="opening-text">
-                        Dengan mengharap ridho dan rahmat Allah Subhanahu Wa Ta'ala, 
-                        kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri 
-                        acara pernikahan putra-putri kami:
-                    </p>
-                    <div class="opening-names">
-                        <h3>Hartini</h3>
-                        <span class="and-symbol">&</span>
-                        <h3>Ahmad Yazidul Jihad</h3>
-                    </div>
-                    <div class="opening-parents">
-                        <p>Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
-                        <p>Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
-                    </div>
-                    <p class="opening-closing">
-                        Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila 
-                        Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ornamen Pembatas Section -->
-        <div class="section-divider">
-            <div class="divider-icon">
-                <i class="fas fa-star"></i>
-            </div>
-        </div>
-
-        <!-- Halaman Detail Pengantin -->
-        <section id="detail" class="content-section">
-            <div class="section-content">
-                <h2 class="section-title">Bride & Groom</h2>
-                <div class="couple-container">
-                    <div class="bride traditional-card">
-                        <div class="couple-img">
-                            <i class="fas fa-female"></i>
-                            <div class="img-frame"></div>
-                        </div>
-                        <h3>Hartini</h3>
-                        <p>Putri dari</p>
-                        <p>Bapak Supriyadi & Ibu Maesaroh</p>
-                        <div class="couple-quote">
-                            <i class="fas fa-quote-left"></i>
-                            <p>Kebahagiaan sejati adalah ketika kita bisa membahagiakan orang lain</p>
-                        </div>
-                    </div>
-                    <div class="heart-divider">
-                        <div class="heart-container">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                    </div>
-                    <div class="groom traditional-card">
-                        <div class="couple-img">
-                            <i class="fas fa-male"></i>
-                            <div class="img-frame"></div>
-                        </div>
-                        <h3>Ahmad Yazidul Jihad</h3>
-                        <p>Putra dari</p>
-                        <p>Bapak Suhada (Alm) & Ibu Didah Saidah</p>
-                        <div class="couple-quote">
-                            <i class="fas fa-quote-left"></i>
-                            <p>Cinta terbaik adalah yang membuatmu menjadi pribadi yang lebih baik</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ornamen Pembatas Section -->
-        <div class="section-divider">
-            <div class="divider-icon">
-                <i class="fas fa-heart"></i>
-            </div>
-        </div>
-
-        <!-- Halaman Detail Acara -->
-        <section id="events" class="content-section">
-            <div class="section-content">
-                <h2 class="section-title">Detail Acara</h2>
-                <div class="events-container">
-                    <div class="event-card traditional-card">
-                        <div class="event-icon">
-                            <i class="fas fa-mosque"></i>
-                        </div>
-                        <h3>Akad Nikah</h3>
-                        <div class="event-info">
-                            <i class="fas fa-clock"></i>
-                            <p>09:00 WIB</p>
-                        </div>
-                        <div class="event-info">
-                            <i class="fas fa-calendar"></i>
-                            <p>Minggu, 21 Desember 2025</p>
-                        </div>
-                        <div class="event-info">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>Lokasi Resepsi</p>
-                        </div>
-                    </div>
-                    <div class="event-card traditional-card">
-                        <div class="event-icon">
-                            <i class="fas fa-glass-cheers"></i>
-                        </div>
-                        <h3>Resepsi Pernikahan</h3>
-                        <div class="event-info">
-                            <i class="fas fa-clock"></i>
-                            <p>11:00 - 14:00 WIB</p>
-                        </div>
-                        <div class="event-info">
-                            <i class="fas fa-calendar"></i>
-                            <p>Minggu, 21 Desember 2025</p>
-                        </div>
-                        <div class="event-info">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>Lokasi Resepsi</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="location-card traditional-card">
-                    <h3>Lokasi Acara</h3>
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.923935721991!2d107.61085121477238!3d-6.902069995012953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e64b2f6b1f27%3A0x1e74e5a5e8a6a7a!2sGedung%20Sate!5e0!3m2!1sid!2sid!4v1621234567890!5m2!1sid!2sid" 
-                                width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" title="Lokasi Pernikahan"></iframe>
-                    </div>
-                    <a href="https://maps.app.goo.gl/PzdmwVSJc67DmowM7?g_st=ipc" target="_blank" class="btn-map">
-                        <i class="fas fa-map-marked-alt"></i> Buka di Google Maps
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ornamen Pembatas Section -->
-        <div class="section-divider">
-            <div class="divider-icon">
-                <i class="fas fa-star"></i>
-            </div>
-        </div>
-
-        <!-- Halaman Galeri -->
-        <section id="gallery" class="content-section">
-            <div class="section-content">
-                <h2 class="section-title">Galeri Kami</h2>
-                <div class="gallery-container">
-                    <div class="gallery-item traditional-frame">
-                        <div class="gallery-img">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <p>Pertemuan Pertama</p>
-                    </div>
-                    <div class="gallery-item traditional-frame">
-                        <div class="gallery-img">
-                            <i class="fas fa-ring"></i>
-                        </div>
-                        <p>Lamaran</p>
-                    </div>
-                    <div class="gallery-item traditional-frame">
-                        <div class="gallery-img">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                        <p>Pre-Wedding</p>
-                    </div>
-                    <div class="gallery-item traditional-frame">
-                        <div class="gallery-img">
-                            <i class="fas fa-kiss-wink-heart"></i>
-                        </div>
-                        <p>Kebersamaan</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ornamen Pembatas Section -->
-        <div class="section-divider">
-            <div class="divider-icon">
-                <i class="fas fa-heart"></i>
-            </div>
-        </div>
-
-        <!-- Halaman Hitung Mundur -->
-        <section id="countdown" class="content-section">
-            <div class="section-content">
-                <h2 class="section-title">Hitung Mundur</h2>
-                <p class="countdown-text">Menuju Hari Bahagia Kami</p>
-                <div class="countdown-container">
-                    <div class="countdown-item traditional-frame">
-                        <span id="days">00</span>
-                        <p>Hari</p>
-                    </div>
-                    <div class="countdown-item traditional-frame">
-                        <span id="hours">00</span>
-                        <p>Jam</p>
-                    </div>
-                    <div class="countdown-item traditional-frame">
-                        <span id="minutes">00</span>
-                        <p>Menit</p>
-                    </div>
-                    <div class="countdown-item traditional-frame">
-                        <span id="seconds">00</span>
-                        <p>Detik</p>
-                    </div>
-                </div>
-                <div class="countdown-message">
-                    <p>Kami tidak sabar untuk berbagi kebahagiaan ini dengan Anda</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ornamen Pembatas Section -->
-        <div class="section-divider">
-            <div class="divider-icon">
-                <i class="fas fa-star"></i>
-            </div>
-        </div>
-
-        <!-- Halaman Penutup -->
-        <section id="closing" class="content-section">
-            <div class="section-content">
-                <div class="closing-content traditional-card">
-                    <h2 class="section-title">Terima Kasih</h2>
-                    <p class="closing-text">
-                        Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, 
-                        kami mengucapkan terima kasih yang sebesar-besarnya.
-                    </p>
-                    <p class="closing-text">
-                        Wassalamu'alaikum Warahmatullahi Wabarakatuh
-                    </p>
-                    <div class="closing-names">
-                        <p>Keluarga Besar</p>
-                        <h3>Bapak Supriyadi & Ibu Maesaroh</h3>
-                        <h3>Bapak Suhada (Alm) & Ibu Didah Saidah</h3>
-                    </div>
-                    <div class="closing-quote">
-                        <i class="fas fa-quote-left"></i>
-                        <p>"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir."</p>
-                        <p class="quote-source">(QS. Ar-Rum: 21)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ornamen Pembatas Section -->
-        <div class="section-divider">
-            <div class="divider-icon">
-                <i class="fas fa-heart"></i>
-            </div>
-        </div>
-
-        <!-- Halaman Amplop Digital -->
-        <section id="envelope" class="content-section">
-            <div class="section-content">
-                <div class="envelope-content traditional-card">
-                    <h2 class="section-title">Amplop Digital</h2>
-                    <p class="envelope-text">
-                        Bagi yang ingin memberikan tanda kasih, dapat melalui:
-                    </p>
-                    <div class="envelope-options">
-                        <div class="bank-option traditional-frame">
-                            <div class="bank-icon">
-                                <i class="fas fa-university"></i>
-                            </div>
-                            <h3>Transfer Bank</h3>
-                            <div class="bank-detail">
-                                <p><strong>Bank BCA</strong></p>
-                                <p>1234 5678 9012</p>
-                                <p>a.n. Hartini</p>
-                            </div>
-                        </div>
-                        <div class="bank-option traditional-frame">
-                            <div class="bank-icon">
-                                <i class="fas fa-wallet"></i>
-                            </div>
-                            <h3>E-Wallet</h3>
-                            <div class="bank-detail">
-                                <p><strong>DANA</strong></p>
-                                <p>0812 3456 7890</p>
-                                <p>a.n. Ahmad Yazidul Jihad</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="envelope-note">
-                        <p><i class="fas fa-hands"></i> Doa dan restu Anda merupakan hadiah terindah bagi kami</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ornamen Pembatas Section -->
-        <div class="section-divider">
-            <div class="divider-icon">
-                <i class="fas fa-star"></i>
-            </div>
-        </div>
-
-        <!-- Halaman Komentar -->
-        <section id="comments" class="content-section">
-            <div class="section-content">
-                <h2 class="section-title">Ucapan & Doa</h2>
-                <div class="comments-container">
-                    <form id="commentForm" class="comment-form traditional-card">
-                        <div class="form-group">
-                            <input type="text" id="commentName" placeholder="Nama Anda" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="commentMessage" placeholder="Tulis ucapan dan doa untuk mempelai..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary">
-                            <i class="fas fa-paper-plane"></i> Kirim Ucapan
-                        </button>
-                    </form>
-                    <div class="comments-list traditional-card" id="commentsList">
-                        <div class="comment-placeholder">
-                            <i class="fas fa-comments"></i>
-                            <p>Belum ada ucapan. Jadilah yang pertama memberikan ucapan!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Musik Kontrol -->
-    <div class="music-control">
-        <button id="musicToggle" class="music-btn">
-            <i class="fas fa-music"></i>
-        </button>
-    </div>
-
-    <!-- Underbar Navigasi -->
-    <div class="underbar">
-        <div class="underbar-item" data-target="opening">
-            <div class="underbar-icon">
-                <i class="fas fa-envelope-open"></i>
-            </div>
-            <div class="underbar-label">Pembuka</div>
-        </div>
-        <div class="underbar-item" data-target="detail">
-            <div class="underbar-icon">
-                <i class="fas fa-heart"></i>
-            </div>
-            <div class="underbar-label">Pengantin</div>
-        </div>
-        <div class="underbar-item" data-target="events">
-            <div class="underbar-icon">
-                <i class="fas fa-calendar-alt"></i>
-            </div>
-            <div class="underbar-label">Acara</div>
-        </div>
-        <div class="underbar-item" data-target="gallery">
-            <div class="underbar-icon">
-                <i class="fas fa-images"></i>
-            </div>
-            <div class="underbar-label">Galeri</div>
-        </div>
-        <div class="underbar-item" data-target="countdown">
-            <div class="underbar-icon">
-                <i class="fas fa-clock"></i>
-            </div>
-            <div class="underbar-label">Hitung Mundur</div>
-        </div>
-        <div class="underbar-item" data-target="closing">
-            <div class="underbar-icon">
-                <i class="fas fa-hands"></i>
-            </div>
-            <div class="underbar-label">Penutup</div>
-        </div>
-        <div class="underbar-item" data-target="envelope">
-            <div class="underbar-icon">
-                <i class="fas fa-envelope"></i>
-            </div>
-            <div class="underbar-label">Amplop</div>
-        </div>
-        <div class="underbar-item" data-target="comments">
-            <div class="underbar-icon">
-                <i class="fas fa-comment"></i>
-            </div>
-            <div class="underbar-label">Ucapan</div>
-        </div>
-    </div>
-
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    
+    <!-- Custom JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
