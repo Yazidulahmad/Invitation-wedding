@@ -13,6 +13,9 @@ lightbox.option({
     'positionFromTop': 50
 });
 
+// Variabel global untuk nama tamu
+let currentGuestName = '';
+
 // Firebase Configuration (Ganti dengan config Anda nanti)
 const firebaseConfig = {
     apiKey: "your-api-key",
@@ -57,11 +60,28 @@ function copyToClipboard(text) {
     });
 }
 
+// Cegah scroll ke cover
+function preventCoverScroll() {
+    // Hapus event listener scroll lama
+    $(window).off('scroll.coverPrevention');
+    
+    // Tambahkan event listener baru untuk mencegah scroll ke cover
+    $(window).on('scroll.coverPrevention', function() {
+        const coverSection = document.getElementById('cover');
+        if (coverSection.classList.contains('hidden')) {
+            const coverRect = coverSection.getBoundingClientRect();
+            if (coverRect.top < 0 && coverRect.bottom > 0) {
+                window.scrollTo(0, document.getElementById('pembuka').offsetTop);
+            }
+        }
+    });
+}
+
 // Set nama tamu dari URL
 $(document).ready(function() {
-    var guestName = getUrlParameter('to');
-    if (guestName) {
-        $('#guest-name').text('Kepada Yth. ' + guestName);
+    currentGuestName = getUrlParameter('to');
+    if (currentGuestName) {
+        $('#guest-name').text('Kepada Yth. ' + currentGuestName);
     }
     
     // Musik otomatis
@@ -97,6 +117,10 @@ $(document).ready(function() {
     
     // Tombol buka undangan
     $('#open-invitation').click(function() {
+        // Sembunyikan cover section
+        $('#cover').addClass('hidden');
+        
+        // Scroll ke section pembuka
         $('html, body').animate({
             scrollTop: $('#pembuka').offset().top
         }, 1000);
@@ -108,12 +132,30 @@ $(document).ready(function() {
         setTimeout(() => {
             $('#bottom-nav').fadeIn(300);
         }, 1000);
+        
+        // Aktifkan pencegahan scroll ke cover
+        preventCoverScroll();
+        
+        // Set status bahwa undangan sudah dibuka
+        sessionStorage.setItem('undanganDibuka', 'true');
     });
+    
+    // Cek jika undangan sudah dibuka sebelumnya
+    if (sessionStorage.getItem('undanganDibuka') === 'true') {
+        $('#cover').addClass('hidden');
+        $('#bottom-nav').show();
+        preventCoverScroll();
+    }
     
     // Bottom Navigation
     $('.nav-tab').click(function(e) {
         e.preventDefault();
         var target = $(this).attr('href');
+        
+        // Cegah navigasi ke cover jika sudah dibuka
+        if (target === '#cover' && sessionStorage.getItem('undanganDibuka') === 'true') {
+            return;
+        }
         
         $('html, body').animate({
             scrollTop: $(target).offset().top
@@ -233,13 +275,15 @@ $(document).ready(function() {
     
     // Kirim ucapan
     $('#submit-comment').click(function() {
-        var name = $('#comment-name').val();
         var message = $('#comment-message').val();
         
-        if (!name || !message) {
-            showSuccessMessage('Harap isi nama dan pesan Anda');
+        if (!message) {
+            showSuccessMessage('Harap isi pesan Anda');
             return;
         }
+        
+        // Gunakan nama tamu dari URL, atau default jika tidak ada
+        var name = currentGuestName || 'Tamu Undangan';
         
         // Simpan komentar
         var comment = {
@@ -261,7 +305,6 @@ $(document).ready(function() {
         displayComments();
         
         // Reset form
-        $('#comment-name').val('');
         $('#comment-message').val('');
         
         // Tampilkan pesan sukses
@@ -273,8 +316,8 @@ $(document).ready(function() {
         var scrollPosition = $(window).scrollTop();
         var windowHeight = $(window).height();
         
-        // Sembunyikan bottom nav di cover section
-        if (scrollPosition < windowHeight * 0.8) {
+        // Sembunyikan bottom nav di cover section (hanya jika cover belum dibuka)
+        if (scrollPosition < windowHeight * 0.8 && !sessionStorage.getItem('undanganDibuka')) {
             $('#bottom-nav').fadeOut(300);
         } else {
             $('#bottom-nav').fadeIn(300);
@@ -295,6 +338,8 @@ $(document).ready(function() {
     // Tampilkan komentar saat halaman dimuat
     displayComments();
     
-    // Sembunyikan bottom nav di awal (saat di cover)
-    $('#bottom-nav').hide();
+    // Sembunyikan bottom nav di awal (saat di cover dan belum dibuka)
+    if (!sessionStorage.getItem('undanganDibuka')) {
+        $('#bottom-nav').hide();
+    }
 });
