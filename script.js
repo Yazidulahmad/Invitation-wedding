@@ -22,9 +22,9 @@ let commentsRef;
 function initializeFirebase() {
     return new Promise((resolve, reject) => {
         const checkFirebase = () => {
-            if (window.firebaseDatabase) {
+            if (window.firebaseDatabase && window.firebaseRef) {
                 database = window.firebaseDatabase;
-                commentsRef = ref(database, 'comments');
+                commentsRef = window.firebaseRef(database, 'comments');
                 resolve();
             } else {
                 setTimeout(checkFirebase, 100);
@@ -102,15 +102,15 @@ function formatCommentDate(timestamp) {
 
 // Simpan komentar ke Firebase
 function saveCommentToFirebase(comment) {
-    return push(commentsRef, comment);
+    return window.firebasePush(commentsRef, comment);
 }
 
 // Tampilkan komentar dari Firebase
 function displayCommentsFromFirebase() {
-    const commentsQuery = orderByChild(commentsRef, 'timestamp');
-    const limitedQuery = limitToLast(commentsQuery, 50);
+    const commentsQuery = window.firebaseQuery(commentsRef, window.firebaseOrderByChild('timestamp'));
+    const limitedQuery = window.firebaseQuery(commentsQuery, window.firebaseLimitToLast(50));
     
-    onValue(limitedQuery, (snapshot) => {
+    window.firebaseOnValue(limitedQuery, (snapshot) => {
         const comments = [];
         snapshot.forEach((childSnapshot) => {
             const comment = childSnapshot.val();
