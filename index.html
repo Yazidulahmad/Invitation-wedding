@@ -15,61 +15,137 @@
         Browser Anda tidak mendukung elemen audio.
     </audio>
     
+    <!-- Ornamen Janur Kuning -->
+    <div class="janur-decoration top-janur">
+        <div class="janur-leaf"></div>
+        <div class="janur-leaf"></div>
+        <div class="janur-leaf"></div>
+        <div class="janur-leaf"></div>
+    </div>
+    
+    <!-- Ornamen Bunga -->
+    <div class="flower-decoration flower-1">
+        <i class="fas fa-leaf"></i>
+    </div>
+    <div class="flower-decoration flower-2">
+        <i class="fas fa-leaf"></i>
+    </div>
+    <div class="flower-decoration flower-3">
+        <i class="fas fa-leaf"></i>
+    </div>
+    <div class="flower-decoration flower-4">
+        <i class="fas fa-leaf"></i>
+    </div>
+    
     <!-- Halaman Cover -->
     <section id="cover" class="page active">
         <div class="cover-container">
+            <!-- Ornamen Khas Sunda -->
+            <div class="sunda-ornament top-ornament">
+                <div class="sunda-pattern"></div>
+            </div>
+            
             <div class="cover-content">
-                <h1 class="cover-title">Undangan Pernikahan</h1>
+                <div class="cover-header">
+                    <div class="cover-icon left-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h1 class="cover-title">Undangan Pernikahan</h1>
+                    <div class="cover-icon right-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                
                 <div class="cover-names">
                     <h2>Hartini</h2>
-                    <span>&</span>
+                    <span class="cover-and">&</span>
                     <h2>Ahmad Yazidul Jihad</h2>
                 </div>
-                <p class="cover-date">21 Desember 2025</p>
+                
+                <div class="cover-date-container">
+                    <div class="date-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <p class="cover-date">21 Desember 2025</p>
+                    <div class="date-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                
                 <p class="guest-name" id="guestName">Kepada Yth: Bapak/Ibu/Saudara/i</p>
+                
                 <button id="openInvitation" class="btn-primary">
                     <span>Buka Undangan</span>
                     <i class="fas fa-envelope-open"></i>
                 </button>
+            </div>
+            
+            <!-- Ornamen Bawah -->
+            <div class="sunda-ornament bottom-ornament">
+                <div class="sunda-pattern"></div>
             </div>
         </div>
     </section>
 
     <!-- Konten Utama (Single Page) -->
     <main id="main-content" class="single-page">
+        <!-- Ornamen Pembatas Section -->
+        <div class="section-divider">
+            <div class="divider-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+
         <!-- Halaman Pembuka -->
         <section id="opening" class="content-section">
+            <div class="section-ornament left-ornament">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <div class="section-ornament right-ornament">
+                <i class="fas fa-leaf"></i>
+            </div>
+            
             <div class="section-content">
-                <h2 class="section-title">Assalamu'alaikum Warahmatullahi Wabarakatuh</h2>
-                <p class="opening-text">
-                    Dengan mengharap ridho dan rahmat Allah Subhanahu Wa Ta'ala, 
-                    kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri 
-                    acara pernikahan putra-putri kami:
-                </p>
-                <div class="opening-names">
-                    <h3>Hartini</h3>
-                    <span class="and-symbol">&</span>
-                    <h3>Ahmad Yazidul Jihad</h3>
+                <div class="opening-content traditional-card">
+                    <h2 class="section-title">Assalamu'alaikum Warahmatullahi Wabarakatuh</h2>
+                    <p class="opening-text">
+                        Dengan mengharap ridho dan rahmat Allah Subhanahu Wa Ta'ala, 
+                        kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri 
+                        acara pernikahan putra-putri kami:
+                    </p>
+                    <div class="opening-names">
+                        <h3>Hartini</h3>
+                        <span class="and-symbol">&</span>
+                        <h3>Ahmad Yazidul Jihad</h3>
+                    </div>
+                    <div class="opening-parents">
+                        <p>Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
+                        <p>Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
+                    </div>
+                    <p class="opening-closing">
+                        Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila 
+                        Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
+                    </p>
                 </div>
-                <div class="opening-parents">
-                    <p>Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
-                    <p>Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
-                </div>
-                <p class="opening-closing">
-                    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila 
-                    Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
-                </p>
             </div>
         </section>
+
+        <!-- Ornamen Pembatas Section -->
+        <div class="section-divider">
+            <div class="divider-icon">
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
 
         <!-- Halaman Detail Pengantin -->
         <section id="detail" class="content-section">
             <div class="section-content">
                 <h2 class="section-title">Bride & Groom</h2>
                 <div class="couple-container">
-                    <div class="bride">
+                    <div class="bride traditional-card">
                         <div class="couple-img">
                             <i class="fas fa-female"></i>
+                            <div class="img-frame"></div>
                         </div>
                         <h3>Hartini</h3>
                         <p>Putri dari</p>
@@ -80,11 +156,14 @@
                         </div>
                     </div>
                     <div class="heart-divider">
-                        <i class="fas fa-heart"></i>
+                        <div class="heart-container">
+                            <i class="fas fa-heart"></i>
+                        </div>
                     </div>
-                    <div class="groom">
+                    <div class="groom traditional-card">
                         <div class="couple-img">
                             <i class="fas fa-male"></i>
+                            <div class="img-frame"></div>
                         </div>
                         <h3>Ahmad Yazidul Jihad</h3>
                         <p>Putra dari</p>
@@ -98,12 +177,19 @@
             </div>
         </section>
 
+        <!-- Ornamen Pembatas Section -->
+        <div class="section-divider">
+            <div class="divider-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+
         <!-- Halaman Detail Acara -->
         <section id="events" class="content-section">
             <div class="section-content">
                 <h2 class="section-title">Detail Acara</h2>
                 <div class="events-container">
-                    <div class="event-card">
+                    <div class="event-card traditional-card">
                         <div class="event-icon">
                             <i class="fas fa-mosque"></i>
                         </div>
@@ -121,7 +207,7 @@
                             <p>Lokasi Resepsi</p>
                         </div>
                     </div>
-                    <div class="event-card">
+                    <div class="event-card traditional-card">
                         <div class="event-icon">
                             <i class="fas fa-glass-cheers"></i>
                         </div>
@@ -140,7 +226,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="location-card">
+                <div class="location-card traditional-card">
                     <h3>Lokasi Acara</h3>
                     <div class="map-container">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.923935721991!2d107.61085121477238!3d-6.902069995012953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e64b2f6b1f27%3A0x1e74e5a5e8a6a7a!2sGedung%20Sate!5e0!3m2!1sid!2sid!4v1621234567890!5m2!1sid!2sid" 
@@ -153,30 +239,37 @@
             </div>
         </section>
 
+        <!-- Ornamen Pembatas Section -->
+        <div class="section-divider">
+            <div class="divider-icon">
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+
         <!-- Halaman Galeri -->
         <section id="gallery" class="content-section">
             <div class="section-content">
                 <h2 class="section-title">Galeri Kami</h2>
                 <div class="gallery-container">
-                    <div class="gallery-item">
+                    <div class="gallery-item traditional-frame">
                         <div class="gallery-img">
                             <i class="fas fa-heart"></i>
                         </div>
                         <p>Pertemuan Pertama</p>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item traditional-frame">
                         <div class="gallery-img">
                             <i class="fas fa-ring"></i>
                         </div>
                         <p>Lamaran</p>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item traditional-frame">
                         <div class="gallery-img">
                             <i class="fas fa-camera"></i>
                         </div>
                         <p>Pre-Wedding</p>
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item traditional-frame">
                         <div class="gallery-img">
                             <i class="fas fa-kiss-wink-heart"></i>
                         </div>
@@ -186,25 +279,32 @@
             </div>
         </section>
 
+        <!-- Ornamen Pembatas Section -->
+        <div class="section-divider">
+            <div class="divider-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+
         <!-- Halaman Hitung Mundur -->
         <section id="countdown" class="content-section">
             <div class="section-content">
                 <h2 class="section-title">Hitung Mundur</h2>
                 <p class="countdown-text">Menuju Hari Bahagia Kami</p>
                 <div class="countdown-container">
-                    <div class="countdown-item">
+                    <div class="countdown-item traditional-frame">
                         <span id="days">00</span>
                         <p>Hari</p>
                     </div>
-                    <div class="countdown-item">
+                    <div class="countdown-item traditional-frame">
                         <span id="hours">00</span>
                         <p>Jam</p>
                     </div>
-                    <div class="countdown-item">
+                    <div class="countdown-item traditional-frame">
                         <span id="minutes">00</span>
                         <p>Menit</p>
                     </div>
-                    <div class="countdown-item">
+                    <div class="countdown-item traditional-frame">
                         <span id="seconds">00</span>
                         <p>Detik</p>
                     </div>
@@ -215,10 +315,17 @@
             </div>
         </section>
 
+        <!-- Ornamen Pembatas Section -->
+        <div class="section-divider">
+            <div class="divider-icon">
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+
         <!-- Halaman Penutup -->
         <section id="closing" class="content-section">
             <div class="section-content">
-                <div class="closing-content">
+                <div class="closing-content traditional-card">
                     <h2 class="section-title">Terima Kasih</h2>
                     <p class="closing-text">
                         Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, 
@@ -241,16 +348,23 @@
             </div>
         </section>
 
+        <!-- Ornamen Pembatas Section -->
+        <div class="section-divider">
+            <div class="divider-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+
         <!-- Halaman Amplop Digital -->
         <section id="envelope" class="content-section">
             <div class="section-content">
-                <div class="envelope-content">
+                <div class="envelope-content traditional-card">
                     <h2 class="section-title">Amplop Digital</h2>
                     <p class="envelope-text">
                         Bagi yang ingin memberikan tanda kasih, dapat melalui:
                     </p>
                     <div class="envelope-options">
-                        <div class="bank-option">
+                        <div class="bank-option traditional-frame">
                             <div class="bank-icon">
                                 <i class="fas fa-university"></i>
                             </div>
@@ -261,7 +375,7 @@
                                 <p>a.n. Hartini</p>
                             </div>
                         </div>
-                        <div class="bank-option">
+                        <div class="bank-option traditional-frame">
                             <div class="bank-icon">
                                 <i class="fas fa-wallet"></i>
                             </div>
@@ -280,12 +394,19 @@
             </div>
         </section>
 
+        <!-- Ornamen Pembatas Section -->
+        <div class="section-divider">
+            <div class="divider-icon">
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+
         <!-- Halaman Komentar -->
         <section id="comments" class="content-section">
             <div class="section-content">
                 <h2 class="section-title">Ucapan & Doa</h2>
                 <div class="comments-container">
-                    <form id="commentForm" class="comment-form">
+                    <form id="commentForm" class="comment-form traditional-card">
                         <div class="form-group">
                             <input type="text" id="commentName" placeholder="Nama Anda" required>
                         </div>
@@ -296,7 +417,7 @@
                             <i class="fas fa-paper-plane"></i> Kirim Ucapan
                         </button>
                     </form>
-                    <div class="comments-list" id="commentsList">
+                    <div class="comments-list traditional-card" id="commentsList">
                         <div class="comment-placeholder">
                             <i class="fas fa-comments"></i>
                             <p>Belum ada ucapan. Jadilah yang pertama memberikan ucapan!</p>
