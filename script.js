@@ -1,17 +1,19 @@
 // Inisialisasi AOS
 AOS.init({
-    duration: 1000,
-    once: true
+    duration: 800,
+    once: true,
+    offset: 50
 });
 
 // Inisialisasi Lightbox
 lightbox.option({
     'resizeDuration': 200,
     'wrapAround': true,
-    'imageFadeDuration': 300
+    'imageFadeDuration': 300,
+    'positionFromTop': 50
 });
 
-// Firebase Configuration (Ganti dengan config Anda)
+// Firebase Configuration (Ganti dengan config Anda nanti)
 const firebaseConfig = {
     apiKey: "your-api-key",
     authDomain: "your-project.firebaseapp.com",
@@ -22,7 +24,7 @@ const firebaseConfig = {
     appId: "your-app-id"
 };
 
-// Initialize Firebase (jika menggunakan Firebase)
+// Initialize Firebase (akan di-uncomment ketika sudah siap)
 // firebase.initializeApp(firebaseConfig);
 
 // Fungsi untuk mengambil parameter dari URL
@@ -31,6 +33,28 @@ function getUrlParameter(name) {
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+// Tampilkan pesan sukses
+function showSuccessMessage(message) {
+    const successEl = document.getElementById('success-message');
+    const successText = document.getElementById('success-text');
+    
+    successText.textContent = message;
+    successEl.classList.add('show');
+    
+    setTimeout(() => {
+        successEl.classList.remove('show');
+    }, 3000);
+}
+
+// Salin teks ke clipboard
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showSuccessMessage('Nomor rekening berhasil disalin');
+    }).catch(err => {
+        console.error('Gagal menyalin teks: ', err);
+    });
 }
 
 // Set nama tamu dari URL
@@ -79,6 +103,11 @@ $(document).ready(function() {
         
         // Sembunyikan nama tamu setelah membuka undangan
         $('#guest-name').fadeOut(500);
+        
+        // Tampilkan bottom navigation setelah membuka undangan
+        setTimeout(() => {
+            $('#bottom-nav').fadeIn(300);
+        }, 1000);
     });
     
     // Bottom Navigation
@@ -115,62 +144,47 @@ $(document).ready(function() {
     setInterval(updateCountdown, 1000);
     updateCountdown();
     
-    // Simpan ke kalender
+    // Simpan ke kalender - TANPA KONFIRMASI
     $('#save-akad').click(function() {
-        Swal.fire({
-            title: 'Simpan Acara Akad Nikah',
-            text: 'Apakah Anda ingin menyimpan acara ini ke kalender?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Simpan',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Kode untuk menyimpan ke Google Calendar
-                var startDate = '20251221T090000';
-                var endDate = '20251221T100000';
-                var title = 'Akad Nikah Hartini & Ahmad Yazidul Jihad';
-                var location = 'Kediaman Mempelai Wanita';
-                var details = 'Akad Nikah Hartini & Ahmad Yazidul Jihad';
-                
-                var googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + 
-                    encodeURIComponent(title) + '&dates=' + startDate + '/' + endDate + 
-                    '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(location);
-                
-                window.open(googleCalendarUrl, '_blank');
-            }
-        });
+        var startDate = '20251221T090000';
+        var endDate = '20251221T100000';
+        var title = 'Akad Nikah Hartini & Ahmad Yazidul Jihad';
+        var location = 'Kediaman Mempelai Wanita';
+        var details = 'Akad Nikah Hartini & Ahmad Yazidul Jihad';
+        
+        var googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + 
+            encodeURIComponent(title) + '&dates=' + startDate + '/' + endDate + 
+            '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(location);
+        
+        window.open(googleCalendarUrl, '_blank');
+        showSuccessMessage('Acara akad nikah ditambahkan ke kalender');
     });
     
     $('#save-resepsi').click(function() {
-        Swal.fire({
-            title: 'Simpan Acara Resepsi',
-            text: 'Apakah Anda ingin menyimpan acara ini ke kalender?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Simpan',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Kode untuk menyimpan ke Google Calendar
-                var startDate = '20251221T110000';
-                var endDate = '20251221T140000';
-                var title = 'Resepsi Pernikahan Hartini & Ahmad Yazidul Jihad';
-                var location = 'Gedung Serba Guna';
-                var details = 'Resepsi Pernikahan Hartini & Ahmad Yazidul Jihad';
-                
-                var googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + 
-                    encodeURIComponent(title) + '&dates=' + startDate + '/' + endDate + 
-                    '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(location);
-                
-                window.open(googleCalendarUrl, '_blank');
-            }
-        });
+        var startDate = '20251221T110000';
+        var endDate = '20251221T140000';
+        var title = 'Resepsi Pernikahan Hartini & Ahmad Yazidul Jihad';
+        var location = 'Gedung Serba Guna';
+        var details = 'Resepsi Pernikahan Hartini & Ahmad Yazidul Jihad';
+        
+        var googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + 
+            encodeURIComponent(title) + '&dates=' + startDate + '/' + endDate + 
+            '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(location);
+        
+        window.open(googleCalendarUrl, '_blank');
+        showSuccessMessage('Acara resepsi ditambahkan ke kalender');
     });
     
     // Buka Google Maps
     $('#open-map').click(function() {
         window.open('https://maps.app.goo.gl/PzdmwVSJc67DmowM7?g_st=ipc', '_blank');
+        showSuccessMessage('Membuka lokasi di Google Maps');
+    });
+    
+    // Salin nomor rekening
+    $('.btn-copy').click(function() {
+        var accountNumber = $(this).data('account');
+        copyToClipboard(accountNumber);
     });
     
     // Simpan komentar ke localStorage (sementara, ganti dengan Firebase nanti)
@@ -192,6 +206,17 @@ $(document).ready(function() {
         var commentsContainer = $('#comments-container');
         commentsContainer.empty();
         
+        if (comments.length === 0) {
+            commentsContainer.html(`
+                <div class="comment-item" data-aos="fade-up">
+                    <p style="text-align: center; color: #777; font-style: italic;">
+                        Belum ada ucapan. Jadilah yang pertama mengucapkan selamat!
+                    </p>
+                </div>
+            `);
+            return;
+        }
+        
         comments.forEach(function(comment) {
             var commentHtml = `
                 <div class="comment-item" data-aos="fade-up">
@@ -212,12 +237,7 @@ $(document).ready(function() {
         var message = $('#comment-message').val();
         
         if (!name || !message) {
-            Swal.fire({
-                title: 'Perhatian',
-                text: 'Harap isi nama dan pesan Anda',
-                icon: 'warning',
-                confirmButtonText: 'Baik'
-            });
+            showSuccessMessage('Harap isi nama dan pesan Anda');
             return;
         }
         
@@ -244,66 +264,37 @@ $(document).ready(function() {
         $('#comment-name').val('');
         $('#comment-message').val('');
         
-        // Tampilkan pesan sukses tanpa popup
-        var successHtml = `
-            <div class="success-message show">
-                <i class="fas fa-check-circle"></i> Ucapan Anda telah terkirim
-            </div>
-        `;
-        $('.comment-form').after(successHtml);
-        
-        // Sembunyikan pesan setelah 3 detik
-        setTimeout(function() {
-            $('.success-message').remove();
-        }, 3000);
+        // Tampilkan pesan sukses
+        showSuccessMessage('Ucapan Anda telah terkirim');
     });
     
     // Deteksi scroll untuk mengaktifkan navigasi
     $(window).scroll(function() {
         var scrollPosition = $(window).scrollTop();
+        var windowHeight = $(window).height();
+        
+        // Sembunyikan bottom nav di cover section
+        if (scrollPosition < windowHeight * 0.8) {
+            $('#bottom-nav').fadeOut(300);
+        } else {
+            $('#bottom-nav').fadeIn(300);
+        }
         
         $('.section').each(function() {
             var sectionId = $(this).attr('id');
             var sectionTop = $(this).offset().top - 100;
             var sectionBottom = sectionTop + $(this).outerHeight();
             
-            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom && sectionId !== 'cover') {
                 $('.nav-tab').removeClass('active');
-                $('.nav-tab[href="#' + sectionId + '"]').addClass('active');
+                $(`.nav-tab[href="#${sectionId}"]`).addClass('active');
             }
         });
     });
     
-    // Inisialisasi komentar contoh jika belum ada
-    if (getCommentsFromStorage().length === 0) {
-        var sampleComments = [
-            {
-                name: "Keluarga Supriyadi",
-                message: "Semoga pernikahan kalian diberkahi Allah SWT dan menjadi keluarga yang sakinah, mawaddah, wa rahmah.",
-                date: "15 November 2025, 10:30"
-            },
-            {
-                name: "Sahabat Hartini",
-                message: "Selamat menempuh hidup baru! Semoga kalian selalu bahagia dan kompak selamanya.",
-                date: "14 November 2025, 16:45"
-            }
-        ];
-        
-        sampleComments.forEach(function(comment) {
-            saveCommentToStorage(comment);
-        });
-    }
-    
     // Tampilkan komentar saat halaman dimuat
     displayComments();
     
-    // Fungsi untuk integrasi Firebase (akan digunakan nanti)
-    function initializeFirebase() {
-        // Kode inisialisasi Firebase akan ditambahkan di sini
-        // ketika Anda sudah membuat project Firebase
-        console.log('Firebase akan diinisialisasi di sini');
-    }
-    
-    // Panggil fungsi inisialisasi Firebase
-    // initializeFirebase();
+    // Sembunyikan bottom nav di awal (saat di cover)
+    $('#bottom-nav').hide();
 });
