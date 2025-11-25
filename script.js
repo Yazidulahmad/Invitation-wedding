@@ -1,400 +1,227 @@
-// script.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Inisialisasi variabel dan elemen
-    console.log("Undangan Pernikahan Digital Dimuat");
-    
-    // Ambil nama tamu dari URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const guestNameFromUrl = urlParams.get('to');
-    const guestNameElement = document.getElementById('guestName');
-    
-    if (guestNameFromUrl) {
-        guestNameElement.textContent = `Kepada Yth: ${guestNameFromUrl}`;
-        // Set nama tamu di field komentar
-        const commentNameInput = document.getElementById('commentName');
-        if (commentNameInput) {
-            commentNameInput.value = guestNameFromUrl;
-        }
+// Inisialisasi AOS
+AOS.init({
+    duration: 1000,
+    once: true
+});
+
+// Inisialisasi Lightbox
+lightbox.option({
+    'resizeDuration': 200,
+    'wrapAround': true,
+    'imageFadeDuration': 300
+});
+
+// Fungsi untuk mengambil parameter dari URL
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+// Set nama tamu dari URL
+$(document).ready(function() {
+    var guestName = getUrlParameter('to');
+    if (guestName) {
+        $('#guest-name').text('Kepada Yth. ' + guestName);
     }
     
-    // Elemen musik
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    const musicToggle = document.getElementById('musicToggle');
-    let isMusicPlaying = false;
-    
-    // Tombol buka undangan
-    const openInvitationBtn = document.getElementById('openInvitation');
-    
-    // Navigasi underbar
-    const underbarItems = document.querySelectorAll('.underbar-item');
-    const underbar = document.querySelector('.underbar');
-    const musicControl = document.querySelector('.music-control');
-    
-    // Hitung mundur
-    const weddingDate = new Date('December 21, 2025 09:00:00').getTime();
-    const daysElement = document.getElementById('days');
-    const hoursElement = document.getElementById('hours');
-    const minutesElement = document.getElementById('minutes');
-    const secondsElement = document.getElementById('seconds');
-    
-    // Form komentar
-    const commentForm = document.getElementById('commentForm');
-    const commentsList = document.getElementById('commentsList');
+    // Musik otomatis
+    var audio = document.getElementById('wedding-music');
+    var musicIcon = document.getElementById('music-icon');
+    var musicToggle = document.getElementById('music-toggle');
     
     // Fungsi untuk memutar musik
     function playMusic() {
-        if (backgroundMusic) {
-            backgroundMusic.volume = 0.3;
-            const playPromise = backgroundMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    isMusicPlaying = true;
-                    if (musicToggle) {
-                        musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-                        musicToggle.style.background = 'var(--secondary)';
-                    }
-                }).catch(error => {
-                    console.log("Autoplay prevented:", error);
-                    // Tampilkan pesan untuk interaksi pengguna
-                    if (musicToggle) {
-                        musicToggle.innerHTML = '<i class="fas fa-play"></i>';
-                        musicToggle.title = "Klik untuk memutar musik";
-                    }
-                });
-            }
-        }
+        audio.play().then(function() {
+            musicIcon.classList.remove('fa-play');
+            musicIcon.classList.add('fa-pause');
+        }).catch(function(error) {
+            console.log('Autoplay prevented:', error);
+        });
     }
     
-    // Fungsi untuk menghentikan musik
-    function pauseMusic() {
-        if (backgroundMusic) {
-            backgroundMusic.pause();
-            isMusicPlaying = false;
-            if (musicToggle) {
-                musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                musicToggle.style.background = 'var(--primary)';
-            }
-        }
-    }
+    // Coba putar musik saat halaman dimuat
+    playMusic();
     
-    // Fungsi untuk membuka undangan (pindah dari cover ke single page)
-    function openInvitation() {
-        const cover = document.getElementById('cover');
-        const mainContent = document.getElementById('main-content');
+    // Toggle musik
+    musicToggle.addEventListener('click', function() {
+        if (audio.paused) {
+            audio.play();
+            musicIcon.classList.remove('fa-play');
+            musicIcon.classList.add('fa-pause');
+        } else {
+            audio.pause();
+            musicIcon.classList.remove('fa-pause');
+            musicIcon.classList.add('fa-play');
+        }
+    });
+    
+    // Tombol buka undangan
+    $('#open-invitation').click(function() {
+        $('html, body').animate({
+            scrollTop: $('#pembuka').offset().top
+        }, 1000);
+    });
+    
+    // Navigasi
+    $('#nav-toggle').click(function() {
+        $('#nav-menu').toggleClass('active');
+    });
+    
+    // Tutup menu navigasi saat item diklik
+    $('.nav-item').click(function() {
+        $('#nav-menu').removeClass('active');
+    });
+    
+    // Hitung mundur
+    function updateCountdown() {
+        var weddingDate = new Date('December 21, 2025 09:00:00').getTime();
+        var now = new Date().getTime();
+        var distance = weddingDate - now;
         
-        if (cover && mainContent) {
-            cover.classList.add('hidden');
-            setTimeout(() => {
-                cover.style.display = 'none';
-                mainContent.classList.add('active');
-                underbar.classList.add('active');
-                musicControl.classList.add('active');
-                playMusic();
-                
-                // Scroll ke bagian pembuka
-                const openingSection = document.getElementById('opening');
-                if (openingSection) {
-                    openingSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            }, 800);
-        }
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        $('#days').text(days.toString().padStart(2, '0'));
+        $('#hours').text(hours.toString().padStart(2, '0'));
+        $('#minutes').text(minutes.toString().padStart(2, '0'));
+        $('#seconds').text(seconds.toString().padStart(2, '0'));
     }
     
-    // Event listener untuk tombol buka undangan
-    if (openInvitationBtn) {
-        openInvitationBtn.addEventListener('click', openInvitation);
-    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
     
-    // Event listener untuk underbar navigasi
-    underbarItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const targetSectionId = this.getAttribute('data-target');
-            const targetSection = document.getElementById(targetSectionId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth' });
+    // Simpan ke kalender
+    $('#save-akad').click(function() {
+        Swal.fire({
+            title: 'Simpan Acara Akad Nikah',
+            text: 'Apakah Anda ingin menyimpan acara ini ke kalender?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Simpan',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Kode untuk menyimpan ke Google Calendar
+                var startDate = '20251221T090000';
+                var endDate = '20251221T100000';
+                var title = 'Akad Nikah Hartini & Ahmad Yazidul Jihad';
+                var location = 'Kediaman Mempelai Wanita';
+                var details = 'Akad Nikah Hartini & Ahmad Yazidul Jihad';
                 
-                // Update underbar aktif
-                underbarItems.forEach(item => {
-                    item.classList.remove('active');
-                });
-                this.classList.add('active');
+                var googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + 
+                    encodeURIComponent(title) + '&dates=' + startDate + '/' + endDate + 
+                    '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(location);
+                
+                window.open(googleCalendarUrl, '_blank');
             }
         });
     });
     
-    // Event listener untuk tombol musik
-    if (musicToggle) {
-        musicToggle.addEventListener('click', function() {
-            if (isMusicPlaying) {
-                pauseMusic();
-            } else {
-                playMusic();
-            }
-        });
-    }
-    
-    // Fungsi untuk mengupdate underbar aktif berdasarkan scroll
-    function updateActiveUnderbar() {
-        const sections = document.querySelectorAll('.content-section');
-        const scrollPos = window.scrollY + 100; // Offset untuk underbar
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                // Hapus active dari semua underbar items
-                underbarItems.forEach(item => {
-                    item.classList.remove('active');
-                });
+    $('#save-resepsi').click(function() {
+        Swal.fire({
+            title: 'Simpan Acara Resepsi',
+            text: 'Apakah Anda ingin menyimpan acara ini ke kalender?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Simpan',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Kode untuk menyimpan ke Google Calendar
+                var startDate = '20251221T110000';
+                var endDate = '20251221T140000';
+                var title = 'Resepsi Pernikahan Hartini & Ahmad Yazidul Jihad';
+                var location = 'Gedung Serba Guna';
+                var details = 'Resepsi Pernikahan Hartini & Ahmad Yazidul Jihad';
                 
-                // Tambahkan active ke underbar item yang sesuai
-                const activeUnderbarItem = document.querySelector(`.underbar-item[data-target="${sectionId}"]`);
-                if (activeUnderbarItem) {
-                    activeUnderbarItem.classList.add('active');
-                }
-            }
-        });
-    }
-    
-    // Event listener untuk scroll
-    window.addEventListener('scroll', updateActiveUnderbar);
-    
-    // Fungsi hitung mundur
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const timeLeft = weddingDate - now;
-        
-        if (timeLeft > 0) {
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            
-            if (daysElement) daysElement.textContent = days.toString().padStart(2, '0');
-            if (hoursElement) hoursElement.textContent = hours.toString().padStart(2, '0');
-            if (minutesElement) minutesElement.textContent = minutes.toString().padStart(2, '0');
-            if (secondsElement) secondsElement.textContent = seconds.toString().padStart(2, '0');
-        } else {
-            if (daysElement) daysElement.textContent = '00';
-            if (hoursElement) hoursElement.textContent = '00';
-            if (minutesElement) minutesElement.textContent = '00';
-            if (secondsElement) secondsElement.textContent = '00';
-            
-            // Tampilkan pesan khusus jika acara sudah berlangsung
-            const countdownText = document.querySelector('.countdown-text');
-            if (countdownText) {
-                countdownText.textContent = 'Acara Pernikahan Telah Berlangsung';
-            }
-        }
-    }
-    
-    // Update hitung mundur setiap detik
-    setInterval(updateCountdown, 1000);
-    updateCountdown(); // Panggil sekali saat halaman dimuat
-    
-    // Fungsi untuk menambahkan komentar
-    function addComment(name, message) {
-        const commentItem = document.createElement('div');
-        commentItem.className = 'comment-item';
-        
-        const now = new Date();
-        const dateString = now.toLocaleDateString('id-ID', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
-        
-        const timeString = now.toLocaleTimeString('id-ID', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-        
-        commentItem.innerHTML = `
-            <div class="comment-header">
-                <span class="comment-name">${escapeHtml(name)}</span>
-                <span class="comment-date">${dateString} ${timeString}</span>
-            </div>
-            <div class="comment-message">${escapeHtml(message)}</div>
-        `;
-        
-        if (commentsList) {
-            // Hapus placeholder jika ada
-            const placeholder = commentsList.querySelector('.comment-placeholder');
-            if (placeholder) {
-                commentsList.removeChild(placeholder);
-            }
-            
-            commentsList.prepend(commentItem);
-        }
-    }
-    
-    // Fungsi untuk menghindari XSS
-    function escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-    
-    // Event listener untuk form komentar
-    if (commentForm) {
-        commentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nameInput = document.getElementById('commentName');
-            const messageInput = document.getElementById('commentMessage');
-            
-            const name = nameInput ? nameInput.value.trim() : '';
-            const message = messageInput ? messageInput.value.trim() : '';
-            
-            if (name && message) {
-                addComment(name, message);
+                var googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + 
+                    encodeURIComponent(title) + '&dates=' + startDate + '/' + endDate + 
+                    '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(location);
                 
-                // Reset form, tetapi jangan reset nama jika dari URL
-                if (messageInput) messageInput.value = '';
-                // Nama tidak direset agar tamu bisa mengirim ucapan lagi dengan nama yang sama
-                
-                // Simpan komentar ke localStorage
-                const comments = JSON.parse(localStorage.getItem('weddingComments') || '[]');
-                comments.unshift({
-                    name: name,
-                    message: message,
-                    date: new Date().toISOString()
-                });
-                localStorage.setItem('weddingComments', JSON.stringify(comments));
-                
-                // Tampilkan pesan sukses
-                showNotification('Ucapan Anda telah terkirim! Terima kasih atas doa dan restunya.');
-            } else {
-                showNotification('Harap isi nama dan ucapan Anda sebelum mengirim.');
+                window.open(googleCalendarUrl, '_blank');
             }
+        });
+    });
+    
+    // Buka Google Maps
+    $('#open-map').click(function() {
+        window.open('https://maps.app.goo.gl/PzdmwVSJc67DmowM7?g_st=ipc', '_blank');
+    });
+    
+    // Inisialisasi peta (placeholder)
+    function initMap() {
+        // Karena API key diperlukan, kita akan menggunakan placeholder
+        // Dalam implementasi nyata, ganti YOUR_API_KEY dengan API key Google Maps Anda
+        var mapOptions = {
+            center: { lat: -6.2088, lng: 106.8456 }, // Koordinat Jakarta
+            zoom: 15
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        
+        var marker = new google.maps.Marker({
+            position: { lat: -6.2088, lng: 106.8456 },
+            map: map,
+            title: 'Lokasi Resepsi'
         });
     }
     
-    // Fungsi untuk menampilkan notifikasi
-    function showNotification(message) {
-        // Buat elemen notifikasi
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--secondary);
-            color: white;
-            padding: 0.8rem 1.2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            max-width: 280px;
-            animation: slideIn 0.3s ease;
-            font-size: 0.9rem;
-        `;
+    // Kirim ucapan
+    $('#submit-comment').click(function() {
+        var name = $('#comment-name').val();
+        var message = $('#comment-message').val();
         
-        notification.textContent = message;
-        document.body.appendChild(notification);
-        
-        // Hapus notifikasi setelah 3 detik
-        setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease';
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
-        }, 3000);
-    }
-    
-    // Tambahkan CSS untuk animasi notifikasi
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Muat komentar dari localStorage saat halaman dimuat
-    function loadComments() {
-        if (!commentsList) return;
-        
-        const comments = JSON.parse(localStorage.getItem('weddingComments') || '[]');
-        
-        // Kosongkan daftar komentar terlebih dahulu
-        commentsList.innerHTML = '';
-        
-        if (comments.length === 0) {
-            commentsList.innerHTML = `
-                <div class="comment-placeholder">
-                    <i class="fas fa-comments"></i>
-                    <p>Belum ada ucapan. Jadilah yang pertama memberikan ucapan!</p>
-                </div>
-            `;
+        if (!name || !message) {
+            Swal.fire({
+                title: 'Perhatian',
+                text: 'Harap isi nama dan pesan Anda',
+                icon: 'warning',
+                confirmButtonText: 'Baik'
+            });
             return;
         }
         
-        comments.forEach(comment => {
-            const commentItem = document.createElement('div');
-            commentItem.className = 'comment-item';
-            
-            const date = new Date(comment.date);
-            const dateString = date.toLocaleDateString('id-ID', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            });
-            
-            const timeString = date.toLocaleTimeString('id-ID', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            
-            commentItem.innerHTML = `
+        // Simpan komentar (dalam implementasi nyata, kirim ke server)
+        var comment = {
+            name: name,
+            message: message,
+            date: new Date().toLocaleDateString('id-ID')
+        };
+        
+        // Tambahkan komentar ke daftar
+        var commentHtml = `
+            <div class="comment-item" data-aos="fade-up">
                 <div class="comment-header">
-                    <span class="comment-name">${escapeHtml(comment.name)}</span>
-                    <span class="comment-date">${dateString} ${timeString}</span>
+                    <span class="comment-name">${comment.name}</span>
+                    <span class="comment-date">${comment.date}</span>
                 </div>
-                <div class="comment-message">${escapeHtml(comment.message)}</div>
-            `;
-            
-            commentsList.appendChild(commentItem);
+                <p>${comment.message}</p>
+            </div>
+        `;
+        
+        $('#comments-container').prepend(commentHtml);
+        
+        // Reset form
+        $('#comment-name').val('');
+        $('#comment-message').val('');
+        
+        Swal.fire({
+            title: 'Terima Kasih',
+            text: 'Ucapan Anda telah terkirim',
+            icon: 'success',
+            confirmButtonText: 'Baik'
         });
-    }
+    });
     
-    // Panggil fungsi untuk memuat komentar
-    loadComments();
-    
-    // Efek animasi saat halaman dimuat
-    setTimeout(() => {
-        const coverContainer = document.querySelector('.cover-container');
-        if (coverContainer) {
-            coverContainer.style.opacity = '1';
-            coverContainer.style.transform = 'translateY(0)';
-        }
-    }, 300);
-    
-    // Tambahkan event listener untuk touch events pada perangkat mobile
-    document.addEventListener('touchstart', function() {}, {passive: true});
-    
-    // Handler untuk error musik
-    if (backgroundMusic) {
-        backgroundMusic.addEventListener('error', function(e) {
-            console.error("Error loading audio:", e);
-            if (musicToggle) {
-                musicToggle.style.display = 'none';
-            }
-        });
-    }
-    
-    console.log("Aplikasi undangan berhasil diinisialisasi");
+    // Smooth scroll untuk navigasi
+    $('a[href*="#"]').on('click', function(e) {
+        e.preventDefault();
+        
+        $('html, body').animate({
+            scrollTop: $($(this).attr('href')).offset().top
+        }, 500, 'linear');
+    });
 });
