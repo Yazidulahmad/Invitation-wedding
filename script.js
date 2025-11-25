@@ -11,6 +11,20 @@ lightbox.option({
     'imageFadeDuration': 300
 });
 
+// Firebase Configuration (Ganti dengan config Anda)
+const firebaseConfig = {
+    apiKey: "your-api-key",
+    authDomain: "your-project.firebaseapp.com",
+    databaseURL: "https://your-project.firebaseio.com",
+    projectId: "your-project",
+    storageBucket: "your-project.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "your-app-id"
+};
+
+// Initialize Firebase (jika menggunakan Firebase)
+// firebase.initializeApp(firebaseConfig);
+
 // Fungsi untuk mengambil parameter dari URL
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -38,14 +52,6 @@ $(document).ready(function() {
             musicIcon.classList.add('fa-pause');
         }).catch(function(error) {
             console.log('Autoplay prevented:', error);
-            // Tampilkan pesan bahwa musik tidak bisa diputar otomatis
-            Swal.fire({
-                title: 'Musik Undangan',
-                text: 'Klik tombol musik di pojok kiri bawah untuk memutar musik.',
-                icon: 'info',
-                confirmButtonText: 'Mengerti',
-                timer: 3000
-            });
         });
     }
     
@@ -75,17 +81,17 @@ $(document).ready(function() {
         $('#guest-name').fadeOut(500);
     });
     
-    // Navigasi
-    $('#nav-toggle').click(function() {
-        $('#nav-menu').toggleClass('active');
-    });
-    
-    // Tutup menu navigasi saat item diklik
-    $('.nav-item').click(function() {
-        $('#nav-menu').removeClass('active');
+    // Bottom Navigation
+    $('.nav-tab').click(function(e) {
+        e.preventDefault();
+        var target = $(this).attr('href');
         
-        // Tambahkan class active ke item yang diklik
-        $('.nav-item').removeClass('active');
+        $('html, body').animate({
+            scrollTop: $(target).offset().top
+        }, 500);
+        
+        // Update active tab
+        $('.nav-tab').removeClass('active');
         $(this).addClass('active');
     });
     
@@ -167,20 +173,36 @@ $(document).ready(function() {
         window.open('https://maps.app.goo.gl/PzdmwVSJc67DmowM7?g_st=ipc', '_blank');
     });
     
-    // Inisialisasi peta (placeholder)
-    function initMap() {
-        // Karena API key diperlukan, kita akan menggunakan placeholder
-        // Dalam implementasi nyata, ganti YOUR_API_KEY dengan API key Google Maps Anda
-        var mapOptions = {
-            center: { lat: -6.2088, lng: 106.8456 }, // Koordinat Jakarta
-            zoom: 15
-        };
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    // Simpan komentar ke localStorage (sementara, ganti dengan Firebase nanti)
+    function saveCommentToStorage(comment) {
+        var comments = JSON.parse(localStorage.getItem('weddingComments')) || [];
+        comments.unshift(comment);
+        localStorage.setItem('weddingComments', JSON.stringify(comments));
+        return comments;
+    }
+    
+    // Ambil komentar dari localStorage
+    function getCommentsFromStorage() {
+        return JSON.parse(localStorage.getItem('weddingComments')) || [];
+    }
+    
+    // Tampilkan komentar
+    function displayComments() {
+        var comments = getCommentsFromStorage();
+        var commentsContainer = $('#comments-container');
+        commentsContainer.empty();
         
-        var marker = new google.maps.Marker({
-            position: { lat: -6.2088, lng: 106.8456 },
-            map: map,
-            title: 'Lokasi Resepsi'
+        comments.forEach(function(comment) {
+            var commentHtml = `
+                <div class="comment-item" data-aos="fade-up">
+                    <div class="comment-header">
+                        <span class="comment-name">${comment.name}</span>
+                        <span class="comment-date">${comment.date}</span>
+                    </div>
+                    <p>${comment.message}</p>
+                </div>
+            `;
+            commentsContainer.append(commentHtml);
         });
     }
     
@@ -199,7 +221,7 @@ $(document).ready(function() {
             return;
         }
         
-        // Simpan komentar (dalam implementasi nyata, kirim ke server)
+        // Simpan komentar
         var comment = {
             name: name,
             message: message,
@@ -212,39 +234,28 @@ $(document).ready(function() {
             })
         };
         
-        // Tambahkan komentar ke daftar
-        var commentHtml = `
-            <div class="comment-item" data-aos="fade-up">
-                <div class="comment-header">
-                    <span class="comment-name">${comment.name}</span>
-                    <span class="comment-date">${comment.date}</span>
-                </div>
-                <p>${comment.message}</p>
-            </div>
-        `;
+        // Simpan ke localStorage (sementara)
+        saveCommentToStorage(comment);
         
-        $('#comments-container').prepend(commentHtml);
+        // Tampilkan komentar
+        displayComments();
         
         // Reset form
         $('#comment-name').val('');
         $('#comment-message').val('');
         
-        Swal.fire({
-            title: 'Terima Kasih',
-            text: 'Ucapan Anda telah terkirim',
-            icon: 'success',
-            confirmButtonText: 'Baik',
-            timer: 2000
-        });
-    });
-    
-    // Smooth scroll untuk navigasi
-    $('a[href*="#"]').on('click', function(e) {
-        e.preventDefault();
+        // Tampilkan pesan sukses tanpa popup
+        var successHtml = `
+            <div class="success-message show">
+                <i class="fas fa-check-circle"></i> Ucapan Anda telah terkirim
+            </div>
+        `;
+        $('.comment-form').after(successHtml);
         
-        $('html, body').animate({
-            scrollTop: $($(this).attr('href')).offset().top
-        }, 500, 'linear');
+        // Sembunyikan pesan setelah 3 detik
+        setTimeout(function() {
+            $('.success-message').remove();
+        }, 3000);
     });
     
     // Deteksi scroll untuk mengaktifkan navigasi
@@ -257,37 +268,42 @@ $(document).ready(function() {
             var sectionBottom = sectionTop + $(this).outerHeight();
             
             if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                $('.nav-item').removeClass('active');
-                $('.nav-item[href="#' + sectionId + '"]').addClass('active');
+                $('.nav-tab').removeClass('active');
+                $('.nav-tab[href="#' + sectionId + '"]').addClass('active');
             }
         });
     });
     
-    // Inisialisasi komentar contoh
-    var sampleComments = [
-        {
-            name: "Keluarga Supriyadi",
-            message: "Semoga pernikahan kalian diberkahi Allah SWT dan menjadi keluarga yang sakinah, mawaddah, wa rahmah.",
-            date: "15 November 2025, 10:30"
-        },
-        {
-            name: "Sahabat Hartini",
-            message: "Selamat menempuh hidup baru! Semoga kalian selalu bahagia dan kompak selamanya.",
-            date: "14 November 2025, 16:45"
-        }
-    ];
+    // Inisialisasi komentar contoh jika belum ada
+    if (getCommentsFromStorage().length === 0) {
+        var sampleComments = [
+            {
+                name: "Keluarga Supriyadi",
+                message: "Semoga pernikahan kalian diberkahi Allah SWT dan menjadi keluarga yang sakinah, mawaddah, wa rahmah.",
+                date: "15 November 2025, 10:30"
+            },
+            {
+                name: "Sahabat Hartini",
+                message: "Selamat menempuh hidup baru! Semoga kalian selalu bahagia dan kompak selamanya.",
+                date: "14 November 2025, 16:45"
+            }
+        ];
+        
+        sampleComments.forEach(function(comment) {
+            saveCommentToStorage(comment);
+        });
+    }
     
-    // Tambahkan komentar contoh
-    sampleComments.forEach(function(comment) {
-        var commentHtml = `
-            <div class="comment-item" data-aos="fade-up">
-                <div class="comment-header">
-                    <span class="comment-name">${comment.name}</span>
-                    <span class="comment-date">${comment.date}</span>
-                </div>
-                <p>${comment.message}</p>
-            </div>
-        `;
-        $('#comments-container').prepend(commentHtml);
-    });
+    // Tampilkan komentar saat halaman dimuat
+    displayComments();
+    
+    // Fungsi untuk integrasi Firebase (akan digunakan nanti)
+    function initializeFirebase() {
+        // Kode inisialisasi Firebase akan ditambahkan di sini
+        // ketika Anda sudah membuat project Firebase
+        console.log('Firebase akan diinisialisasi di sini');
+    }
+    
+    // Panggil fungsi inisialisasi Firebase
+    // initializeFirebase();
 });
