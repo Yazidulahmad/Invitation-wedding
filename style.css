@@ -645,6 +645,13 @@ textarea.form-control {
     font-size: 0.9rem;
 }
 
+.comment-loading {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    padding: 20px;
+}
+
 /* Bottom Navigation */
 .bottom-nav {
     position: fixed;
