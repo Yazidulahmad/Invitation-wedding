@@ -342,6 +342,34 @@
         <span id="success-text"></span>
     </div>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+        import { getDatabase, ref, push, onValue, orderByChild, limitToLast } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEgnYSpi9bZx-sBPWn4obiDLAYFrps49s",
+            authDomain: "wedding-invite-yazid-atin.firebaseapp.com",
+            databaseURL: "https://wedding-invite-yazid-atin-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "wedding-invite-yazid-atin",
+            storageBucket: "wedding-invite-yazid-atin.firebasestorage.app",
+            messagingSenderId: "652951851512",
+            appId: "1:652951851512:web:a74fb7020b9c81687d860d",
+            measurementId: "G-XVJG147JL4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        
+        // Export Firebase instances for use in other scripts
+        window.firebaseApp = app;
+        window.firebaseDatabase = getDatabase(app);
+    </script>
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
