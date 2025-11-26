@@ -992,3 +992,16 @@ textarea.form-control {
         font-size: 0.7rem;
     }
 }
+
+/* Optimasi untuk foto portrait */
+.gallery-item img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.couple-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
