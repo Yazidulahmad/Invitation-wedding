@@ -19,19 +19,10 @@
     <!-- Lightbox -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     
-    <!-- Animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
-    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body data-scroll-container>
-    <!-- Container untuk semua animasi dekoratif -->
-    <div class="decorations-container">
-        <!-- Animasi untuk setiap section akan ditambahkan secara dinamis -->
-    </div>
-    
+<body>
     <!-- Audio Element -->
     <audio id="wedding-music" loop>
         <source src="https://raw.githubusercontent.com/Yazidulahmad/nikah-musik/a6decedda2d81eb843286508d740705000c3f845/sumpahdanmati.mp3" type="audio/mpeg">
@@ -83,6 +74,9 @@
     
     <!-- Cover Section -->
     <section id="cover" class="section cover-section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI COVER -->
+        <div class="decorations-container" id="cover-decorations"></div>
+        
         <div class="container">
             <div class="cover-content" data-aos="fade-up">
                 <div class="floral-decoration top-floral">
@@ -119,6 +113,9 @@
     
     <!-- Pembuka Section -->
     <section id="pembuka" class="section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI PEMBUKA -->
+        <div class="decorations-container" id="pembuka-decorations"></div>
+        
         <div class="container">
             <div data-aos="fade-up">
                 <p class="opening-quote arabic">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ"</p>
@@ -131,6 +128,9 @@
     
     <!-- Detail Pengantin Section -->
     <section id="detail-pengantin" class="section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI PENGANTIN -->
+        <div class="decorations-container" id="pengantin-decorations"></div>
+        
         <div class="container">
             <h2 data-aos="fade-up" class="section-title">Mempelai</h2>
             <div class="couple-container">
@@ -163,6 +163,9 @@
     
     <!-- Detail Acara Section -->
     <section id="detail-acara" class="section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI ACARA -->
+        <div class="decorations-container" id="acara-decorations"></div>
+        
         <div class="container">
             <h2 data-aos="fade-up" class="section-title">Detail Acara</h2>
             <div class="event-details">
@@ -212,6 +215,9 @@
     
     <!-- Galeri Section -->
     <section id="galeri" class="section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI GALERI -->
+        <div class="decorations-container" id="galeri-decorations"></div>
+        
         <div class="container">
             <h2 data-aos="fade-up" class="section-title">Galeri Kami</h2>
             <div class="gallery-grid">
@@ -245,6 +251,9 @@
     
     <!-- Hitung Mundur Section -->
     <section id="hitung-mundur" class="section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI HITUNG MUNDUR -->
+        <div class="decorations-container" id="mundur-decorations"></div>
+        
         <div class="container">
             <h2 data-aos="fade-up" class="section-title">Hitung Mundur</h2>
             <div class="countdown-container" data-aos="fade-up" data-aos-delay="200">
@@ -273,6 +282,9 @@
     
     <!-- Penutup Section -->
     <section id="penutup" class="section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI PENUTUP -->
+        <div class="decorations-container" id="penutup-decorations"></div>
+        
         <div class="container">
             <div data-aos="fade-up">
                 <h2 class="section-title">Terima Kasih</h2>
@@ -286,6 +298,9 @@
     
     <!-- Amplop Digital Section -->
     <section id="amplop-digital" class="section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI AMPLOP -->
+        <div class="decorations-container" id="amplop-decorations"></div>
+        
         <div class="container">
             <h2 data-aos="fade-up" class="section-title">Amplop Digital</h2>
             <p data-aos="fade-up" class="amplop-text">Untuk yang ingin memberikan tanda kasih, dapat melalui transfer ke:</p>
@@ -329,6 +344,9 @@
     
     <!-- Ucapan Section -->
     <section id="ucapan" class="section">
+        <!-- TEMPAT UNTUK DEKORASI ANIMASI UCAPAN -->
+        <div class="decorations-container" id="ucapan-decorations"></div>
+        
         <div class="container">
             <h2 data-aos="fade-up" class="section-title">Kirim Ucapan</h2>
             <div class="comment-form" data-aos="fade-up">
@@ -390,7 +408,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
