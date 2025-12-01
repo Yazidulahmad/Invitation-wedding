@@ -1,3 +1,439 @@
+// ============ ORNAMEN SVG MANAGEMENT ============
+
+// URL XML SVG dari GitHub
+const SVG_XML_URL = 'https://raw.githubusercontent.com/Yazidulahmad/Invitation-wedding/94542140ac92742bc491d7cff9b6efb75a33d3bc/cover%20ornamen.svg.xml';
+
+// Cache untuk SVG yang sudah dimuat
+let svgCache = null;
+
+// Fungsi untuk memuat SVG dari URL
+async function loadSVGFromURL() {
+    try {
+        const response = await fetch(SVG_XML_URL);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const svgText = await response.text();
+        return svgText;
+    } catch (error) {
+        console.error('Error loading SVG:', error);
+        // Fallback ke SVG default jika gagal
+        return createFallbackSVG();
+    }
+}
+
+// Fungsi untuk membuat SVG fallback
+function createFallbackSVG() {
+    return `
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <symbol id="ornamen-floral" viewBox="0 0 100 100">
+                    <path d="M50,20 C60,10 75,10 85,20 C95,30 95,45 85,55 C75,65 60,65 50,55 C40,45 40,30 50,20 Z" 
+                          fill="#d4af37" opacity="0.8">
+                        <animate attributeName="d" dur="3s" values="
+                            M50,20 C60,10 75,10 85,20 C95,30 95,45 85,55 C75,65 60,65 50,55 C40,45 40,30 50,20 Z;
+                            M50,18 C62,8 78,8 87,18 C97,28 97,48 87,58 C78,68 62,68 50,58 C38,48 38,28 50,18 Z;
+                            M50,20 C60,10 75,10 85,20 C95,30 95,45 85,55 C75,65 60,65 50,55 C40,45 40,30 50,20 Z
+                        " repeatCount="indefinite"/>
+                    </path>
+                    <circle cx="50" cy="37" r="8" fill="#c19a6b" opacity="0.7">
+                        <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </symbol>
+                
+                <symbol id="ornamen-border" viewBox="0 0 200 20">
+                    <path d="M0,10 L200,10" stroke="#d4af37" stroke-width="2" stroke-dasharray="10,5">
+                        <animate attributeName="stroke-dashoffset" from="0" to="15" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                </symbol>
+                
+                <symbol id="ornamen-heart" viewBox="0 0 100 100">
+                    <path d="M50,30 C60,20 75,20 85,30 C95,40 95,55 85,65 L50,90 L15,65 C5,55 5,40 15,30 C25,20 40,20 50,30 Z" 
+                          fill="#ff6b6b" opacity="0.8">
+                        <animate attributeName="d" dur="1.5s" values="
+                            M50,30 C60,20 75,20 85,30 C95,40 95,55 85,65 L50,90 L15,65 C5,55 5,40 15,30 C25,20 40,20 50,30 Z;
+                            M50,28 C62,18 78,18 87,28 C97,38 97,58 87,68 L50,95 L13,68 C3,58 3,38 13,28 C22,18 38,18 50,28 Z;
+                            M50,30 C60,20 75,20 85,30 C95,40 95,55 85,65 L50,90 L15,65 C5,55 5,40 15,30 C25,20 40,20 50,30 Z
+                        " repeatCount="indefinite"/>
+                    </path>
+                </symbol>
+            </defs>
+        </svg>
+    `;
+}
+
+// Fungsi untuk mengekstrak simbol dari SVG XML
+function extractSymbolsFromSVG(svgText) {
+    const parser = new DOMParser();
+    const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+    const symbols = svgDoc.querySelectorAll('symbol');
+    
+    if (symbols.length === 0) {
+        console.warn('No symbols found in SVG, using fallback');
+        const fallbackDoc = parser.parseFromString(createFallbackSVG(), 'image/svg+xml');
+        return fallbackDoc.querySelectorAll('symbol');
+    }
+    
+    return symbols;
+}
+
+// Fungsi untuk mengisi SVG definitions
+async function populateSVGDefinitions() {
+    const svgContainer = document.getElementById('svg-definitions');
+    if (!svgContainer) {
+        console.error('SVG definitions container not found');
+        return;
+    }
+    
+    // Load SVG dari URL
+    const svgText = await loadSVGFromURL();
+    const symbols = extractSymbolsFromSVG(svgText);
+    
+    // Tambahkan simbol ke container
+    symbols.forEach(symbol => {
+        svgContainer.appendChild(symbol.cloneNode(true));
+    });
+    
+    console.log(`Loaded ${symbols.length} SVG symbols`);
+    return symbols;
+}
+
+// Fungsi untuk mengisi ornamen dengan SVG
+function populateOrnamentsWithSVG() {
+    // Mapping elemen ornamen dengan simbol SVG
+    const ornamentMappings = [
+        // Cover ornaments
+        { element: 'cover-ornament-tl', symbol: 'ornamen-floral' },
+        { element: 'cover-ornament-tr', symbol: 'ornamen-floral' },
+        { element: 'cover-ornament-bl', symbol: 'ornamen-floral' },
+        { element: 'cover-ornament-br', symbol: 'ornamen-floral' },
+        { element: 'cover-top-ornament', symbol: 'ornamen-border' },
+        { element: 'cover-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'name-ornament', symbol: 'ornamen-border' },
+        { element: 'date-ornament', symbol: 'ornamen-border' },
+        { element: 'button-ornament', symbol: 'ornamen-border' },
+        
+        // Section ornaments
+        { element: 'pembuka-top-ornament', symbol: 'ornamen-border' },
+        { element: 'pembuka-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'verse-ornament', symbol: 'ornamen-border' },
+        { element: 'couple-name-ornament', symbol: 'ornamen-border' },
+        { element: 'text-bottom-ornament', symbol: 'ornamen-border' },
+        
+        // Pengantin ornaments
+        { element: 'pengantin-top-ornament', symbol: 'ornamen-border' },
+        { element: 'pengantin-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'pengantin-title-ornament', symbol: 'ornamen-border' },
+        { element: 'card-frame-1', symbol: 'ornamen-floral' },
+        { element: 'card-frame-2', symbol: 'ornamen-floral' },
+        { element: 'photo-ornament-1', symbol: 'ornamen-floral' },
+        { element: 'photo-ornament-2', symbol: 'ornamen-floral' },
+        { element: 'card-bottom-1', symbol: 'ornamen-border' },
+        { element: 'card-bottom-2', symbol: 'ornamen-border' },
+        
+        // Acara ornaments
+        { element: 'acara-top-ornament', symbol: 'ornamen-border' },
+        { element: 'acara-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'acara-title-ornament', symbol: 'ornamen-border' },
+        { element: 'event-frame-1', symbol: 'ornamen-floral' },
+        { element: 'event-frame-2', symbol: 'ornamen-floral' },
+        { element: 'event-frame-3', symbol: 'ornamen-floral' },
+        { element: 'event-icon-1', symbol: 'ornamen-floral' },
+        { element: 'event-icon-2', symbol: 'ornamen-floral' },
+        { element: 'event-icon-3', symbol: 'ornamen-floral' },
+        { element: 'event-bottom-1', symbol: 'ornamen-border' },
+        { element: 'event-bottom-2', symbol: 'ornamen-border' },
+        { element: 'event-bottom-3', symbol: 'ornamen-border' },
+        
+        // Galeri ornaments
+        { element: 'galeri-top-ornament', symbol: 'ornamen-border' },
+        { element: 'galeri-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'galeri-title-ornament', symbol: 'ornamen-border' },
+        { element: 'gallery-frame-1', symbol: 'ornamen-floral' },
+        { element: 'gallery-frame-2', symbol: 'ornamen-floral' },
+        { element: 'gallery-frame-3', symbol: 'ornamen-floral' },
+        { element: 'gallery-frame-4', symbol: 'ornamen-floral' },
+        
+        // Hitung mundur ornaments
+        { element: 'mundur-top-ornament', symbol: 'ornamen-border' },
+        { element: 'mundur-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'mundur-title-ornament', symbol: 'ornamen-border' },
+        { element: 'countdown-ornament-1', symbol: 'ornamen-heart' },
+        { element: 'countdown-ornament-2', symbol: 'ornamen-heart' },
+        { element: 'countdown-ornament-3', symbol: 'ornamen-heart' },
+        { element: 'countdown-ornament-4', symbol: 'ornamen-heart' },
+        { element: 'message-ornament', symbol: 'ornamen-border' },
+        
+        // Penutup ornaments
+        { element: 'penutup-top-ornament', symbol: 'ornamen-border' },
+        { element: 'penutup-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'penutup-title-ornament', symbol: 'ornamen-border' },
+        { element: 'closing-ornament-1', symbol: 'ornamen-border' },
+        { element: 'arabic-ornament', symbol: 'ornamen-border' },
+        { element: 'closing-ornament-2', symbol: 'ornamen-border' },
+        { element: 'signature-ornament', symbol: 'ornamen-border' },
+        
+        // Amplop ornaments
+        { element: 'amplop-top-ornament', symbol: 'ornamen-border' },
+        { element: 'amplop-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'amplop-title-ornament', symbol: 'ornamen-border' },
+        { element: 'bank-frame-1', symbol: 'ornamen-floral' },
+        { element: 'bank-frame-2', symbol: 'ornamen-floral' },
+        { element: 'bank-frame-3', symbol: 'ornamen-floral' },
+        { element: 'bank-icon-ornament-1', symbol: 'ornamen-floral' },
+        { element: 'bank-icon-ornament-2', symbol: 'ornamen-floral' },
+        { element: 'bank-icon-ornament-3', symbol: 'ornamen-floral' },
+        { element: 'bank-bottom-1', symbol: 'ornamen-border' },
+        { element: 'bank-bottom-2', symbol: 'ornamen-border' },
+        { element: 'bank-bottom-3', symbol: 'ornamen-border' },
+        
+        // Ucapan ornaments
+        { element: 'ucapan-top-ornament', symbol: 'ornamen-border' },
+        { element: 'ucapan-bottom-ornament', symbol: 'ornamen-border' },
+        { element: 'ucapan-title-ornament', symbol: 'ornamen-border' },
+        { element: 'form-frame', symbol: 'ornamen-floral' },
+        { element: 'form-bottom', symbol: 'ornamen-border' },
+        
+        // Music ornament
+        { element: 'music-ornament', symbol: 'ornamen-floral' }
+    ];
+    
+    // Isi setiap elemen ornamen dengan SVG
+    ornamentMappings.forEach(mapping => {
+        const element = document.getElementById(mapping.element);
+        if (element && !element.querySelector('svg')) {
+            const svgNS = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(svgNS, 'svg');
+            svg.setAttribute('class', 'ornamen-svg');
+            svg.setAttribute('viewBox', '0 0 100 100');
+            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+            
+            const use = document.createElementNS(svgNS, 'use');
+            use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#${mapping.symbol}`);
+            
+            svg.appendChild(use);
+            element.appendChild(svg);
+        }
+    });
+}
+
+// Fungsi untuk membuat floating particles
+function createFloatingParticles() {
+    const container = document.getElementById('floating-particles');
+    if (!container) return;
+    
+    // Bersihkan existing particles
+    container.innerHTML = '';
+    
+    // Buat 20 particles
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random properties
+        const size = Math.random() * 4 + 2;
+        const left = Math.random() * 100;
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 10;
+        
+        // Set styles
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        // Random color from theme
+        const colors = ['#d4af37', '#c19a6b', '#f9e076', '#ffffff'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.backgroundColor = color;
+        
+        container.appendChild(particle);
+    }
+}
+
+// Fungsi untuk mengatur animasi ornamen berdasarkan scroll
+function setupOrnamentScrollAnimations() {
+    const ornaments = document.querySelectorAll('.svg-ornament, .cover-ornament, .section-ornament, .title-ornament');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Aktifkan animasi
+                entry.target.style.animationPlayState = 'running';
+                entry.target.style.opacity = '0.8';
+                
+                // Trigger efek khusus untuk beberapa ornamen
+                if (entry.target.classList.contains('cover-ornament')) {
+                    entry.target.style.transform = 'translateY(0) rotate(0deg)';
+                }
+            } else {
+                // Nonaktifkan animasi untuk optimasi
+                entry.target.style.animationPlayState = 'paused';
+                entry.target.style.opacity = '0.4';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    ornaments.forEach(ornament => {
+        observer.observe(ornament);
+    });
+}
+
+// Fungsi untuk mengatur efek hover pada cards
+function setupCardHoverEffects() {
+    const cards = document.querySelectorAll('.couple-card, .event-card, .bank-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const frame = card.querySelector('.card-ornament.frame');
+            if (frame) {
+                frame.style.opacity = '0.9';
+                frame.style.transform = 'scale(1.02)';
+            }
+            
+            const photo = card.querySelector('.photo-ornament');
+            if (photo) {
+                photo.style.transform = 'rotate(15deg) scale(1.1)';
+            }
+            
+            const icon = card.querySelector('.icon-ornament, .bank-icon-ornament');
+            if (icon) {
+                icon.style.transform = 'scale(1.2)';
+                icon.style.opacity = '0.9';
+            }
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            const frame = card.querySelector('.card-ornament.frame');
+            if (frame) {
+                frame.style.opacity = '0';
+                frame.style.transform = 'scale(1)';
+            }
+            
+            const photo = card.querySelector('.photo-ornament');
+            if (photo) {
+                photo.style.transform = 'rotate(0) scale(1)';
+            }
+            
+            const icon = card.querySelector('.icon-ornament, .bank-icon-ornament');
+            if (icon) {
+                icon.style.transform = 'scale(1)';
+                icon.style.opacity = '0.6';
+            }
+        });
+    });
+}
+
+// Fungsi untuk mengatur efek gallery hover
+function setupGalleryHoverEffects() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    galleryItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const frame = item.querySelector('.gallery-frame-ornament');
+            if (frame) {
+                frame.style.opacity = '1';
+                frame.style.borderImageSlice = '1';
+            }
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            const frame = item.querySelector('.gallery-frame-ornament');
+            if (frame) {
+                frame.style.opacity = '0';
+            }
+        });
+    });
+}
+
+// Fungsi untuk mengatur animasi countdown ornaments
+function setupCountdownOrnamentAnimations() {
+    let lastSeconds = null;
+    
+    function updateCountdownOrnaments() {
+        const seconds = parseInt(document.getElementById('seconds').textContent);
+        
+        if (seconds !== lastSeconds) {
+            const ornaments = document.querySelectorAll('.countdown-ornament');
+            ornaments.forEach(ornament => {
+                ornament.style.animation = 'none';
+                setTimeout(() => {
+                    ornament.style.animation = 'pulse 2s ease-in-out infinite';
+                }, 10);
+            });
+            
+            lastSeconds = seconds;
+        }
+    }
+    
+    // Check setiap 100ms
+    setInterval(updateCountdownOrnaments, 100);
+}
+
+// Fungsi untuk mengatur animasi music ornament
+function setupMusicOrnamentAnimation() {
+    const musicToggle = document.getElementById('music-toggle');
+    const musicOrnament = document.querySelector('.music-ornament');
+    
+    if (!musicToggle || !musicOrnament) return;
+    
+    let isPlaying = false;
+    
+    musicToggle.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        
+        if (isPlaying) {
+            musicOrnament.style.animation = 'rotate 10s linear infinite';
+            musicOrnament.style.opacity = '0.9';
+        } else {
+            musicOrnament.style.animation = 'rotate 20s linear infinite';
+            musicOrnament.style.opacity = '0.6';
+        }
+    });
+}
+
+// Fungsi untuk inisialisasi semua ornamen
+async function initializeOrnaments() {
+    try {
+        console.log('Initializing SVG ornaments...');
+        
+        // Populate SVG definitions
+        await populateSVGDefinitions();
+        
+        // Beri waktu untuk SVG definitions dimuat
+        setTimeout(() => {
+            // Populate ornaments dengan SVG
+            populateOrnamentsWithSVG();
+            
+            // Buat floating particles
+            createFloatingParticles();
+            
+            // Setup scroll animations
+            setupOrnamentScrollAnimations();
+            
+            // Setup hover effects
+            setupCardHoverEffects();
+            setupGalleryHoverEffects();
+            
+            // Setup countdown ornament animations
+            setupCountdownOrnamentAnimations();
+            
+            // Setup music ornament animation
+            setupMusicOrnamentAnimation();
+            
+            console.log('SVG ornaments initialized successfully');
+        }, 500);
+    } catch (error) {
+        console.error('Error initializing ornaments:', error);
+    }
+}
+
+// ============ KODE ASLI ============
+
 // Inisialisasi AOS
 AOS.init({
     duration: 800,
@@ -163,51 +599,8 @@ function displayComments(comments) {
     });
 }
 
-// Optimasi Canva Background
-function optimizeCanvaBackground() {
-    const canvaIframe = document.querySelector('.canva-container iframe');
-    if (!canvaIframe) return;
-    
-    // Set iframe attributes for better performance
-    canvaIframe.setAttribute('loading', 'lazy');
-    canvaIframe.setAttribute('importance', 'low');
-    
-    // Adjust for mobile
-    if (window.innerWidth < 768) {
-        canvaIframe.style.filter = 'brightness(0.35) saturate(1.1)';
-    }
-}
-
-// Initialize Canva background
-function initCanvaBackground() {
-    const canvaBackground = document.getElementById('canva-background');
-    if (!canvaBackground) return;
-    
-    // Preload canva background
-    canvaBackground.style.opacity = '0';
-    setTimeout(() => {
-        canvaBackground.style.transition = 'opacity 1s ease';
-        canvaBackground.style.opacity = '1';
-    }, 500);
-    
-    // Optimize for performance
-    optimizeCanvaBackground();
-    
-    // Listen for iframe load
-    const canvaIframe = document.querySelector('.canva-container iframe');
-    if (canvaIframe) {
-        canvaIframe.addEventListener('load', () => {
-            console.log('Canva background loaded successfully');
-            canvaBackground.classList.add('loaded');
-        });
-    }
-}
-
 // Set nama tamu dari URL
 $(document).ready(function() {
-    // Initialize Canva background
-    initCanvaBackground();
-    
     // Initialize Firebase first
     initializeFirebase().then(() => {
         console.log('Firebase initialized successfully');
@@ -232,6 +625,9 @@ $(document).ready(function() {
         `);
     });
     
+    // Initialize ornaments
+    initializeOrnaments();
+    
     // Musik otomatis
     var audio = document.getElementById('wedding-music');
     var musicIcon = document.getElementById('music-icon');
@@ -239,19 +635,12 @@ $(document).ready(function() {
     
     // Fungsi untuk memutar musik
     function playMusic() {
-        // Add slight delay for better UX
-        setTimeout(() => {
-            audio.play().then(function() {
-                musicIcon.classList.remove('fa-play');
-                musicIcon.classList.add('fa-pause');
-                console.log('Musik berhasil diputar');
-            }).catch(function(error) {
-                console.log('Autoplay prevented:', error);
-                // Show play button for manual start
-                musicIcon.classList.remove('fa-pause');
-                musicIcon.classList.add('fa-play');
-            });
-        }, 1000);
+        audio.play().then(function() {
+            musicIcon.classList.remove('fa-play');
+            musicIcon.classList.add('fa-pause');
+        }).catch(function(error) {
+            console.log('Autoplay prevented:', error);
+        });
     }
     
     // Coba putar musik saat halaman dimuat
@@ -272,17 +661,18 @@ $(document).ready(function() {
     
     // Tombol buka undangan
     $('#open-invitation').click(function() {
-        // Sembunyikan cover section
-        $('#cover').addClass('hidden');
+        // Animasikan ornamen cover sebelum menyembunyikan
+        const coverOrnaments = document.querySelectorAll('.cover-ornament');
+        coverOrnaments.forEach(ornament => {
+            ornament.style.transition = 'all 0.8s ease';
+            ornament.style.opacity = '0';
+            ornament.style.transform = 'scale(0.5) rotate(45deg)';
+        });
         
-        // Fade out Canva background
-        const canvaBackground = document.getElementById('canva-background');
-        if (canvaBackground) {
-            canvaBackground.style.opacity = '0';
-            setTimeout(() => {
-                canvaBackground.style.display = 'none';
-            }, 800);
-        }
+        // Sembunyikan cover section setelah animasi
+        setTimeout(() => {
+            $('#cover').addClass('hidden');
+        }, 500);
         
         // Scroll ke section pembuka
         $('html, body').animate({
@@ -303,11 +693,10 @@ $(document).ready(function() {
         // Set status bahwa undangan sudah dibuka
         sessionStorage.setItem('undanganDibuka', 'true');
         
-        // Hide Canva credit
-        const canvaCredit = document.querySelector('.canva-credit');
-        if (canvaCredit) {
-            canvaCredit.style.display = 'none';
-        }
+        // Refresh AOS setelah membuka undangan
+        setTimeout(() => {
+            AOS.refresh();
+        }, 500);
     });
     
     // Cek jika undangan sudah dibuka sebelumnya
@@ -316,16 +705,10 @@ $(document).ready(function() {
         $('#bottom-nav').show();
         preventCoverScroll();
         
-        // Hide Canva background and credit
-        const canvaBackground = document.getElementById('canva-background');
-        if (canvaBackground) {
-            canvaBackground.style.display = 'none';
-        }
-        
-        const canvaCredit = document.querySelector('.canva-credit');
-        if (canvaCredit) {
-            canvaCredit.style.display = 'none';
-        }
+        // Initialize ornaments setelah cover disembunyikan
+        setTimeout(() => {
+            initializeOrnaments();
+        }, 100);
     }
     
     // Bottom Navigation
@@ -367,7 +750,7 @@ $(document).ready(function() {
     setInterval(updateCountdown, 1000);
     updateCountdown();
     
-    // Simpan ke kalender
+    // Simpan ke kalender - TANPA KONFIRMASI
     $('#save-akad').click(function() {
         var startDate = '20251221T090000';
         var endDate = '20251221T100000';
@@ -408,6 +791,22 @@ $(document).ready(function() {
     $('.btn-copy').click(function() {
         var accountNumber = $(this).data('account');
         copyToClipboard(accountNumber);
+        
+        // Animasikan ornamen bank
+        const bankCard = $(this).closest('.bank-card');
+        const bankIconOrnament = bankCard.find('.bank-icon-ornament');
+        if (bankIconOrnament.length) {
+            bankIconOrnament.css({
+                'transform': 'scale(1.3) rotate(15deg)',
+                'transition': 'transform 0.3s ease'
+            });
+            
+            setTimeout(() => {
+                bankIconOrnament.css({
+                    'transform': 'scale(1) rotate(0)'
+                });
+            }, 300);
+        }
     });
     
     // Kirim ucapan
@@ -439,6 +838,22 @@ $(document).ready(function() {
             .then(() => {
                 // Reset form
                 $('#comment-message').val('');
+                
+                // Animasikan form ornament
+                const formFrame = $('.form-ornament.frame');
+                if (formFrame.length) {
+                    formFrame.css({
+                        'border-image': 'linear-gradient(45deg, #4CAF50, #8BC34A) 1',
+                        'opacity': '0.8'
+                    });
+                    
+                    setTimeout(() => {
+                        formFrame.css({
+                            'border-image': 'linear-gradient(45deg, var(--primary), var(--secondary)) 1',
+                            'opacity': '0.5'
+                        });
+                    }, 1000);
+                }
                 
                 // Tampilkan pesan sukses
                 showSuccessMessage('Ucapan Anda telah terkirim');
@@ -478,429 +893,8 @@ $(document).ready(function() {
         $('#bottom-nav').hide();
     }
     
-    // Handle window resize for Canva background
-    let resizeTimer;
+    // Refresh particles pada resize
     $(window).resize(function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            optimizeCanvaBackground();
-        }, 250);
+        createFloatingParticles();
     });
 });
-
-// Export fungsi untuk Canva optimizations
-window.optimizeCanvaBackground = optimizeCanvaBackground;
-// SVG Decorations Management System for Other Sections
-class SVGDecorations {
-    constructor() {
-        this.decorationsLoaded = false;
-        this.svgBasePath = 'decorations/'; // Path folder untuk file SVG
-        this.init();
-    }
-
-    init() {
-        this.loadSVGDecorations();
-        this.initializeSectionObserver();
-        this.setupResizeHandler();
-    }
-
-    // Konfigurasi dekorasi untuk setiap section (tanpa cover)
-    getSectionConfig() {
-        return {
-            'pembuka': {
-                files: [
-                    'pembuka-corner-top.svg',
-                    'pembuka-corner-bottom.svg'
-                ],
-                positions: ['corner-top-left', 'corner-bottom-right']
-            },
-            'detail-pengantin': {
-                files: [
-                    'pengantin-heart-left.svg',
-                    'pengantin-heart-right.svg',
-                    'pengantin-ring.svg'
-                ],
-                positions: ['heart-left', 'heart-right', 'ring-bottom']
-            },
-            'detail-acara': {
-                files: [
-                    'acara-border-top.svg',
-                    'acara-border-bottom.svg',
-                    'acara-calendar.svg'
-                ],
-                positions: ['border-top', 'border-bottom', 'calendar-icon']
-            },
-            'galeri': {
-                files: [
-                    'galeri-frame-1.svg',
-                    'galeri-frame-2.svg',
-                    'galeri-frame-3.svg',
-                    'galeri-frame-4.svg',
-                    'galeri-photo.svg'
-                ],
-                positions: ['frame-corner', 'frame-corner', 'frame-corner', 'frame-corner', 'photo-icon']
-            },
-            'hitung-mundur': {
-                files: [
-                    'mundur-clock.svg',
-                    'mundur-sandglass.svg'
-                ],
-                positions: ['clock-decoration', 'sandglass']
-            },
-            'penutup': {
-                files: [
-                    'penutup-floral-left.svg',
-                    'penutup-floral-right.svg',
-                    'penutup-hands.svg'
-                ],
-                positions: ['floral-left', 'floral-right', 'hands-icon']
-            },
-            'amplop-digital': {
-                files: [
-                    'amplop-envelope-top.svg',
-                    'amplop-envelope-bottom.svg',
-                    'amplop-money.svg'
-                ],
-                positions: ['envelope-top', 'envelope-bottom', 'money-icon']
-            },
-            'ucapan': {
-                files: [
-                    'ucapan-message-left.svg',
-                    'ucapan-message-right.svg',
-                    'ucapan-pen.svg'
-                ],
-                positions: ['message-left', 'message-right', 'pen-icon']
-            }
-        };
-    }
-
-    // Load SVG decorations from separate files
-    async loadSVGDecorations() {
-        const container = document.getElementById('svg-decorations');
-        if (!container) return;
-        
-        const sectionConfig = this.getSectionConfig();
-
-        try {
-            for (const [sectionId, config] of Object.entries(sectionConfig)) {
-                // Create decoration container for this section
-                const decorationDiv = document.createElement('div');
-                decorationDiv.className = `svg-decoration ${sectionId.replace('-', '')}-decoration`;
-                decorationDiv.setAttribute('data-section', sectionId);
-
-                // Load each SVG file for this section
-                for (let i = 0; i < config.files.length; i++) {
-                    const fileName = config.files[i];
-                    const positionClass = config.positions[i];
-                    
-                    try {
-                        // Load SVG file
-                        const response = await fetch(`${this.svgBasePath}${fileName}`);
-                        if (!response.ok) {
-                            console.warn(`SVG file not found: ${fileName}, using fallback`);
-                            await this.createFallbackSVG(decorationDiv, sectionId, positionClass);
-                            continue;
-                        }
-                        
-                        const svgContent = await response.text();
-                        const svgWrapper = document.createElement('div');
-                        svgWrapper.className = `decoration-svg ${positionClass}`;
-                        svgWrapper.innerHTML = svgContent;
-                        
-                        // Optimize SVG for performance
-                        this.optimizeSVG(svgWrapper);
-                        
-                        decorationDiv.appendChild(svgWrapper);
-                    } catch (error) {
-                        console.error(`Error loading SVG ${fileName}:`, error);
-                        await this.createFallbackSVG(decorationDiv, sectionId, positionClass);
-                    }
-                }
-
-                container.appendChild(decorationDiv);
-            }
-
-            this.decorationsLoaded = true;
-            console.log('SVG decorations loaded successfully');
-            
-            // Initialize animations after loading
-            this.initializeAnimations();
-            
-        } catch (error) {
-            console.error('Error loading SVG decorations:', error);
-            this.createAllFallbackDecorations(container);
-        }
-    }
-
-    // Create fallback SVG if file not found
-    createFallbackSVG(container, sectionId, positionClass) {
-        return new Promise((resolve) => {
-            const svg = document.createElement('div');
-            svg.className = `decoration-svg ${positionClass} fallback`;
-            
-            // Create simple fallback SVG based on section
-            let svgContent = '';
-            switch(sectionId) {
-                case 'detail-pengantin':
-                    svgContent = this.createHeartFallback(positionClass);
-                    break;
-                case 'galeri':
-                    svgContent = this.createFrameFallback(positionClass);
-                    break;
-                default:
-                    svgContent = this.createSimpleFallback(positionClass);
-            }
-            
-            svg.innerHTML = svgContent;
-            container.appendChild(svg);
-            resolve();
-        });
-    }
-
-    // Fallback SVG creators
-    createHeartFallback(positionClass) {
-        const opacity = positionClass.includes('left') ? '0.7' : '0.6';
-        return `
-            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                <path d="M20,50 C15,40 10,35 20,25 C30,15 40,25 50,35 C60,25 70,15 80,25 C90,35 85,40 80,50 C70,60 50,75 50,75 C50,75 30,60 20,50" 
-                      fill="none" stroke="#c19a6b" stroke-width="0.5" stroke-opacity="${opacity}"/>
-            </svg>
-        `;
-    }
-
-    createFrameFallback(positionClass) {
-        return `
-            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                <path d="M10,10 L30,10 L10,30 Z" fill="none" stroke="#8b7355" stroke-width="0.7" stroke-opacity="0.5"/>
-            </svg>
-        `;
-    }
-
-    createSimpleFallback(positionClass) {
-        return `
-            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                <circle cx="50" cy="50" r="40" fill="none" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.3"/>
-                <circle cx="50" cy="50" r="20" fill="none" stroke="#d4af37" stroke-width="0.3" stroke-opacity="0.2"/>
-            </svg>
-        `;
-    }
-
-    // Create all fallback decorations if loading fails
-    createAllFallbackDecorations(container) {
-        const sectionConfig = this.getSectionConfig();
-        
-        for (const [sectionId, config] of Object.entries(sectionConfig)) {
-            const decorationDiv = document.createElement('div');
-            decorationDiv.className = `svg-decoration ${sectionId.replace('-', '')}-decoration`;
-            decorationDiv.setAttribute('data-section', sectionId);
-
-            config.positions.forEach((positionClass, index) => {
-                this.createFallbackSVG(decorationDiv, sectionId, positionClass);
-            });
-
-            container.appendChild(decorationDiv);
-        }
-        
-        this.decorationsLoaded = true;
-        console.log('Fallback SVG decorations created');
-    }
-
-    // Optimize SVG for better performance
-    optimizeSVG(svgWrapper) {
-        const svg = svgWrapper.querySelector('svg');
-        if (!svg) return;
-
-        // Set attributes for optimization
-        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-        svg.setAttribute('shape-rendering', 'geometricPrecision');
-        
-        // Remove unnecessary metadata
-        const metadata = svg.querySelector('metadata');
-        if (metadata) metadata.remove();
-        
-        // Optimize paths
-        const paths = svg.querySelectorAll('path');
-        paths.forEach(path => {
-            path.setAttribute('vector-effect', 'non-scaling-stroke');
-        });
-    }
-
-    // Initialize animations
-    initializeAnimations() {
-        // Add animation classes based on section
-        const animations = {
-            'pembuka': 'fadeIn',
-            'detail-pengantin': 'float',
-            'detail-acara': 'fadeIn',
-            'galeri': 'fadeIn',
-            'hitung-mundur': 'pulse',
-            'penutup': 'fadeIn',
-            'amplop-digital': 'fadeIn',
-            'ucapan': 'pulse'
-        };
-
-        Object.entries(animations).forEach(([section, animation]) => {
-            const decoration = document.querySelector(`.svg-decoration[data-section="${section}"]`);
-            if (decoration) {
-                decoration.querySelectorAll('.decoration-svg').forEach(svg => {
-                    svg.style.animationName = animation;
-                    svg.style.animationDuration = section === 'detail-pengantin' ? '4s' : '3s';
-                    svg.style.animationIterationCount = 'infinite';
-                    svg.style.animationTimingFunction = 'ease-in-out';
-                });
-            }
-        });
-    }
-
-    // Initialize Intersection Observer for section detection
-    initializeSectionObserver() {
-        const sections = document.querySelectorAll('.section');
-        const decorations = document.querySelectorAll('.svg-decoration');
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.3
-        };
-
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const sectionId = entry.target.id;
-                    
-                    // Skip cover section
-                    if (sectionId === 'cover') return;
-                    
-                    // Hide all decorations
-                    decorations.forEach(decoration => {
-                        decoration.classList.remove('active');
-                    });
-                    
-                    // Show decoration for current section
-                    const currentDecoration = document.querySelector(`.svg-decoration[data-section="${sectionId}"]`);
-                    if (currentDecoration) {
-                        currentDecoration.classList.add('active');
-                        
-                        // Add transition delay for each SVG element
-                        const svgElements = currentDecoration.querySelectorAll('.decoration-svg');
-                        svgElements.forEach((svg, index) => {
-                            svg.style.transitionDelay = `${index * 0.1}s`;
-                        });
-                    }
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            if (section.id !== 'cover') {
-                sectionObserver.observe(section);
-            }
-        });
-    }
-
-    // Setup resize handler for responsive adjustments
-    setupResizeHandler() {
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                this.adjustDecorationsForScreenSize();
-            }, 250);
-        });
-
-        // Initial adjustment
-        this.adjustDecorationsForScreenSize();
-    }
-
-    // Adjust decorations based on screen size
-    adjustDecorationsForScreenSize() {
-        const screenWidth = window.innerWidth;
-        const decorations = document.querySelectorAll('.decoration-svg');
-
-        decorations.forEach(decoration => {
-            if (screenWidth < 480) {
-                // Hide some decorations on small screens
-                const classes = decoration.className;
-                if (classes.includes('frame-corner') || 
-                    classes.includes('message-left') || 
-                    classes.includes('message-right') ||
-                    classes.includes('calendar-icon') ||
-                    classes.includes('money-icon')) {
-                    decoration.style.display = 'none';
-                } else {
-                    decoration.style.display = 'block';
-                }
-                
-                // Scale down decorations
-                decoration.style.transform = 'scale(0.8)';
-            } else if (screenWidth < 768) {
-                // Medium screens
-                decoration.style.transform = 'scale(0.9)';
-                decoration.style.display = 'block';
-            } else {
-                // Large screens
-                decoration.style.transform = 'scale(1)';
-                decoration.style.display = 'block';
-            }
-        });
-    }
-
-    // Manual method to show/hide decorations
-    showDecoration(sectionId) {
-        const decoration = document.querySelector(`.svg-decoration[data-section="${sectionId}"]`);
-        if (decoration) {
-            decoration.classList.add('active');
-        }
-    }
-
-    hideDecoration(sectionId) {
-        const decoration = document.querySelector(`.svg-decoration[data-section="${sectionId}"]`);
-        if (decoration) {
-            decoration.classList.remove('active');
-        }
-    }
-
-    // Add custom SVG decoration dynamically
-    addCustomDecoration(sectionId, svgContent, positionClass, styles = {}) {
-        const decoration = document.querySelector(`.svg-decoration[data-section="${sectionId}"]`);
-        if (!decoration) return;
-
-        const svgWrapper = document.createElement('div');
-        svgWrapper.className = `decoration-svg custom ${positionClass}`;
-        svgWrapper.innerHTML = svgContent;
-
-        // Apply custom styles
-        Object.entries(styles).forEach(([property, value]) => {
-            svgWrapper.style[property] = value;
-        });
-
-        decoration.appendChild(svgWrapper);
-    }
-
-    // Remove all decorations
-    clearDecorations() {
-        const container = document.getElementById('svg-decorations');
-        if (container) {
-            container.innerHTML = '';
-            this.decorationsLoaded = false;
-        }
-    }
-
-    // Check if decorations are loaded
-    areDecorationsLoaded() {
-        return this.decorationsLoaded;
-    }
-}
-
-// Initialize SVG Decorations when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait a bit for other scripts to load
-    setTimeout(() => {
-        window.svgDecorations = new SVGDecorations();
-    }, 1000);
-});
-
-// Export for manual control
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = SVGDecorations;
-}
