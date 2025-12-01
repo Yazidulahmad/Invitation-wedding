@@ -54,8 +54,6 @@ h1, h2, h3, h4, h5 {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
 }
 
 .btn {
@@ -95,148 +93,376 @@ h1, h2, h3, h4, h5 {
     margin-top: 1rem;
 }
 
-/* ========== CANVA ANIMATED BACKGROUND ========== */
-.canva-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
+/* ============ ORNAMEN STYLES ============ */
 
-.canva-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding-top: 177.7778%;
-    box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);
-    overflow: hidden;
-    border-radius: 8px;
-}
-
-.canva-container iframe {
+/* Ornamen Umum */
+.svg-ornament,
+.cover-ornament,
+.section-ornament,
+.title-ornament,
+.card-ornament,
+.photo-ornament,
+.icon-ornament,
+.gallery-frame-ornament,
+.countdown-ornament,
+.message-ornament,
+.closing-ornament,
+.arabic-ornament,
+.signature-ornament,
+.bank-icon-ornament,
+.form-ornament,
+.name-ornament,
+.date-ornament,
+.button-ornament,
+.verse-ornament,
+.couple-name-ornament,
+.text-bottom-ornament {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border: none;
-    padding: 0;
-    margin: 0;
-    filter: brightness(0.4) saturate(1.2);
-}
-
-.canva-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.7) 0%,
-        rgba(0, 0, 0, 0.5) 50%,
-        rgba(0, 0, 0, 0.7) 100%
-    );
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Canva design credit */
-.canva-credit {
-    position: fixed;
-    bottom: 70px;
-    right: 15px;
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    box-shadow: var(--shadow);
-}
-
-.canva-credit a {
-    color: var(--secondary);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.canva-credit a:hover {
-    color: var(--primary);
-}
-
-.canva-credit i {
-    font-size: 0.8rem;
-    color: var(--primary);
-}
-
-/* ========== SVG DECORATIONS SYSTEM ========== */
-#svg-decorations {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     pointer-events: none;
     z-index: 1;
+    opacity: 0.7;
+    transition: all 0.3s ease;
 }
 
-.svg-decoration {
-    position: absolute;
+/* Cover Ornaments */
+.cover-ornament {
+    width: 120px;
+    height: 120px;
+    opacity: 0.8;
+    animation: float 6s ease-in-out infinite;
+}
+
+.cover-ornament.top-left {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.cover-ornament.top-right {
+    top: 10%;
+    right: 5%;
+    animation-delay: 2s;
+    transform: scaleX(-1);
+}
+
+.cover-ornament.bottom-left {
+    bottom: 10%;
+    left: 5%;
+    animation-delay: 1s;
+    transform: scaleY(-1);
+}
+
+.cover-ornament.bottom-right {
+    bottom: 10%;
+    right: 5%;
+    animation-delay: 3s;
+    transform: scale(-1, -1);
+}
+
+.svg-ornament.top-ornament {
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 40px;
+}
+
+.svg-ornament.bottom-ornament {
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 40px;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+/* Section Ornaments */
+.section-ornament {
+    width: 100%;
+    height: 40px;
+    opacity: 0.5;
+}
+
+.section-ornament.top {
+    top: 0;
+    left: 0;
+}
+
+.section-ornament.bottom {
+    bottom: 0;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+/* Title Ornaments */
+.title-ornament {
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 30px;
+    opacity: 0.6;
+}
+
+/* Card Ornaments */
+.card-ornament.frame {
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 0.8s ease;
-    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-.svg-decoration.active {
+.couple-card:hover .card-ornament.frame,
+.event-card:hover .card-ornament.frame,
+.bank-card:hover .card-ornament.frame {
+    opacity: 0.8;
+}
+
+.card-ornament.bottom {
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 20px;
+    opacity: 0.5;
+}
+
+/* Photo Ornaments */
+.photo-ornament {
+    top: -15px;
+    right: -15px;
+    width: 50px;
+    height: 50px;
+    opacity: 0.7;
+}
+
+/* Icon Ornaments */
+.icon-ornament {
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    opacity: 0.6;
+}
+
+/* Gallery Frame Ornaments */
+.gallery-frame-ornament {
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, var(--primary), var(--accent)) 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-frame-ornament {
     opacity: 1;
 }
 
-.decoration-svg {
+/* Countdown Ornaments */
+.countdown-ornament {
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    opacity: 0.6;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Message Ornaments */
+.message-ornament {
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 20px;
+    opacity: 0.5;
+}
+
+/* Closing Ornaments */
+.closing-ornament {
+    width: 150px;
+    height: 20px;
+    margin: 20px auto;
+    opacity: 0.5;
+}
+
+.arabic-ornament {
+    width: 200px;
+    height: 30px;
+    margin: 20px auto;
+    opacity: 0.4;
+}
+
+.signature-ornament {
+    width: 100px;
+    height: 30px;
+    margin: 30px auto 0;
+    opacity: 0.5;
+}
+
+/* Bank Icon Ornaments */
+.bank-icon-ornament {
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 20px;
+    opacity: 0.7;
+}
+
+/* Form Ornaments */
+.form-ornament.frame {
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid transparent;
+    border-image: linear-gradient(45deg, var(--primary), var(--secondary)) 1;
+    border-radius: 17px;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.form-ornament.bottom {
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 15px;
+    opacity: 0.4;
+}
+
+/* Special Cover Ornaments */
+.name-ornament {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+.date-ornament {
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+.button-ornament {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+/* Verse Ornaments */
+.verse-ornament {
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 30px;
+    opacity: 0.4;
+}
+
+.couple-name-ornament {
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 20px;
+    opacity: 0.5;
+}
+
+.text-bottom-ornament {
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 20px;
+    opacity: 0.4;
+}
+
+/* Music Player dengan Ornamen */
+.music-player {
+    position: fixed;
+    bottom: 70px;
+    left: 15px;
+    z-index: 1000;
+}
+
+.music-btn {
+    background: var(--primary);
+    color: var(--white);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.music-btn:hover {
+    background: var(--secondary);
+    transform: scale(1.1);
+}
+
+.music-ornament {
     position: absolute;
-    transition: all 0.6s ease;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    opacity: 0.7;
+    z-index: 1;
+    animation: rotate 20s linear infinite;
+}
+
+/* Floating Particles */
+.floating-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
 }
 
-/* Animation for SVG elements */
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
+.particle {
+    position: absolute;
+    background: var(--primary);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: floatParticle linear infinite;
 }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-}
-
-.decoration-svg {
-    animation: fadeIn 1s ease-out;
-}
-
-/* ========== END DECORATIONS ========== */
 
 /* Cover Section */
 .cover-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
     color: var(--white);
     text-align: center;
     position: relative;
     transition: all 0.8s ease;
-    background: transparent;
 }
 
 .cover-section.hidden {
@@ -248,16 +474,9 @@ h1, h2, h3, h4, h5 {
     pointer-events: none;
 }
 
-.cover-section.hidden + .canva-background {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.8s ease;
-}
-
 .cover-content {
     z-index: 2;
     position: relative;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .cover-title {
@@ -266,10 +485,6 @@ h1, h2, h3, h4, h5 {
     letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 700;
-    background: var(--gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .cover-subtitle {
@@ -277,13 +492,11 @@ h1, h2, h3, h4, h5 {
     margin-bottom: 25px;
     font-weight: 300;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.9);
 }
 
 .cover-divider {
     margin: 20px 0;
     color: var(--primary);
-    font-size: 1.5rem;
 }
 
 .to-guest {
@@ -293,9 +506,7 @@ h1, h2, h3, h4, h5 {
     border-left: 3px solid var(--primary);
     display: inline-block;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border-radius: 5px;
-    color: rgba(255, 255, 255, 0.9);
 }
 
 .cover-date {
@@ -305,7 +516,6 @@ h1, h2, h3, h4, h5 {
     gap: 10px;
     margin-bottom: 30px;
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
 }
 
 .cover-btn {
@@ -313,13 +523,6 @@ h1, h2, h3, h4, h5 {
     border: 2px solid var(--primary);
     font-size: 1rem;
     padding: 12px 30px;
-    backdrop-filter: blur(5px);
-    background: rgba(212, 175, 55, 0.9);
-}
-
-.cover-btn:hover {
-    background: rgba(212, 175, 55, 1);
-    border-color: #f9e076;
 }
 
 .floral-decoration {
@@ -328,7 +531,7 @@ h1, h2, h3, h4, h5 {
     gap: 20px;
     margin: 20px 0;
     color: var(--primary);
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .top-floral {
@@ -489,6 +692,7 @@ h1, h2, h3, h4, h5 {
     text-align: center;
     box-shadow: var(--shadow);
     transition: transform 0.3s ease;
+    position: relative;
 }
 
 .event-card:hover {
@@ -499,6 +703,7 @@ h1, h2, h3, h4, h5 {
     font-size: 2.2rem;
     color: var(--primary);
     margin-bottom: 15px;
+    position: relative;
 }
 
 .event-title {
@@ -613,6 +818,7 @@ h1, h2, h3, h4, h5 {
     padding: 15px;
     min-width: 90px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
 }
 
 .countdown-number {
@@ -677,6 +883,7 @@ h1, h2, h3, h4, h5 {
     text-align: center;
     box-shadow: var(--shadow);
     transition: transform 0.3s ease;
+    position: relative;
 }
 
 .bank-card:hover {
@@ -687,6 +894,7 @@ h1, h2, h3, h4, h5 {
     font-size: 2rem;
     color: var(--primary);
     margin-bottom: 15px;
+    position: relative;
 }
 
 .bank-name {
@@ -743,6 +951,7 @@ h1, h2, h3, h4, h5 {
     padding: 25px;
     border-radius: 15px;
     box-shadow: var(--shadow);
+    position: relative;
 }
 
 .form-group {
@@ -885,37 +1094,6 @@ textarea.form-control {
     display: none;
 }
 
-/* Music Player */
-.music-player {
-    position: fixed;
-    bottom: 70px;
-    left: 15px;
-    z-index: 1000;
-}
-
-.music-btn {
-    background: var(--primary);
-    color: var(--white);
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    font-size: 1.1rem;
-    backdrop-filter: blur(5px);
-    background: rgba(212, 175, 55, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.music-btn:hover {
-    background: rgba(212, 175, 55, 1);
-    transform: scale(1.1);
-}
-
 /* Success Message */
 .success-message {
     position: fixed;
@@ -935,6 +1113,53 @@ textarea.form-control {
 
 .success-message.show {
     display: flex;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px);
+        opacity: 0;
+    }
 }
 
 @keyframes slideInRight {
@@ -997,13 +1222,6 @@ textarea.form-control {
         left: 15px;
     }
     
-    .canva-credit {
-        bottom: 70px;
-        right: 15px;
-        font-size: 0.6rem;
-        padding: 4px 8px;
-    }
-    
     .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
@@ -1040,6 +1258,42 @@ textarea.form-control {
     
     .nav-tab span {
         font-size: 0.55rem;
+    }
+    
+    /* Responsive Ornaments */
+    .cover-ornament {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .svg-ornament.top-ornament,
+    .svg-ornament.bottom-ornament {
+        width: 150px;
+        height: 30px;
+    }
+    
+    .title-ornament {
+        width: 120px;
+        height: 25px;
+        top: -20px;
+    }
+    
+    .photo-ornament {
+        width: 40px;
+        height: 40px;
+        top: -10px;
+        right: -10px;
+    }
+    
+    .countdown-ornament {
+        width: 25px;
+        height: 25px;
+        top: -10px;
+    }
+    
+    .music-ornament {
+        width: 50px;
+        height: 50px;
     }
 }
 
@@ -1081,12 +1335,6 @@ textarea.form-control {
         font-size: 1.5rem;
     }
     
-    .canva-credit {
-        bottom: 65px;
-        font-size: 0.5rem;
-        padding: 3px 6px;
-    }
-    
     .bottom-nav {
         padding: 5px 2px;
         height: 50px;
@@ -1102,6 +1350,46 @@ textarea.form-control {
     
     .nav-tab span {
         font-size: 0.5rem;
+    }
+    
+    /* Responsive Ornaments */
+    .cover-ornament {
+        width: 60px;
+        height: 60px;
+        opacity: 0.6;
+    }
+    
+    .svg-ornament.top-ornament,
+    .svg-ornament.bottom-ornament {
+        width: 120px;
+        height: 25px;
+    }
+    
+    .title-ornament {
+        width: 100px;
+        height: 20px;
+        top: -15px;
+    }
+    
+    .photo-ornament {
+        width: 30px;
+        height: 30px;
+        top: -8px;
+        right: -8px;
+    }
+    
+    .countdown-ornament {
+        width: 20px;
+        height: 20px;
+        top: -8px;
+    }
+    
+    .music-ornament {
+        display: none;
+    }
+    
+    .section-ornament {
+        height: 30px;
     }
 }
 
@@ -1151,6 +1439,38 @@ textarea.form-control {
     .nav-tab span {
         font-size: 0.45rem;
     }
+    
+    /* Responsive Ornaments */
+    .cover-ornament {
+        width: 50px;
+        height: 50px;
+        opacity: 0.5;
+    }
+    
+    .svg-ornament.top-ornament,
+    .svg-ornament.bottom-ornament {
+        width: 100px;
+        height: 20px;
+    }
+    
+    .title-ornament {
+        width: 80px;
+        height: 15px;
+        top: -10px;
+    }
+    
+    .photo-ornament {
+        width: 25px;
+        height: 25px;
+        top: -5px;
+        right: -5px;
+    }
+    
+    .countdown-ornament {
+        width: 15px;
+        height: 15px;
+        top: -5px;
+    }
 }
 
 /* Very small screens */
@@ -1179,4 +1499,56 @@ textarea.form-control {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+/* SVG Style untuk semua ornamen */
+.svg-ornament svg,
+.cover-ornament svg,
+.section-ornament svg,
+.title-ornament svg,
+.card-ornament svg,
+.photo-ornament svg,
+.icon-ornament svg,
+.gallery-frame-ornament svg,
+.countdown-ornament svg,
+.message-ornament svg,
+.closing-ornament svg,
+.arabic-ornament svg,
+.signature-ornament svg,
+.bank-icon-ornament svg,
+.form-ornament svg,
+.name-ornament svg,
+.date-ornament svg,
+.button-ornament svg,
+.verse-ornament svg,
+.couple-name-ornament svg,
+.text-bottom-ornament svg,
+.music-ornament svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+/* Warna khusus untuk ornamen berdasarkan section */
+.cover-section .svg-ornament svg,
+.cover-section .cover-ornament svg {
+    color: rgba(212, 175, 55, 0.8);
+}
+
+#hitung-mundur .countdown-ornament svg {
+    color: #ff6b6b;
+}
+
+#penutup .closing-ornament svg,
+#penutup .arabic-ornament svg,
+#penutup .signature-ornament svg {
+    color: #d4af37;
+}
+
+#amplop-digital .bank-icon-ornament svg {
+    color: #d4af37;
+}
+
+.music-ornament svg {
+    color: var(--primary);
 }
