@@ -163,8 +163,51 @@ function displayComments(comments) {
     });
 }
 
+// Optimasi Canva Background
+function optimizeCanvaBackground() {
+    const canvaIframe = document.querySelector('.canva-container iframe');
+    if (!canvaIframe) return;
+    
+    // Set iframe attributes for better performance
+    canvaIframe.setAttribute('loading', 'lazy');
+    canvaIframe.setAttribute('importance', 'low');
+    
+    // Adjust for mobile
+    if (window.innerWidth < 768) {
+        canvaIframe.style.filter = 'brightness(0.35) saturate(1.1)';
+    }
+}
+
+// Initialize Canva background
+function initCanvaBackground() {
+    const canvaBackground = document.getElementById('canva-background');
+    if (!canvaBackground) return;
+    
+    // Preload canva background
+    canvaBackground.style.opacity = '0';
+    setTimeout(() => {
+        canvaBackground.style.transition = 'opacity 1s ease';
+        canvaBackground.style.opacity = '1';
+    }, 500);
+    
+    // Optimize for performance
+    optimizeCanvaBackground();
+    
+    // Listen for iframe load
+    const canvaIframe = document.querySelector('.canva-container iframe');
+    if (canvaIframe) {
+        canvaIframe.addEventListener('load', () => {
+            console.log('Canva background loaded successfully');
+            canvaBackground.classList.add('loaded');
+        });
+    }
+}
+
 // Set nama tamu dari URL
 $(document).ready(function() {
+    // Initialize Canva background
+    initCanvaBackground();
+    
     // Initialize Firebase first
     initializeFirebase().then(() => {
         console.log('Firebase initialized successfully');
@@ -196,12 +239,19 @@ $(document).ready(function() {
     
     // Fungsi untuk memutar musik
     function playMusic() {
-        audio.play().then(function() {
-            musicIcon.classList.remove('fa-play');
-            musicIcon.classList.add('fa-pause');
-        }).catch(function(error) {
-            console.log('Autoplay prevented:', error);
-        });
+        // Add slight delay for better UX
+        setTimeout(() => {
+            audio.play().then(function() {
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+                console.log('Musik berhasil diputar');
+            }).catch(function(error) {
+                console.log('Autoplay prevented:', error);
+                // Show play button for manual start
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+            });
+        }, 1000);
     }
     
     // Coba putar musik saat halaman dimuat
@@ -225,6 +275,15 @@ $(document).ready(function() {
         // Sembunyikan cover section
         $('#cover').addClass('hidden');
         
+        // Fade out Canva background
+        const canvaBackground = document.getElementById('canva-background');
+        if (canvaBackground) {
+            canvaBackground.style.opacity = '0';
+            setTimeout(() => {
+                canvaBackground.style.display = 'none';
+            }, 800);
+        }
+        
         // Scroll ke section pembuka
         $('html, body').animate({
             scrollTop: $('#pembuka').offset().top
@@ -243,6 +302,12 @@ $(document).ready(function() {
         
         // Set status bahwa undangan sudah dibuka
         sessionStorage.setItem('undanganDibuka', 'true');
+        
+        // Hide Canva credit
+        const canvaCredit = document.querySelector('.canva-credit');
+        if (canvaCredit) {
+            canvaCredit.style.display = 'none';
+        }
     });
     
     // Cek jika undangan sudah dibuka sebelumnya
@@ -250,6 +315,17 @@ $(document).ready(function() {
         $('#cover').addClass('hidden');
         $('#bottom-nav').show();
         preventCoverScroll();
+        
+        // Hide Canva background and credit
+        const canvaBackground = document.getElementById('canva-background');
+        if (canvaBackground) {
+            canvaBackground.style.display = 'none';
+        }
+        
+        const canvaCredit = document.querySelector('.canva-credit');
+        if (canvaCredit) {
+            canvaCredit.style.display = 'none';
+        }
     }
     
     // Bottom Navigation
@@ -291,7 +367,7 @@ $(document).ready(function() {
     setInterval(updateCountdown, 1000);
     updateCountdown();
     
-    // Simpan ke kalender - TANPA KONFIRMASI
+    // Simpan ke kalender
     $('#save-akad').click(function() {
         var startDate = '20251221T090000';
         var endDate = '20251221T100000';
@@ -401,4 +477,430 @@ $(document).ready(function() {
     if (!sessionStorage.getItem('undanganDibuka')) {
         $('#bottom-nav').hide();
     }
+    
+    // Handle window resize for Canva background
+    let resizeTimer;
+    $(window).resize(function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            optimizeCanvaBackground();
+        }, 250);
+    });
 });
+
+// Export fungsi untuk Canva optimizations
+window.optimizeCanvaBackground = optimizeCanvaBackground;
+// SVG Decorations Management System for Other Sections
+class SVGDecorations {
+    constructor() {
+        this.decorationsLoaded = false;
+        this.svgBasePath = 'decorations/'; // Path folder untuk file SVG
+        this.init();
+    }
+
+    init() {
+        this.loadSVGDecorations();
+        this.initializeSectionObserver();
+        this.setupResizeHandler();
+    }
+
+    // Konfigurasi dekorasi untuk setiap section (tanpa cover)
+    getSectionConfig() {
+        return {
+            'pembuka': {
+                files: [
+                    'pembuka-corner-top.svg',
+                    'pembuka-corner-bottom.svg'
+                ],
+                positions: ['corner-top-left', 'corner-bottom-right']
+            },
+            'detail-pengantin': {
+                files: [
+                    'pengantin-heart-left.svg',
+                    'pengantin-heart-right.svg',
+                    'pengantin-ring.svg'
+                ],
+                positions: ['heart-left', 'heart-right', 'ring-bottom']
+            },
+            'detail-acara': {
+                files: [
+                    'acara-border-top.svg',
+                    'acara-border-bottom.svg',
+                    'acara-calendar.svg'
+                ],
+                positions: ['border-top', 'border-bottom', 'calendar-icon']
+            },
+            'galeri': {
+                files: [
+                    'galeri-frame-1.svg',
+                    'galeri-frame-2.svg',
+                    'galeri-frame-3.svg',
+                    'galeri-frame-4.svg',
+                    'galeri-photo.svg'
+                ],
+                positions: ['frame-corner', 'frame-corner', 'frame-corner', 'frame-corner', 'photo-icon']
+            },
+            'hitung-mundur': {
+                files: [
+                    'mundur-clock.svg',
+                    'mundur-sandglass.svg'
+                ],
+                positions: ['clock-decoration', 'sandglass']
+            },
+            'penutup': {
+                files: [
+                    'penutup-floral-left.svg',
+                    'penutup-floral-right.svg',
+                    'penutup-hands.svg'
+                ],
+                positions: ['floral-left', 'floral-right', 'hands-icon']
+            },
+            'amplop-digital': {
+                files: [
+                    'amplop-envelope-top.svg',
+                    'amplop-envelope-bottom.svg',
+                    'amplop-money.svg'
+                ],
+                positions: ['envelope-top', 'envelope-bottom', 'money-icon']
+            },
+            'ucapan': {
+                files: [
+                    'ucapan-message-left.svg',
+                    'ucapan-message-right.svg',
+                    'ucapan-pen.svg'
+                ],
+                positions: ['message-left', 'message-right', 'pen-icon']
+            }
+        };
+    }
+
+    // Load SVG decorations from separate files
+    async loadSVGDecorations() {
+        const container = document.getElementById('svg-decorations');
+        if (!container) return;
+        
+        const sectionConfig = this.getSectionConfig();
+
+        try {
+            for (const [sectionId, config] of Object.entries(sectionConfig)) {
+                // Create decoration container for this section
+                const decorationDiv = document.createElement('div');
+                decorationDiv.className = `svg-decoration ${sectionId.replace('-', '')}-decoration`;
+                decorationDiv.setAttribute('data-section', sectionId);
+
+                // Load each SVG file for this section
+                for (let i = 0; i < config.files.length; i++) {
+                    const fileName = config.files[i];
+                    const positionClass = config.positions[i];
+                    
+                    try {
+                        // Load SVG file
+                        const response = await fetch(`${this.svgBasePath}${fileName}`);
+                        if (!response.ok) {
+                            console.warn(`SVG file not found: ${fileName}, using fallback`);
+                            await this.createFallbackSVG(decorationDiv, sectionId, positionClass);
+                            continue;
+                        }
+                        
+                        const svgContent = await response.text();
+                        const svgWrapper = document.createElement('div');
+                        svgWrapper.className = `decoration-svg ${positionClass}`;
+                        svgWrapper.innerHTML = svgContent;
+                        
+                        // Optimize SVG for performance
+                        this.optimizeSVG(svgWrapper);
+                        
+                        decorationDiv.appendChild(svgWrapper);
+                    } catch (error) {
+                        console.error(`Error loading SVG ${fileName}:`, error);
+                        await this.createFallbackSVG(decorationDiv, sectionId, positionClass);
+                    }
+                }
+
+                container.appendChild(decorationDiv);
+            }
+
+            this.decorationsLoaded = true;
+            console.log('SVG decorations loaded successfully');
+            
+            // Initialize animations after loading
+            this.initializeAnimations();
+            
+        } catch (error) {
+            console.error('Error loading SVG decorations:', error);
+            this.createAllFallbackDecorations(container);
+        }
+    }
+
+    // Create fallback SVG if file not found
+    createFallbackSVG(container, sectionId, positionClass) {
+        return new Promise((resolve) => {
+            const svg = document.createElement('div');
+            svg.className = `decoration-svg ${positionClass} fallback`;
+            
+            // Create simple fallback SVG based on section
+            let svgContent = '';
+            switch(sectionId) {
+                case 'detail-pengantin':
+                    svgContent = this.createHeartFallback(positionClass);
+                    break;
+                case 'galeri':
+                    svgContent = this.createFrameFallback(positionClass);
+                    break;
+                default:
+                    svgContent = this.createSimpleFallback(positionClass);
+            }
+            
+            svg.innerHTML = svgContent;
+            container.appendChild(svg);
+            resolve();
+        });
+    }
+
+    // Fallback SVG creators
+    createHeartFallback(positionClass) {
+        const opacity = positionClass.includes('left') ? '0.7' : '0.6';
+        return `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                <path d="M20,50 C15,40 10,35 20,25 C30,15 40,25 50,35 C60,25 70,15 80,25 C90,35 85,40 80,50 C70,60 50,75 50,75 C50,75 30,60 20,50" 
+                      fill="none" stroke="#c19a6b" stroke-width="0.5" stroke-opacity="${opacity}"/>
+            </svg>
+        `;
+    }
+
+    createFrameFallback(positionClass) {
+        return `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                <path d="M10,10 L30,10 L10,30 Z" fill="none" stroke="#8b7355" stroke-width="0.7" stroke-opacity="0.5"/>
+            </svg>
+        `;
+    }
+
+    createSimpleFallback(positionClass) {
+        return `
+            <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.3"/>
+                <circle cx="50" cy="50" r="20" fill="none" stroke="#d4af37" stroke-width="0.3" stroke-opacity="0.2"/>
+            </svg>
+        `;
+    }
+
+    // Create all fallback decorations if loading fails
+    createAllFallbackDecorations(container) {
+        const sectionConfig = this.getSectionConfig();
+        
+        for (const [sectionId, config] of Object.entries(sectionConfig)) {
+            const decorationDiv = document.createElement('div');
+            decorationDiv.className = `svg-decoration ${sectionId.replace('-', '')}-decoration`;
+            decorationDiv.setAttribute('data-section', sectionId);
+
+            config.positions.forEach((positionClass, index) => {
+                this.createFallbackSVG(decorationDiv, sectionId, positionClass);
+            });
+
+            container.appendChild(decorationDiv);
+        }
+        
+        this.decorationsLoaded = true;
+        console.log('Fallback SVG decorations created');
+    }
+
+    // Optimize SVG for better performance
+    optimizeSVG(svgWrapper) {
+        const svg = svgWrapper.querySelector('svg');
+        if (!svg) return;
+
+        // Set attributes for optimization
+        svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        svg.setAttribute('shape-rendering', 'geometricPrecision');
+        
+        // Remove unnecessary metadata
+        const metadata = svg.querySelector('metadata');
+        if (metadata) metadata.remove();
+        
+        // Optimize paths
+        const paths = svg.querySelectorAll('path');
+        paths.forEach(path => {
+            path.setAttribute('vector-effect', 'non-scaling-stroke');
+        });
+    }
+
+    // Initialize animations
+    initializeAnimations() {
+        // Add animation classes based on section
+        const animations = {
+            'pembuka': 'fadeIn',
+            'detail-pengantin': 'float',
+            'detail-acara': 'fadeIn',
+            'galeri': 'fadeIn',
+            'hitung-mundur': 'pulse',
+            'penutup': 'fadeIn',
+            'amplop-digital': 'fadeIn',
+            'ucapan': 'pulse'
+        };
+
+        Object.entries(animations).forEach(([section, animation]) => {
+            const decoration = document.querySelector(`.svg-decoration[data-section="${section}"]`);
+            if (decoration) {
+                decoration.querySelectorAll('.decoration-svg').forEach(svg => {
+                    svg.style.animationName = animation;
+                    svg.style.animationDuration = section === 'detail-pengantin' ? '4s' : '3s';
+                    svg.style.animationIterationCount = 'infinite';
+                    svg.style.animationTimingFunction = 'ease-in-out';
+                });
+            }
+        });
+    }
+
+    // Initialize Intersection Observer for section detection
+    initializeSectionObserver() {
+        const sections = document.querySelectorAll('.section');
+        const decorations = document.querySelectorAll('.svg-decoration');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    
+                    // Skip cover section
+                    if (sectionId === 'cover') return;
+                    
+                    // Hide all decorations
+                    decorations.forEach(decoration => {
+                        decoration.classList.remove('active');
+                    });
+                    
+                    // Show decoration for current section
+                    const currentDecoration = document.querySelector(`.svg-decoration[data-section="${sectionId}"]`);
+                    if (currentDecoration) {
+                        currentDecoration.classList.add('active');
+                        
+                        // Add transition delay for each SVG element
+                        const svgElements = currentDecoration.querySelectorAll('.decoration-svg');
+                        svgElements.forEach((svg, index) => {
+                            svg.style.transitionDelay = `${index * 0.1}s`;
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            if (section.id !== 'cover') {
+                sectionObserver.observe(section);
+            }
+        });
+    }
+
+    // Setup resize handler for responsive adjustments
+    setupResizeHandler() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                this.adjustDecorationsForScreenSize();
+            }, 250);
+        });
+
+        // Initial adjustment
+        this.adjustDecorationsForScreenSize();
+    }
+
+    // Adjust decorations based on screen size
+    adjustDecorationsForScreenSize() {
+        const screenWidth = window.innerWidth;
+        const decorations = document.querySelectorAll('.decoration-svg');
+
+        decorations.forEach(decoration => {
+            if (screenWidth < 480) {
+                // Hide some decorations on small screens
+                const classes = decoration.className;
+                if (classes.includes('frame-corner') || 
+                    classes.includes('message-left') || 
+                    classes.includes('message-right') ||
+                    classes.includes('calendar-icon') ||
+                    classes.includes('money-icon')) {
+                    decoration.style.display = 'none';
+                } else {
+                    decoration.style.display = 'block';
+                }
+                
+                // Scale down decorations
+                decoration.style.transform = 'scale(0.8)';
+            } else if (screenWidth < 768) {
+                // Medium screens
+                decoration.style.transform = 'scale(0.9)';
+                decoration.style.display = 'block';
+            } else {
+                // Large screens
+                decoration.style.transform = 'scale(1)';
+                decoration.style.display = 'block';
+            }
+        });
+    }
+
+    // Manual method to show/hide decorations
+    showDecoration(sectionId) {
+        const decoration = document.querySelector(`.svg-decoration[data-section="${sectionId}"]`);
+        if (decoration) {
+            decoration.classList.add('active');
+        }
+    }
+
+    hideDecoration(sectionId) {
+        const decoration = document.querySelector(`.svg-decoration[data-section="${sectionId}"]`);
+        if (decoration) {
+            decoration.classList.remove('active');
+        }
+    }
+
+    // Add custom SVG decoration dynamically
+    addCustomDecoration(sectionId, svgContent, positionClass, styles = {}) {
+        const decoration = document.querySelector(`.svg-decoration[data-section="${sectionId}"]`);
+        if (!decoration) return;
+
+        const svgWrapper = document.createElement('div');
+        svgWrapper.className = `decoration-svg custom ${positionClass}`;
+        svgWrapper.innerHTML = svgContent;
+
+        // Apply custom styles
+        Object.entries(styles).forEach(([property, value]) => {
+            svgWrapper.style[property] = value;
+        });
+
+        decoration.appendChild(svgWrapper);
+    }
+
+    // Remove all decorations
+    clearDecorations() {
+        const container = document.getElementById('svg-decorations');
+        if (container) {
+            container.innerHTML = '';
+            this.decorationsLoaded = false;
+        }
+    }
+
+    // Check if decorations are loaded
+    areDecorationsLoaded() {
+        return this.decorationsLoaded;
+    }
+}
+
+// Initialize SVG Decorations when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Wait a bit for other scripts to load
+    setTimeout(() => {
+        window.svgDecorations = new SVGDecorations();
+    }, 1000);
+});
+
+// Export for manual control
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = SVGDecorations;
+}
