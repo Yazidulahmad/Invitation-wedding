@@ -29,29 +29,12 @@
         Browser Anda tidak mendukung elemen audio.
     </audio>
     
-    <!-- Music Player -->
+    <!-- Music Player dengan Ornamen -->
     <div class="music-player">
         <div class="music-btn" id="music-toggle">
             <i class="fas fa-play" id="music-icon"></i>
         </div>
-    </div>
-
-    <!-- ========== ANIMATED CANVA BACKGROUND ========== -->
-    <div class="canva-background" id="canva-background">
-        <div class="canva-container">
-            <iframe 
-                src="https://www.canva.com/design/DAG6PDNxmzY/4sRQhJ30_EOhHsfihC9hxw/watch?embed" 
-                allowfullscreen="allowfullscreen" 
-                allow="fullscreen">
-            </iframe>
-            <div class="canva-overlay"></div>
-        </div>
-    </div>
-    <!-- ========== END CANVA BACKGROUND ========== -->
-    
-    <!-- SVG Decorations for Other Sections -->
-    <div id="svg-decorations">
-        <!-- Decorations will be loaded dynamically -->
+        <div class="music-ornament" id="music-ornament"></div>
     </div>
     
     <!-- Bottom Navigation Bar -->
@@ -90,10 +73,22 @@
         </a>
     </nav>
     
-    <!-- Cover Section -->
+    <!-- Cover Section dengan Ornamen -->
     <section id="cover" class="section cover-section">
+        <!-- Ornamen Cover SVG -->
+        <div class="cover-ornament top-left" id="cover-ornament-tl"></div>
+        <div class="cover-ornament top-right" id="cover-ornament-tr"></div>
+        <div class="cover-ornament bottom-left" id="cover-ornament-bl"></div>
+        <div class="cover-ornament bottom-right" id="cover-ornament-br"></div>
+        
+        <!-- Floating Particles -->
+        <div class="floating-particles" id="floating-particles"></div>
+        
         <div class="container">
             <div class="cover-content" data-aos="fade-up">
+                <!-- Ornamen Atas -->
+                <div class="svg-ornament top-ornament" id="cover-top-ornament"></div>
+                
                 <div class="floral-decoration top-floral">
                     <i class="fas fa-leaf"></i>
                     <i class="fas fa-leaf"></i>
@@ -106,12 +101,21 @@
                 </div>
                 <h2 class="cover-subtitle">Hartini & Ahmad Yazidul Jihad</h2>
                 
+                <!-- Ornamen Nama Tamu -->
+                <div class="name-ornament" id="name-ornament"></div>
+                
                 <div class="to-guest" id="guest-name">Kepada Yth. Bapak/Ibu/Saudara/i</div>
+                
+                <!-- Ornamen Tanggal -->
+                <div class="date-ornament" id="date-ornament"></div>
                 
                 <div class="cover-date">
                     <i class="far fa-calendar"></i>
                     <span>21 . 12 . 2025</span>
                 </div>
+                
+                <!-- Ornamen Tombol -->
+                <div class="button-ornament" id="button-ornament"></div>
                 
                 <button class="btn cover-btn" id="open-invitation">
                     <i class="fas fa-envelope-open-text"></i> Buka Undangan
@@ -122,60 +126,120 @@
                     <i class="fas fa-leaf"></i>
                     <i class="fas fa-leaf"></i>
                 </div>
+                
+                <!-- Ornamen Bawah -->
+                <div class="svg-ornament bottom-ornament" id="cover-bottom-ornament"></div>
             </div>
         </div>
     </section>
     
-    <!-- Pembuka Section -->
+    <!-- Pembuka Section dengan Ornamen -->
     <section id="pembuka" class="section">
+        <!-- Ornamen Section -->
+        <div class="section-ornament top" id="pembuka-top-ornament"></div>
+        
         <div class="container">
             <div data-aos="fade-up">
+                <!-- Ornamen Ayat -->
+                <div class="verse-ornament" id="verse-ornament"></div>
+                
                 <p class="opening-quote arabic">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ"</p>
                 <p class="opening-quote">(QS. Ar-Rum: 21)</p>
+                
+                <!-- Ornamen Nama Pasangan -->
+                <div class="couple-name-ornament" id="couple-name-ornament"></div>
+                
                 <h2 class="couple-names">Hartini & Ahmad Yazidul Jihad</h2>
                 <p class="invitation-text">Dengan penuh rasa syukur dan kebahagiaan, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami.</p>
+                
+                <!-- Ornamen Bawah Text -->
+                <div class="text-bottom-ornament" id="text-bottom-ornament"></div>
             </div>
         </div>
+        
+        <!-- Ornamen Section Bawah -->
+        <div class="section-ornament bottom" id="pembuka-bottom-ornament"></div>
     </section>
     
-    <!-- Detail Pengantin Section -->
+    <!-- Detail Pengantin Section dengan Ornamen -->
     <section id="detail-pengantin" class="section">
+        <!-- Ornamen Section -->
+        <div class="section-ornament top" id="pengantin-top-ornament"></div>
+        
         <div class="container">
+            <!-- Ornamen Judul -->
+            <div class="title-ornament" id="pengantin-title-ornament"></div>
+            
             <h2 data-aos="fade-up" class="section-title">Mempelai</h2>
+            
             <div class="couple-container">
                 <div class="couple-card" data-aos="fade-right">
+                    <!-- Ornamen Card -->
+                    <div class="card-ornament frame" id="card-frame-1"></div>
+                    
                     <div class="couple-img-container">
                         <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/59ac14e43997a2891ad1884dd0cff423daf67301/poto%20single%20atin.png" alt="Hartini" class="couple-img">
                         <div class="img-overlay"></div>
+                        
+                        <!-- Ornamen Foto -->
+                        <div class="photo-ornament" id="photo-ornament-1"></div>
                     </div>
                     <h3 class="couple-name">Hartini</h3>
                     <p class="couple-parents">Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
                     <div class="couple-icon">
                         <i class="fas fa-female"></i>
                     </div>
+                    
+                    <!-- Ornamen Bawah Card -->
+                    <div class="card-ornament bottom" id="card-bottom-1"></div>
                 </div>
                 
                 <div class="couple-card" data-aos="fade-left">
+                    <!-- Ornamen Card -->
+                    <div class="card-ornament frame" id="card-frame-2"></div>
+                    
                     <div class="couple-img-container">
                         <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/poto%20single%20yazid.png" alt="Ahmad Yazidul Jihad" class="couple-img">
                         <div class="img-overlay"></div>
+                        
+                        <!-- Ornamen Foto -->
+                        <div class="photo-ornament" id="photo-ornament-2"></div>
                     </div>
                     <h3 class="couple-name">Ahmad Yazidul Jihad</h3>
                     <p class="couple-parents">Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
                     <div class="couple-icon">
                         <i class="fas fa-male"></i>
                     </div>
+                    
+                    <!-- Ornamen Bawah Card -->
+                    <div class="card-ornament bottom" id="card-bottom-2"></div>
                 </div>
             </div>
         </div>
+        
+        <!-- Ornamen Section Bawah -->
+        <div class="section-ornament bottom" id="pengantin-bottom-ornament"></div>
     </section>
     
-    <!-- Detail Acara Section -->
+    <!-- Detail Acara Section dengan Ornamen -->
     <section id="detail-acara" class="section">
+        <!-- Ornamen Section -->
+        <div class="section-ornament top" id="acara-top-ornament"></div>
+        
         <div class="container">
+            <!-- Ornamen Judul -->
+            <div class="title-ornament" id="acara-title-ornament"></div>
+            
             <h2 data-aos="fade-up" class="section-title">Detail Acara</h2>
+            
             <div class="event-details">
                 <div class="event-card" data-aos="zoom-in" data-aos-delay="100">
+                    <!-- Ornamen Card -->
+                    <div class="card-ornament frame" id="event-frame-1"></div>
+                    
+                    <!-- Ornamen Icon -->
+                    <div class="icon-ornament" id="event-icon-1"></div>
+                    
                     <div class="event-icon">
                         <i class="fas fa-mosque"></i>
                     </div>
@@ -186,9 +250,18 @@
                     <button class="btn btn-outline mt-3 calendar-btn" id="save-akad">
                         <i class="far fa-calendar-plus"></i> Simpan ke Kalender
                     </button>
+                    
+                    <!-- Ornamen Bawah Card -->
+                    <div class="card-ornament bottom" id="event-bottom-1"></div>
                 </div>
                 
                 <div class="event-card" data-aos="zoom-in" data-aos-delay="200">
+                    <!-- Ornamen Card -->
+                    <div class="card-ornament frame" id="event-frame-2"></div>
+                    
+                    <!-- Ornamen Icon -->
+                    <div class="icon-ornament" id="event-icon-2"></div>
+                    
                     <div class="event-icon">
                         <i class="fas fa-glass-cheers"></i>
                     </div>
@@ -199,9 +272,18 @@
                     <button class="btn btn-outline mt-3 calendar-btn" id="save-resepsi">
                         <i class="far fa-calendar-plus"></i> Simpan ke Kalender
                     </button>
+                    
+                    <!-- Ornamen Bawah Card -->
+                    <div class="card-ornament bottom" id="event-bottom-2"></div>
                 </div>
                 
                 <div class="event-card" data-aos="zoom-in" data-aos-delay="300">
+                    <!-- Ornamen Card -->
+                    <div class="card-ornament frame" id="event-frame-3"></div>
+                    
+                    <!-- Ornamen Icon -->
+                    <div class="icon-ornament" id="event-icon-3"></div>
+                    
                     <div class="event-icon">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
@@ -214,35 +296,60 @@
                     <button class="btn btn-outline mt-3" id="open-map">
                         <i class="fas fa-directions"></i> Buka di Google Maps
                     </button>
+                    
+                    <!-- Ornamen Bawah Card -->
+                    <div class="card-ornament bottom" id="event-bottom-3"></div>
                 </div>
             </div>
         </div>
+        
+        <!-- Ornamen Section Bawah -->
+        <div class="section-ornament bottom" id="acara-bottom-ornament"></div>
     </section>
     
-    <!-- Galeri Section -->
+    <!-- Galeri Section dengan Ornamen -->
     <section id="galeri" class="section">
+        <!-- Ornamen Section -->
+        <div class="section-ornament top" id="galeri-top-ornament"></div>
+        
         <div class="container">
+            <!-- Ornamen Judul -->
+            <div class="title-ornament" id="galeri-title-ornament"></div>
+            
             <h2 data-aos="fade-up" class="section-title">Galeri Kami</h2>
+            
             <div class="gallery-grid">
                 <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up">
+                    <!-- Ornamen Frame Gallery -->
+                    <div class="gallery-frame-ornament" id="gallery-frame-1"></div>
+                    
                     <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd.png" alt="Prewedding 1">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
                 <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%202.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Ornamen Frame Gallery -->
+                    <div class="gallery-frame-ornament" id="gallery-frame-2"></div>
+                    
                     <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%202.png" alt="Prewedding 2">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
                 <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%203.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Ornamen Frame Gallery -->
+                    <div class="gallery-frame-ornament" id="gallery-frame-3"></div>
+                    
                     <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%203.png" alt="Prewedding 3">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
                 <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/prewwed%205.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <!-- Ornamen Frame Gallery -->
+                    <div class="gallery-frame-ornament" id="gallery-frame-4"></div>
+                    
                     <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/prewwed%205.png" alt="Prewedding 4">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
@@ -250,58 +357,125 @@
                 </a>
             </div>
         </div>
+        
+        <!-- Ornamen Section Bawah -->
+        <div class="section-ornament bottom" id="galeri-bottom-ornament"></div>
     </section>
     
-    <!-- Hitung Mundur Section -->
+    <!-- Hitung Mundur Section dengan Ornamen -->
     <section id="hitung-mundur" class="section">
+        <!-- Ornamen Section -->
+        <div class="section-ornament top" id="mundur-top-ornament"></div>
+        
         <div class="container">
+            <!-- Ornamen Judul -->
+            <div class="title-ornament" id="mundur-title-ornament"></div>
+            
             <h2 data-aos="fade-up" class="section-title">Hitung Mundur</h2>
+            
             <div class="countdown-container" data-aos="fade-up" data-aos-delay="200">
                 <div class="countdown-item">
+                    <!-- Ornamen Countdown -->
+                    <div class="countdown-ornament" id="countdown-ornament-1"></div>
+                    
                     <div class="countdown-number" id="days">00</div>
                     <div class="countdown-label">Hari</div>
                 </div>
                 <div class="countdown-item">
+                    <!-- Ornamen Countdown -->
+                    <div class="countdown-ornament" id="countdown-ornament-2"></div>
+                    
                     <div class="countdown-number" id="hours">00</div>
                     <div class="countdown-label">Jam</div>
                 </div>
                 <div class="countdown-item">
+                    <!-- Ornamen Countdown -->
+                    <div class="countdown-ornament" id="countdown-ornament-3"></div>
+                    
                     <div class="countdown-number" id="minutes">00</div>
                     <div class="countdown-label">Menit</div>
                 </div>
                 <div class="countdown-item">
+                    <!-- Ornamen Countdown -->
+                    <div class="countdown-ornament" id="countdown-ornament-4"></div>
+                    
                     <div class="countdown-number" id="seconds">00</div>
                     <div class="countdown-label">Detik</div>
                 </div>
             </div>
+            
+            <!-- Ornamen Pesan -->
+            <div class="message-ornament" id="message-ornament"></div>
+            
             <p class="countdown-message" data-aos="fade-up" data-aos-delay="400">
                 Menuju hari bahagia kami
             </p>
         </div>
+        
+        <!-- Ornamen Section Bawah -->
+        <div class="section-ornament bottom" id="mundur-bottom-ornament"></div>
     </section>
     
-    <!-- Penutup Section -->
+    <!-- Penutup Section dengan Ornamen -->
     <section id="penutup" class="section">
+        <!-- Ornamen Section -->
+        <div class="section-ornament top" id="penutup-top-ornament"></div>
+        
         <div class="container">
+            <!-- Ornamen Judul -->
+            <div class="title-ornament" id="penutup-title-ornament"></div>
+            
             <div data-aos="fade-up">
                 <h2 class="section-title">Terima Kasih</h2>
+                
+                <!-- Ornamen Pesan -->
+                <div class="closing-ornament" id="closing-ornament-1"></div>
+                
                 <p class="closing-message">Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih. Semoga Allah SWT senantiasa meridhoi pernikahan kami dan memberikan keberkahan dalam rumah tangga yang akan kami bangun.</p>
+                
+                <!-- Ornamen Arab -->
+                <div class="arabic-ornament" id="arabic-ornament"></div>
+                
                 <p class="closing-message arabic">وَالسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
                 <p class="closing-message">Kami yang berbahagia,</p>
+                
+                <!-- Ornamen Nama -->
+                <div class="closing-ornament" id="closing-ornament-2"></div>
+                
                 <h3 class="couple-names">Hartini & Ahmad Yazidul Jihad</h3>
+                
+                <!-- Ornamen Tanda Tangan -->
+                <div class="signature-ornament" id="signature-ornament"></div>
             </div>
         </div>
+        
+        <!-- Ornamen Section Bawah -->
+        <div class="section-ornament bottom" id="penutup-bottom-ornament"></div>
     </section>
     
-    <!-- Amplop Digital Section -->
+    <!-- Amplop Digital Section dengan Ornamen -->
     <section id="amplop-digital" class="section">
+        <!-- Ornamen Section -->
+        <div class="section-ornament top" id="amplop-top-ornament"></div>
+        
         <div class="container">
+            <!-- Ornamen Judul -->
+            <div class="title-ornament" id="amplop-title-ornament"></div>
+            
             <h2 data-aos="fade-up" class="section-title">Amplop Digital</h2>
+            
             <p data-aos="fade-up" class="amplop-text">Untuk yang ingin memberikan tanda kasih, dapat melalui transfer ke:</p>
+            
             <div class="bank-options">
                 <div class="bank-card" data-aos="fade-right">
+                    <!-- Ornamen Card -->
+                    <div class="card-ornament frame" id="bank-frame-1"></div>
+                    
                     <div class="bank-icon">
                         <i class="fas fa-university"></i>
+                        
+                        <!-- Ornamen Icon Bank -->
+                        <div class="bank-icon-ornament" id="bank-icon-ornament-1"></div>
                     </div>
                     <h3 class="bank-name">Bank BCA</h3>
                     <p class="account-number">123 456 7890</p>
@@ -309,10 +483,19 @@
                     <button class="btn-copy" data-account="1234567890">
                         <i class="far fa-copy"></i> Salin Nomor
                     </button>
+                    
+                    <!-- Ornamen Bawah Card -->
+                    <div class="card-ornament bottom" id="bank-bottom-1"></div>
                 </div>
                 <div class="bank-card" data-aos="fade-up">
+                    <!-- Ornamen Card -->
+                    <div class="card-ornament frame" id="bank-frame-2"></div>
+                    
                     <div class="bank-icon">
                         <i class="fas fa-landmark"></i>
+                        
+                        <!-- Ornamen Icon Bank -->
+                        <div class="bank-icon-ornament" id="bank-icon-ornament-2"></div>
                     </div>
                     <h3 class="bank-name">Bank Mandiri</h3>
                     <p class="account-number">098 765 4321</p>
@@ -320,10 +503,19 @@
                     <button class="btn-copy" data-account="0987654321">
                         <i class="far fa-copy"></i> Salin Nomor
                     </button>
+                    
+                    <!-- Ornamen Bawah Card -->
+                    <div class="card-ornament bottom" id="bank-bottom-2"></div>
                 </div>
                 <div class="bank-card" data-aos="fade-left">
+                    <!-- Ornamen Card -->
+                    <div class="card-ornament frame" id="bank-frame-3"></div>
+                    
                     <div class="bank-icon">
                         <i class="fas fa-piggy-bank"></i>
+                        
+                        <!-- Ornamen Icon Bank -->
+                        <div class="bank-icon-ornament" id="bank-icon-ornament-3"></div>
                     </div>
                     <h3 class="bank-name">Bank BRI</h3>
                     <p class="account-number">567 890 1234</p>
@@ -331,27 +523,49 @@
                     <button class="btn-copy" data-account="5678901234">
                         <i class="far fa-copy"></i> Salin Nomor
                     </button>
+                    
+                    <!-- Ornamen Bawah Card -->
+                    <div class="card-ornament bottom" id="bank-bottom-3"></div>
                 </div>
             </div>
         </div>
+        
+        <!-- Ornamen Section Bawah -->
+        <div class="section-ornament bottom" id="amplop-bottom-ornament"></div>
     </section>
     
-    <!-- Ucapan Section -->
+    <!-- Ucapan Section dengan Ornamen -->
     <section id="ucapan" class="section">
+        <!-- Ornamen Section -->
+        <div class="section-ornament top" id="ucapan-top-ornament"></div>
+        
         <div class="container">
+            <!-- Ornamen Judul -->
+            <div class="title-ornament" id="ucapan-title-ornament"></div>
+            
             <h2 data-aos="fade-up" class="section-title">Kirim Ucapan</h2>
+            
             <div class="comment-form" data-aos="fade-up">
+                <!-- Ornamen Form -->
+                <div class="form-ornament frame" id="form-frame"></div>
+                
                 <div class="form-group">
                     <textarea class="form-control" id="comment-message" placeholder="Tulis ucapan dan doa Anda di sini..."></textarea>
                 </div>
                 <button class="btn" id="submit-comment">
                     <i class="fas fa-paper-plane"></i> Kirim Ucapan
                 </button>
+                
+                <!-- Ornamen Bawah Form -->
+                <div class="form-ornament bottom" id="form-bottom"></div>
             </div>
             <div class="comments-list" id="comments-container">
                 <!-- Komentar akan ditampilkan di sini -->
             </div>
         </div>
+        
+        <!-- Ornamen Section Bawah -->
+        <div class="section-ornament bottom" id="ucapan-bottom-ornament"></div>
     </section>
 
     <!-- Success Message Template -->
@@ -360,14 +574,10 @@
         <span id="success-text"></span>
     </div>
 
-    <!-- Canva Design Credit -->
-    <div class="canva-credit">
-        <a href="https://www.canva.com/design/DAG6PDNxmzY/4sRQhJ30_EOhHsfihC9hxw/watch?utm_content=DAG6PDNxmzY&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" 
-           target="_blank" 
-           rel="noopener">
-           Dekorasi oleh Ahmad Bandanniji
-        </a>
-    </div>
+    <!-- SVG Definitions (Akan diisi oleh JavaScript) -->
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;" id="svg-definitions">
+        <!-- SVG definitions akan dimuat di sini -->
+    </svg>
 
     <!-- Firebase SDK -->
     <script type="module">
@@ -411,8 +621,5 @@
     
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
-    
-    <!-- SVG Decorations Loader -->
-    <script src="svg-decorations.js"></script>
 </body>
 </html>
