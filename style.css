@@ -1,201 +1,555 @@
-:root {
-    --primary: #d4af37;
-    --secondary: #8b7355;
-    --accent: #c19a6b;
-    --dark: #2c2c2c;
-    --light: #f8f4e9;
-    --white: #ffffff;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --gold: linear-gradient(135deg, #d4af37, #f9e076);
-}
+/* ============ SVG BACKGROUND & DECORATION STYLES ============ */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    color: var(--dark);
-    background-color: var(--light);
-    overflow-x: hidden;
-    line-height: 1.6;
-    font-size: 14px;
-    padding-bottom: 60px; /* Space for bottom nav */
-}
-
-h1, h2, h3, h4, h5 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-}
-
-.arabic {
-    font-family: 'Amiri', serif;
-    font-size: 1.3rem;
-    line-height: 1.8;
-}
-
-.section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 80px 20px;
-    position: relative;
-}
-
-.container {
-    max-width: 1200px;
+/* SVG Background Container */
+.svg-background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    margin: 0 auto;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1;
+    pointer-events: none;
 }
 
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 25px;
-    background: var(--primary);
-    color: var(--white);
-    border: none;
-    border-radius: 50px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow);
-    font-size: 0.9rem;
+/* Cover Section SVG Background */
+.cover-section .svg-background {
+    opacity: 0.15;
+    z-index: 1;
 }
 
-.btn:hover {
-    background: var(--secondary);
-    transform: translateY(-3px);
-}
-
-.btn-outline {
-    background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-}
-
-.btn-outline:hover {
-    background: var(--primary);
-    color: var(--white);
-}
-
-.mt-3 {
-    margin-top: 1rem;
-}
-
-/* ============ ORNAMEN STYLES ============ */
-
-/* Ornamen Umum */
-.svg-ornament,
-.cover-ornament,
-.section-ornament,
-.title-ornament,
-.card-ornament,
-.photo-ornament,
-.icon-ornament,
-.gallery-frame-ornament,
-.countdown-ornament,
-.message-ornament,
-.closing-ornament,
-.arabic-ornament,
-.signature-ornament,
-.bank-icon-ornament,
-.form-ornament,
-.name-ornament,
-.date-ornament,
-.button-ornament,
-.verse-ornament,
-.couple-name-ornament,
-.text-bottom-ornament {
+/* SVG Overlay Elements */
+.svg-overlay {
     position: absolute;
     pointer-events: none;
-    z-index: 1;
-    opacity: 0.7;
-    transition: all 0.3s ease;
+    z-index: 2;
+    opacity: 0.6;
+    width: 80px;
+    height: 80px;
 }
 
-/* Cover Ornaments */
-.cover-ornament {
-    width: 120px;
-    height: 120px;
-    opacity: 0.8;
+.svg-top-left {
+    top: 10%;
+    left: 5%;
     animation: float 6s ease-in-out infinite;
 }
 
-.cover-ornament.top-left {
-    top: 10%;
-    left: 5%;
-    animation-delay: 0s;
-}
-
-.cover-ornament.top-right {
+.svg-top-right {
     top: 10%;
     right: 5%;
-    animation-delay: 2s;
-    transform: scaleX(-1);
+    animation: float 8s ease-in-out infinite;
 }
 
-.cover-ornament.bottom-left {
+.svg-bottom-left {
     bottom: 10%;
     left: 5%;
-    animation-delay: 1s;
-    transform: scaleY(-1);
+    animation: float 7s ease-in-out infinite;
 }
 
-.cover-ornament.bottom-right {
+.svg-bottom-right {
     bottom: 10%;
     right: 5%;
-    animation-delay: 3s;
-    transform: scale(-1, -1);
+    animation: float 9s ease-in-out infinite;
 }
 
-.svg-ornament.top-ornament {
+/* SVG Decoration Elements */
+.svg-decoration {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Top and Bottom Borders */
+.svg-top-border {
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
     width: 200px;
-    height: 40px;
+    height: 30px;
+    opacity: 0.7;
 }
 
-.svg-ornament.bottom-ornament {
+.svg-bottom-border {
     bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
     width: 200px;
-    height: 40px;
-    transform: translateX(-50%) rotate(180deg);
+    height: 30px;
+    opacity: 0.7;
 }
 
-/* Section Ornaments */
-.section-ornament {
-    width: 100%;
+/* Title Decorations */
+.svg-title-left {
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
     height: 40px;
+    opacity: 0.8;
+}
+
+.svg-title-right {
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    opacity: 0.8;
+}
+
+/* Frame Decorations */
+.svg-guest-frame,
+.svg-date-frame,
+.svg-button-frame,
+.svg-verse-frame,
+.svg-text-frame,
+.svg-arabic-frame,
+.svg-message-frame {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.to-guest:hover ~ .svg-guest-frame,
+.cover-date:hover ~ .svg-date-frame,
+.cover-btn:hover ~ .svg-button-frame,
+.opening-quote:hover ~ .svg-verse-frame,
+.invitation-text:hover ~ .svg-text-frame,
+.closing-message:hover ~ .svg-arabic-frame,
+.countdown-message:hover ~ .svg-message-frame {
     opacity: 0.5;
 }
 
-.section-ornament.top {
+/* Section Borders */
+.svg-section-top {
+    top: -25px;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    opacity: 0.5;
+}
+
+.svg-section-bottom {
+    bottom: -25px;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    opacity: 0.5;
+}
+
+/* Separators */
+.svg-name-separator,
+.svg-section-separator,
+.svg-info-separator {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 10px;
+    opacity: 0.6;
+}
+
+.svg-name-separator {
+    top: -15px;
+}
+
+.svg-section-separator {
+    top: -20px;
+}
+
+.svg-info-separator {
+    top: -10px;
+}
+
+/* Card Backgrounds */
+.svg-card-bg {
+    position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    z-index: -1;
+    border-radius: 15px;
 }
 
-.section-ornament.bottom {
+.couple-card:hover .svg-card-bg,
+.event-card:hover .svg-card-bg,
+.bank-card:hover .svg-card-bg {
+    opacity: 0.1;
+}
+
+/* Photo Frame */
+.svg-photo-frame {
+    width: 150px;
+    height: 150px;
+    top: -5px;
+    left: -5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.couple-img-container:hover .svg-photo-frame {
+    opacity: 0.7;
+}
+
+/* Underline Decorations */
+.svg-name-underline {
     bottom: 0;
-    left: 0;
-    transform: rotate(180deg);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    opacity: 0.5;
 }
 
-/* Title Ornaments */
-.title-ornament {
+/* Icon Frames */
+.svg-icon-frame,
+.svg-bank-icon-frame,
+.svg-event-icon {
+    width: 50px;
+    height: 50px;
+    top: -10px;
+    right: -10px;
+    opacity: 0.6;
+}
+
+/* Card Borders */
+.svg-card-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, var(--primary), var(--accent)) 1;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.couple-card:hover .svg-card-border,
+.event-card:hover .svg-card-border,
+.bank-card:hover .svg-card-border {
+    opacity: 0.8;
+}
+
+/* Gallery Frames */
+.svg-gallery-frame {
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    top: -5px;
+    left: -5px;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, var(--primary), var(--secondary)) 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .svg-gallery-frame {
+    opacity: 1;
+}
+
+/* Gallery Corners */
+.svg-gallery-corner-1,
+.svg-gallery-corner-2,
+.svg-gallery-corner-3,
+.svg-gallery-corner-4 {
+    width: 15px;
+    height: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.svg-gallery-corner-1 {
+    top: -3px;
+    left: -3px;
+    border-top: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
+}
+
+.svg-gallery-corner-2 {
+    top: -3px;
+    right: -3px;
+    border-top: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+}
+
+.svg-gallery-corner-3 {
+    bottom: -3px;
+    left: -3px;
+    border-bottom: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
+}
+
+.svg-gallery-corner-4 {
+    bottom: -3px;
+    right: -3px;
+    border-bottom: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+}
+
+.gallery-item:hover .svg-gallery-corner-1,
+.gallery-item:hover .svg-gallery-corner-2,
+.gallery-item:hover .svg-gallery-corner-3,
+.gallery-item:hover .svg-gallery-corner-4 {
+    opacity: 1;
+}
+
+/* Countdown Elements */
+.svg-countdown-bg {
+    width: 100%;
+    height: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+}
+
+.svg-countdown-frame {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    border-radius: 10px;
+}
+
+.countdown-item:hover .svg-countdown-frame {
+    opacity: 0.6;
+}
+
+/* Form Elements */
+.svg-form-frame {
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    top: -5px;
+    left: -5px;
+    border-radius: 20px;
+    opacity: 0.3;
+}
+
+.svg-form-border {
+    width: 100%;
+    height: 3px;
+    bottom: -10px;
+    left: 0;
+    opacity: 0.5;
+}
+
+/* Floating Elements */
+.svg-floating {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+    animation: float 10s ease-in-out infinite;
+}
+
+.svg-floating-1 {
+    top: 20%;
+    left: 10%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 0s;
+}
+
+.svg-floating-2 {
+    top: 40%;
+    right: 15%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 2s;
+}
+
+.svg-floating-3 {
+    bottom: 30%;
+    left: 20%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.svg-floating-heart-1,
+.svg-floating-heart-2,
+.svg-floating-heart-3 {
+    width: 20px;
+    height: 20px;
+    animation: floatHeart 15s ease-in-out infinite;
+}
+
+.svg-floating-heart-1 {
+    top: 20%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.svg-floating-heart-2 {
+    top: 60%;
+    right: 10%;
+    animation-delay: 5s;
+}
+
+.svg-floating-heart-3 {
+    bottom: 20%;
+    left: 15%;
+    animation-delay: 10s;
+}
+
+/* Envelope Elements */
+.svg-envelope-1,
+.svg-envelope-2 {
+    width: 40px;
+    height: 30px;
+    animation: floatEnvelope 12s ease-in-out infinite;
+}
+
+.svg-envelope-1 {
+    top: 25%;
+    left: 8%;
+    animation-delay: 0s;
+}
+
+.svg-envelope-2 {
+    bottom: 30%;
+    right: 12%;
+    animation-delay: 6s;
+}
+
+/* Message Elements */
+.svg-message-1,
+.svg-message-2,
+.svg-message-3 {
+    width: 25px;
+    height: 25px;
+    animation: floatMessage 8s ease-in-out infinite;
+}
+
+.svg-message-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.svg-message-2 {
+    top: 50%;
+    right: 15%;
+    animation-delay: 2.5s;
+}
+
+.svg-message-3 {
+    bottom: 25%;
+    left: 20%;
+    animation-delay: 5s;
+}
+
+/* Corner Decorations */
+.svg-corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.svg-corner-top-left {
+    top: 20px;
+    left: 20px;
+    border-top: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
+}
+
+.svg-corner-top-right {
+    top: 20px;
+    right: 20px;
+    border-top: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+}
+
+.svg-corner-bottom-left {
+    bottom: 20px;
+    left: 20px;
+    border-bottom: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
+}
+
+.svg-corner-bottom-right {
+    bottom: 20px;
+    right: 20px;
+    border-bottom: 2px solid var(--primary);
+    border-right: 2px solid var(--primary);
+}
+
+/* Pattern Overlays */
+.svg-pattern {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.svg-pattern-1 {
+    top: 15%;
+    left: 5%;
+    animation: rotate 20s linear infinite;
+}
+
+.svg-pattern-2 {
+    bottom: 20%;
+    right: 8%;
+    animation: rotate 25s linear infinite reverse;
+}
+
+.svg-pattern-3 {
+    top: 25%;
+    right: 10%;
+    animation: rotate 30s linear infinite;
+}
+
+.svg-pattern-4 {
+    bottom: 15%;
+    left: 12%;
+    animation: rotate 35s linear infinite reverse;
+}
+
+.svg-pattern-5 {
+    top: 30%;
+    left: 15%;
+    animation: rotate 40s linear infinite;
+}
+
+.svg-pattern-6 {
+    bottom: 25%;
+    right: 18%;
+    animation: rotate 45s linear infinite reverse;
+}
+
+/* Map Frame */
+.svg-map-frame {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    opacity: 0.3;
+}
+
+/* Signature Line */
+.svg-signature-line {
+    width: 200px;
+    height: 2px;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+}
+
+/* Title Decoration */
+.svg-title-decoration {
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
@@ -204,1351 +558,344 @@ h1, h2, h3, h4, h5 {
     opacity: 0.6;
 }
 
-/* Card Ornaments */
-.card-ornament.frame {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.couple-card:hover .card-ornament.frame,
-.event-card:hover .card-ornament.frame,
-.bank-card:hover .card-ornament.frame {
-    opacity: 0.8;
-}
-
-.card-ornament.bottom {
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 20px;
-    opacity: 0.5;
-}
-
-/* Photo Ornaments */
-.photo-ornament {
-    top: -15px;
-    right: -15px;
-    width: 50px;
-    height: 50px;
-    opacity: 0.7;
-}
-
-/* Icon Ornaments */
-.icon-ornament {
-    top: -10px;
-    right: -10px;
-    width: 40px;
-    height: 40px;
-    opacity: 0.6;
-}
-
-/* Gallery Frame Ornaments */
-.gallery-frame-ornament {
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-    border: 2px solid transparent;
-    border-image: linear-gradient(45deg, var(--primary), var(--accent)) 1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.gallery-item:hover .gallery-frame-ornament {
-    opacity: 1;
-}
-
-/* Countdown Ornaments */
-.countdown-ornament {
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
-    opacity: 0.6;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-/* Message Ornaments */
-.message-ornament {
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 20px;
-    opacity: 0.5;
-}
-
-/* Closing Ornaments */
-.closing-ornament {
-    width: 150px;
-    height: 20px;
-    margin: 20px auto;
-    opacity: 0.5;
-}
-
-.arabic-ornament {
-    width: 200px;
-    height: 30px;
-    margin: 20px auto;
-    opacity: 0.4;
-}
-
-.signature-ornament {
-    width: 100px;
-    height: 30px;
-    margin: 30px auto 0;
-    opacity: 0.5;
-}
-
-/* Bank Icon Ornaments */
-.bank-icon-ornament {
-    top: -10px;
-    right: -10px;
-    width: 30px;
-    height: 20px;
-    opacity: 0.7;
-}
-
-/* Form Ornaments */
-.form-ornament.frame {
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border: 1px solid transparent;
-    border-image: linear-gradient(45deg, var(--primary), var(--secondary)) 1;
-    border-radius: 17px;
-    opacity: 0.5;
-    z-index: -1;
-}
-
-.form-ornament.bottom {
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 15px;
-    opacity: 0.4;
-}
-
-/* Special Cover Ornaments */
-.name-ornament {
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 150px;
-    height: 20px;
-    opacity: 0.6;
-}
-
-.date-ornament {
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 20px;
-    opacity: 0.6;
-}
-
-.button-ornament {
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 180px;
-    height: 20px;
-    opacity: 0.6;
-}
-
-/* Verse Ornaments */
-.verse-ornament {
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 250px;
-    height: 30px;
-    opacity: 0.4;
-}
-
-.couple-name-ornament {
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 20px;
-    opacity: 0.5;
-}
-
-.text-bottom-ornament {
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 20px;
-    opacity: 0.4;
-}
-
-/* Music Player dengan Ornamen */
-.music-player {
-    position: fixed;
-    bottom: 70px;
-    left: 15px;
-    z-index: 1000;
-}
-
-.music-btn {
-    background: var(--primary);
-    color: var(--white);
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    font-size: 1.1rem;
-    position: relative;
-    z-index: 2;
-}
-
-.music-btn:hover {
-    background: var(--secondary);
-    transform: scale(1.1);
-}
-
-.music-ornament {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    opacity: 0.7;
-    z-index: 1;
-    animation: rotate 20s linear infinite;
-}
-
-/* Floating Particles */
-.floating-particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.particle {
-    position: absolute;
-    background: var(--primary);
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: floatParticle linear infinite;
-}
-
-/* Cover Section */
-.cover-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-    color: var(--white);
-    text-align: center;
-    position: relative;
-    transition: all 0.8s ease;
-}
-
-.cover-section.hidden {
-    min-height: 0;
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.cover-content {
-    z-index: 2;
-    position: relative;
-}
-
-.cover-title {
-    font-size: 2.8rem;
-    margin-bottom: 15px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.cover-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 25px;
-    font-weight: 300;
-    letter-spacing: 1px;
-}
-
-.cover-divider {
-    margin: 20px 0;
-    color: var(--primary);
-}
-
-.to-guest {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    padding: 10px 20px;
-    border-left: 3px solid var(--primary);
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-}
-
-.cover-date {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-}
-
-.cover-btn {
-    background: var(--primary);
-    border: 2px solid var(--primary);
-    font-size: 1rem;
-    padding: 12px 30px;
-}
-
-.floral-decoration {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
-    color: var(--primary);
-    opacity: 0.7;
-}
-
-.top-floral {
-    margin-bottom: 30px;
-}
-
-.bottom-floral {
-    margin-top: 30px;
-}
-
-/* Section Titles */
-.section-title {
-    font-size: 2.2rem;
-    margin-bottom: 40px;
-    color: var(--secondary);
-    text-align: center;
-    position: relative;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 2px;
-}
-
-/* Pembuka Section */
-#pembuka {
-    background-color: var(--white);
-    text-align: center;
-}
-
-.opening-quote {
-    font-size: 1.2rem;
-    font-style: italic;
-    margin-bottom: 20px;
-    max-width: 800px;
-}
-
-.couple-names {
-    font-size: 2rem;
-    color: var(--primary);
-    margin: 30px 0;
-    font-weight: 600;
-}
-
-.invitation-text {
-    font-size: 1.1rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* Detail Pengantin */
-#detail-pengantin {
-    background-color: var(--light);
-}
-
-.couple-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.couple-card {
-    background: var(--white);
-    border-radius: 15px;
-    padding: 25px;
-    width: 280px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-    position: relative;
-}
-
-.couple-card:hover {
-    transform: translateY(-10px);
-}
-
-.couple-img-container {
-    position: relative;
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 15px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid var(--primary);
-}
-
-.couple-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.couple-card:hover .couple-img {
-    transform: scale(1.1);
-}
-
-.img-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(212, 175, 55, 0.2);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.couple-card:hover .img-overlay {
-    opacity: 1;
-}
-
-.couple-name {
-    font-size: 1.3rem;
-    margin-bottom: 8px;
-    color: var(--secondary);
-}
-
-.couple-parents {
-    font-size: 0.9rem;
-    color: var(--dark);
-    margin-bottom: 15px;
-}
-
-.couple-icon {
-    margin-top: 15px;
-    color: var(--primary);
-    font-size: 1.5rem;
-}
-
-/* Detail Acara */
-#detail-acara {
-    background-color: var(--white);
-}
-
-.event-details {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 40px;
-}
-
-.event-card {
-    background: var(--light);
-    border-radius: 15px;
-    padding: 25px;
-    width: 320px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-    position: relative;
-}
-
-.event-card:hover {
-    transform: translateY(-5px);
-}
-
-.event-icon {
-    font-size: 2.2rem;
-    color: var(--primary);
-    margin-bottom: 15px;
-    position: relative;
-}
-
-.event-title {
-    font-size: 1.3rem;
-    margin-bottom: 12px;
-    color: var(--secondary);
-}
-
-.event-info {
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.calendar-btn {
-    font-size: 0.85rem;
-    padding: 8px 20px;
-}
-
-.map-placeholder {
-    height: 150px;
-    background: linear-gradient(135deg, var(--light), #e8e0d0);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 15px 0;
-    color: var(--secondary);
-}
-
-.map-placeholder i {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-/* Galeri */
-#galeri {
-    background-color: var(--light);
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 12px;
-    margin-top: 40px;
-    width: 100%;
-}
-
-.gallery-item {
-    border-radius: 10px;
-    overflow: hidden;
-    height: 230px;
-    position: relative;
-    cursor: pointer;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.gallery-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    color: white;
-    font-size: 1.5rem;
-}
-
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-/* Hitung Mundur */
-#hitung-mundur {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-    color: var(--white);
-    text-align: center;
-}
-
-.countdown-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 40px;
-}
-
-.countdown-item {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    padding: 15px;
-    min-width: 90px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-}
-
-.countdown-number {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    background: var(--gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.countdown-label {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.countdown-message {
-    margin-top: 30px;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-style: italic;
-}
-
-/* Penutup */
-#penutup {
-    background-color: var(--white);
-    text-align: center;
-}
-
-.closing-message {
-    font-size: 1.1rem;
-    max-width: 800px;
-    margin: 0 auto 25px;
-}
-
-/* Amplop Digital */
-#amplop-digital {
-    background-color: var(--light);
-}
-
-.amplop-text {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-}
-
-.bank-options {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.bank-card {
-    background: var(--white);
-    border-radius: 15px;
-    padding: 20px;
-    width: 230px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-    position: relative;
-}
-
-.bank-card:hover {
-    transform: translateY(-5px);
-}
-
-.bank-icon {
-    font-size: 2rem;
-    color: var(--primary);
-    margin-bottom: 15px;
-    position: relative;
-}
-
-.bank-name {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-    color: var(--secondary);
-}
-
-.account-number {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--dark);
-    background: var(--light);
-    padding: 8px;
-    border-radius: 5px;
-    font-family: monospace;
-}
-
-.account-name {
-    font-size: 0.9rem;
-    color: var(--dark);
-    margin-bottom: 15px;
-}
-
-.btn-copy {
-    background: transparent;
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.btn-copy:hover {
-    background: var(--primary);
-    color: white;
-}
-
-/* Ucapan */
-#ucapan {
-    background-color: var(--white);
-}
-
-.comment-form {
-    max-width: 600px;
-    margin: 25px auto 0;
-    background: var(--light);
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    position: relative;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--primary);
-}
-
-textarea.form-control {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.comments-list {
-    max-width: 800px;
-    margin: 40px auto 0;
-}
-
-.comment-item {
-    background: var(--light);
-    padding: 18px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: var(--shadow);
-    border-left: 3px solid var(--primary);
-}
-
-.comment-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.comment-name {
-    font-weight: 600;
-    color: var(--secondary);
-    font-size: 0.95rem;
-}
-
-.comment-date {
-    color: #777;
-    font-size: 0.85rem;
-}
-
-.comment-item p {
-    font-size: 0.9rem;
-}
-
-.comment-loading {
-    text-align: center;
-    color: #777;
-    font-style: italic;
-    padding: 20px;
-}
-
-/* Bottom Navigation */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--white);
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 5px;
-    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    border-top: 1px solid #eee;
-    height: 60px;
-}
-
-.nav-tab {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: var(--dark);
-    padding: 5px 2px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    flex: 1;
-    max-width: 12.5%;
-    position: relative;
-    min-width: 0;
-}
-
-.nav-tab i {
-    font-size: 1rem;
-    margin-bottom: 3px;
-    transition: all 0.3s ease;
-}
-
-.nav-tab span {
-    font-size: 0.6rem;
-    font-weight: 500;
-    text-align: center;
-    line-height: 1.1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-}
-
-.nav-tab.active {
-    color: var(--primary);
-}
-
-.nav-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background: var(--primary);
-    border-radius: 50%;
-}
-
-.nav-tab:hover {
-    color: var(--primary);
-    background: rgba(212, 175, 55, 0.1);
-}
-
-/* Hide bottom nav on cover */
-.cover-section:not(.hidden) ~ .bottom-nav {
-    display: none;
-}
-
-/* Success Message */
-.success-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    display: none;
-    align-items: center;
-    gap: 10px;
-    z-index: 10000;
-    animation: slideInRight 0.5s, slideOutRight 0.5s 2.5s;
-}
-
-.success-message.show {
-    display: flex;
-}
-
 /* Animations */
 @keyframes float {
     0%, 100% {
         transform: translateY(0) rotate(0deg);
     }
     50% {
-        transform: translateY(-15px) rotate(5deg);
+        transform: translateY(-20px) rotate(10deg);
     }
 }
 
-@keyframes pulse {
+@keyframes floatHeart {
     0%, 100% {
-        transform: translateX(-50%) scale(1);
-        opacity: 0.6;
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translateY(-30px) rotate(90deg) scale(1.1);
+        opacity: 0.5;
     }
     50% {
-        transform: translateX(-50%) scale(1.1);
-        opacity: 0.8;
+        transform: translateY(-15px) rotate(180deg) scale(1);
+        opacity: 0.3;
+    }
+    75% {
+        transform: translateY(-40px) rotate(270deg) scale(1.2);
+        opacity: 0.6;
+    }
+}
+
+@keyframes floatEnvelope {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+    }
+    33% {
+        transform: translateY(-25px) rotate(5deg);
+        opacity: 0.5;
+    }
+    66% {
+        transform: translateY(-10px) rotate(-5deg);
+        opacity: 0.4;
+    }
+}
+
+@keyframes floatMessage {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-20px) scale(1.2);
+        opacity: 0.6;
     }
 }
 
 @keyframes rotate {
     0% {
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: rotate(0deg);
     }
     100% {
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
-@keyframes floatParticle {
-    0% {
-        transform: translateY(100vh) translateX(0);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.5;
-    }
-    90% {
-        opacity: 0.5;
-    }
-    100% {
-        transform: translateY(-100px) translateX(100px);
-        opacity: 0;
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOutRight {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-
-/* Responsive */
+/* Responsive SVG Adjustments */
 @media (max-width: 768px) {
-    body {
-        font-size: 13px;
-        padding-bottom: 60px;
+    .svg-overlay {
+        width: 60px;
+        height: 60px;
+        opacity: 0.5;
     }
     
-    .section {
-        padding: 60px 15px;
-        min-height: 100vh;
-    }
-    
-    .cover-title {
-        font-size: 2.2rem;
-    }
-    
-    .cover-subtitle {
-        font-size: 1.1rem;
-    }
-    
-    .couple-names {
-        font-size: 1.7rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .event-card, .couple-card, .bank-card {
-        width: 100%;
-        max-width: 320px;
-    }
-    
-    .music-player {
-        bottom: 70px;
-        left: 15px;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-    
-    .gallery-item {
-        height: 180px;
-    }
-    
-    .countdown-item {
-        min-width: 70px;
-        padding: 12px;
-    }
-    
-    .countdown-number {
-        font-size: 1.8rem;
-    }
-    
-    .countdown-label {
-        font-size: 0.8rem;
-    }
-    
-    .bottom-nav {
-        padding: 6px 3px;
-        height: 55px;
-    }
-    
-    .nav-tab {
-        padding: 4px 1px;
-    }
-    
-    .nav-tab i {
-        font-size: 0.9rem;
-    }
-    
-    .nav-tab span {
-        font-size: 0.55rem;
-    }
-    
-    /* Responsive Ornaments */
-    .cover-ornament {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .svg-ornament.top-ornament,
-    .svg-ornament.bottom-ornament {
+    .svg-top-border,
+    .svg-bottom-border {
         width: 150px;
+        height: 25px;
+    }
+    
+    .svg-title-left,
+    .svg-title-right {
+        width: 30px;
         height: 30px;
     }
     
-    .title-ornament {
+    .svg-title-decoration {
         width: 120px;
         height: 25px;
         top: -20px;
     }
     
-    .photo-ornament {
-        width: 40px;
-        height: 40px;
-        top: -10px;
-        right: -10px;
+    .svg-name-separator,
+    .svg-section-separator {
+        width: 120px;
+        height: 8px;
     }
     
-    .countdown-ornament {
-        width: 25px;
-        height: 25px;
-        top: -10px;
+    .svg-pattern {
+        width: 80px;
+        height: 80px;
     }
     
-    .music-ornament {
-        width: 50px;
-        height: 50px;
+    .svg-corner {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .svg-floating {
+        width: 20px;
+        height: 20px;
+        opacity: 0.2;
     }
 }
 
 @media (max-width: 480px) {
-    .cover-title {
-        font-size: 1.8rem;
+    .svg-overlay {
+        width: 40px;
+        height: 40px;
+        opacity: 0.4;
     }
     
-    .couple-names {
-        font-size: 1.5rem;
-    }
-    
-    .section-title {
-        font-size: 1.6rem;
-    }
-    
-    .opening-quote {
-        font-size: 1rem;
-    }
-    
-    .arabic {
-        font-size: 1.1rem;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .countdown-container {
-        gap: 10px;
-    }
-    
-    .countdown-item {
-        min-width: 60px;
-        padding: 10px;
-    }
-    
-    .countdown-number {
-        font-size: 1.5rem;
-    }
-    
-    .bottom-nav {
-        padding: 5px 2px;
-        height: 50px;
-    }
-    
-    .nav-tab {
-        padding: 3px 1px;
-    }
-    
-    .nav-tab i {
-        font-size: 0.8rem;
-    }
-    
-    .nav-tab span {
-        font-size: 0.5rem;
-    }
-    
-    /* Responsive Ornaments */
-    .cover-ornament {
-        width: 60px;
-        height: 60px;
-        opacity: 0.6;
-    }
-    
-    .svg-ornament.top-ornament,
-    .svg-ornament.bottom-ornament {
+    .svg-top-border,
+    .svg-bottom-border {
         width: 120px;
-        height: 25px;
+        height: 20px;
     }
     
-    .title-ornament {
+    .svg-title-left,
+    .svg-title-right {
+        display: none;
+    }
+    
+    .svg-title-decoration {
         width: 100px;
         height: 20px;
         top: -15px;
     }
     
-    .photo-ornament {
-        width: 30px;
-        height: 30px;
-        top: -8px;
-        right: -8px;
+    .svg-name-separator,
+    .svg-section-separator {
+        width: 100px;
+        height: 6px;
     }
     
-    .countdown-ornament {
-        width: 20px;
-        height: 20px;
-        top: -8px;
+    .svg-pattern {
+        width: 60px;
+        height: 60px;
     }
     
-    .music-ornament {
-        display: none;
+    .svg-corner {
+        width: 25px;
+        height: 25px;
     }
     
-    .section-ornament {
-        height: 30px;
+    .svg-floating {
+        width: 15px;
+        height: 15px;
+        opacity: 0.15;
+    }
+    
+    .svg-photo-frame {
+        width: 120px;
+        height: 120px;
     }
 }
 
 @media (max-width: 360px) {
-    .section {
-        padding: 50px 10px;
+    .svg-overlay {
+        width: 30px;
+        height: 30px;
+        opacity: 0.3;
     }
     
-    .cover-title {
-        font-size: 1.6rem;
-    }
-    
-    .couple-names {
-        font-size: 1.3rem;
-    }
-    
-    .section-title {
-        font-size: 1.4rem;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .countdown-item {
-        min-width: 55px;
-        padding: 8px;
-    }
-    
-    .countdown-number {
-        font-size: 1.3rem;
-    }
-    
-    .countdown-label {
-        font-size: 0.7rem;
-    }
-    
-    .bottom-nav {
-        padding: 4px 1px;
-        height: 48px;
-    }
-    
-    .nav-tab i {
-        font-size: 0.75rem;
-    }
-    
-    .nav-tab span {
-        font-size: 0.45rem;
-    }
-    
-    /* Responsive Ornaments */
-    .cover-ornament {
-        width: 50px;
-        height: 50px;
-        opacity: 0.5;
-    }
-    
-    .svg-ornament.top-ornament,
-    .svg-ornament.bottom-ornament {
+    .svg-top-border,
+    .svg-bottom-border {
         width: 100px;
-        height: 20px;
+        height: 15px;
     }
     
-    .title-ornament {
+    .svg-title-decoration {
         width: 80px;
         height: 15px;
         top: -10px;
     }
     
-    .photo-ornament {
-        width: 25px;
-        height: 25px;
-        top: -5px;
-        right: -5px;
+    .svg-name-separator,
+    .svg-section-separator {
+        width: 80px;
+        height: 5px;
     }
     
-    .countdown-ornament {
-        width: 15px;
-        height: 15px;
-        top: -5px;
-    }
-}
-
-/* Very small screens */
-@media (max-width: 320px) {
-    .bottom-nav {
-        height: 46px;
+    .svg-pattern {
+        width: 50px;
+        height: 50px;
     }
     
-    .nav-tab span {
-        font-size: 0.4rem;
+    .svg-corner {
+        width: 20px;
+        height: 20px;
     }
     
-    .nav-tab i {
-        font-size: 0.7rem;
+    .svg-floating {
+        display: none;
     }
 }
 
-/* Optimasi untuk foto portrait */
-.gallery-item img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+/* SVG Element Hover Effects */
+.svg-background {
+    transition: opacity 0.3s ease;
 }
 
-.couple-img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+.section:hover .svg-background {
+    opacity: 0.15;
 }
 
-/* SVG Style untuk semua ornamen */
-.svg-ornament svg,
-.cover-ornament svg,
-.section-ornament svg,
-.title-ornament svg,
-.card-ornament svg,
-.photo-ornament svg,
-.icon-ornament svg,
-.gallery-frame-ornament svg,
-.countdown-ornament svg,
-.message-ornament svg,
-.closing-ornament svg,
-.arabic-ornament svg,
-.signature-ornament svg,
-.bank-icon-ornament svg,
-.form-ornament svg,
-.name-ornament svg,
-.date-ornament svg,
-.button-ornament svg,
-.verse-ornament svg,
-.couple-name-ornament svg,
-.text-bottom-ornament svg,
-.music-ornament svg {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
+.cover-section:hover .svg-background {
+    opacity: 0.2;
 }
 
-/* Warna khusus untuk ornamen berdasarkan section */
-.cover-section .svg-ornament svg,
-.cover-section .cover-ornament svg {
-    color: rgba(212, 175, 55, 0.8);
+/* Interactive SVG Effects */
+.couple-card,
+.event-card,
+.bank-card,
+.gallery-item {
+    position: relative;
+    overflow: hidden;
 }
 
-#hitung-mundur .countdown-ornament svg {
+.couple-card::before,
+.event-card::before,
+.bank-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.couple-card:hover::before,
+.event-card:hover::before,
+.bank-card:hover::before {
+    opacity: 1;
+}
+
+/* SVG Loading Animation */
+@keyframes svgLoad {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.svg-background,
+.svg-decoration,
+.svg-overlay,
+.svg-floating {
+    animation: svgLoad 0.5s ease-out forwards;
+}
+
+/* Section-specific SVG Opacity */
+#hitung-mundur .svg-background {
+    opacity: 0.08;
+}
+
+#penutup .svg-background {
+    opacity: 0.06;
+}
+
+#ucapan .svg-background {
+    opacity: 0.05;
+}
+
+/* SVG Color Variations based on Section */
+#pembuka .svg-decoration,
+#penutup .svg-decoration {
+    color: var(--primary);
+}
+
+#detail-pengantin .svg-decoration,
+#detail-acara .svg-decoration {
+    color: var(--accent);
+}
+
+#galeri .svg-decoration {
+    color: var(--secondary);
+}
+
+#hitung-mundur .svg-decoration {
     color: #ff6b6b;
 }
 
-#penutup .closing-ornament svg,
-#penutup .arabic-ornament svg,
-#penutup .signature-ornament svg {
+#amplop-digital .svg-decoration {
     color: #d4af37;
 }
 
-#amplop-digital .bank-icon-ornament svg {
-    color: #d4af37;
+#ucapan .svg-decoration {
+    color: #8b7355;
 }
 
-.music-ornament svg {
-    color: var(--primary);
+/* SVG Size Adjustments for Different Elements */
+.svg-guest-frame,
+.svg-date-frame,
+.svg-button-frame {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* Ensure SVG elements don't interfere with clicks */
+.svg-background,
+.svg-decoration,
+.svg-overlay,
+.svg-floating,
+.svg-corner,
+.svg-pattern {
+    pointer-events: none;
+}
+
+/* SVG Container for Inline SVG */
+#svg-container {
+    display: none;
+}
+
+/* Fallback for SVG not loaded */
+.svg-background:empty::before,
+.svg-decoration:empty::before,
+.svg-overlay:empty::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: currentColor;
+    opacity: 0.1;
+    border-radius: 2px;
 }
