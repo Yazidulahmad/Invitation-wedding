@@ -1,439 +1,3 @@
-// ============ ORNAMEN SVG MANAGEMENT ============
-
-// URL XML SVG dari GitHub
-const SVG_XML_URL = 'https://raw.githubusercontent.com/Yazidulahmad/Invitation-wedding/94542140ac92742bc491d7cff9b6efb75a33d3bc/cover%20ornamen.svg.xml';
-
-// Cache untuk SVG yang sudah dimuat
-let svgCache = null;
-
-// Fungsi untuk memuat SVG dari URL
-async function loadSVGFromURL() {
-    try {
-        const response = await fetch(SVG_XML_URL);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const svgText = await response.text();
-        return svgText;
-    } catch (error) {
-        console.error('Error loading SVG:', error);
-        // Fallback ke SVG default jika gagal
-        return createFallbackSVG();
-    }
-}
-
-// Fungsi untuk membuat SVG fallback
-function createFallbackSVG() {
-    return `
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <defs>
-                <symbol id="ornamen-floral" viewBox="0 0 100 100">
-                    <path d="M50,20 C60,10 75,10 85,20 C95,30 95,45 85,55 C75,65 60,65 50,55 C40,45 40,30 50,20 Z" 
-                          fill="#d4af37" opacity="0.8">
-                        <animate attributeName="d" dur="3s" values="
-                            M50,20 C60,10 75,10 85,20 C95,30 95,45 85,55 C75,65 60,65 50,55 C40,45 40,30 50,20 Z;
-                            M50,18 C62,8 78,8 87,18 C97,28 97,48 87,58 C78,68 62,68 50,58 C38,48 38,28 50,18 Z;
-                            M50,20 C60,10 75,10 85,20 C95,30 95,45 85,55 C75,65 60,65 50,55 C40,45 40,30 50,20 Z
-                        " repeatCount="indefinite"/>
-                    </path>
-                    <circle cx="50" cy="37" r="8" fill="#c19a6b" opacity="0.7">
-                        <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                </symbol>
-                
-                <symbol id="ornamen-border" viewBox="0 0 200 20">
-                    <path d="M0,10 L200,10" stroke="#d4af37" stroke-width="2" stroke-dasharray="10,5">
-                        <animate attributeName="stroke-dashoffset" from="0" to="15" dur="1s" repeatCount="indefinite"/>
-                    </path>
-                </symbol>
-                
-                <symbol id="ornamen-heart" viewBox="0 0 100 100">
-                    <path d="M50,30 C60,20 75,20 85,30 C95,40 95,55 85,65 L50,90 L15,65 C5,55 5,40 15,30 C25,20 40,20 50,30 Z" 
-                          fill="#ff6b6b" opacity="0.8">
-                        <animate attributeName="d" dur="1.5s" values="
-                            M50,30 C60,20 75,20 85,30 C95,40 95,55 85,65 L50,90 L15,65 C5,55 5,40 15,30 C25,20 40,20 50,30 Z;
-                            M50,28 C62,18 78,18 87,28 C97,38 97,58 87,68 L50,95 L13,68 C3,58 3,38 13,28 C22,18 38,18 50,28 Z;
-                            M50,30 C60,20 75,20 85,30 C95,40 95,55 85,65 L50,90 L15,65 C5,55 5,40 15,30 C25,20 40,20 50,30 Z
-                        " repeatCount="indefinite"/>
-                    </path>
-                </symbol>
-            </defs>
-        </svg>
-    `;
-}
-
-// Fungsi untuk mengekstrak simbol dari SVG XML
-function extractSymbolsFromSVG(svgText) {
-    const parser = new DOMParser();
-    const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
-    const symbols = svgDoc.querySelectorAll('symbol');
-    
-    if (symbols.length === 0) {
-        console.warn('No symbols found in SVG, using fallback');
-        const fallbackDoc = parser.parseFromString(createFallbackSVG(), 'image/svg+xml');
-        return fallbackDoc.querySelectorAll('symbol');
-    }
-    
-    return symbols;
-}
-
-// Fungsi untuk mengisi SVG definitions
-async function populateSVGDefinitions() {
-    const svgContainer = document.getElementById('svg-definitions');
-    if (!svgContainer) {
-        console.error('SVG definitions container not found');
-        return;
-    }
-    
-    // Load SVG dari URL
-    const svgText = await loadSVGFromURL();
-    const symbols = extractSymbolsFromSVG(svgText);
-    
-    // Tambahkan simbol ke container
-    symbols.forEach(symbol => {
-        svgContainer.appendChild(symbol.cloneNode(true));
-    });
-    
-    console.log(`Loaded ${symbols.length} SVG symbols`);
-    return symbols;
-}
-
-// Fungsi untuk mengisi ornamen dengan SVG
-function populateOrnamentsWithSVG() {
-    // Mapping elemen ornamen dengan simbol SVG
-    const ornamentMappings = [
-        // Cover ornaments
-        { element: 'cover-ornament-tl', symbol: 'ornamen-floral' },
-        { element: 'cover-ornament-tr', symbol: 'ornamen-floral' },
-        { element: 'cover-ornament-bl', symbol: 'ornamen-floral' },
-        { element: 'cover-ornament-br', symbol: 'ornamen-floral' },
-        { element: 'cover-top-ornament', symbol: 'ornamen-border' },
-        { element: 'cover-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'name-ornament', symbol: 'ornamen-border' },
-        { element: 'date-ornament', symbol: 'ornamen-border' },
-        { element: 'button-ornament', symbol: 'ornamen-border' },
-        
-        // Section ornaments
-        { element: 'pembuka-top-ornament', symbol: 'ornamen-border' },
-        { element: 'pembuka-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'verse-ornament', symbol: 'ornamen-border' },
-        { element: 'couple-name-ornament', symbol: 'ornamen-border' },
-        { element: 'text-bottom-ornament', symbol: 'ornamen-border' },
-        
-        // Pengantin ornaments
-        { element: 'pengantin-top-ornament', symbol: 'ornamen-border' },
-        { element: 'pengantin-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'pengantin-title-ornament', symbol: 'ornamen-border' },
-        { element: 'card-frame-1', symbol: 'ornamen-floral' },
-        { element: 'card-frame-2', symbol: 'ornamen-floral' },
-        { element: 'photo-ornament-1', symbol: 'ornamen-floral' },
-        { element: 'photo-ornament-2', symbol: 'ornamen-floral' },
-        { element: 'card-bottom-1', symbol: 'ornamen-border' },
-        { element: 'card-bottom-2', symbol: 'ornamen-border' },
-        
-        // Acara ornaments
-        { element: 'acara-top-ornament', symbol: 'ornamen-border' },
-        { element: 'acara-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'acara-title-ornament', symbol: 'ornamen-border' },
-        { element: 'event-frame-1', symbol: 'ornamen-floral' },
-        { element: 'event-frame-2', symbol: 'ornamen-floral' },
-        { element: 'event-frame-3', symbol: 'ornamen-floral' },
-        { element: 'event-icon-1', symbol: 'ornamen-floral' },
-        { element: 'event-icon-2', symbol: 'ornamen-floral' },
-        { element: 'event-icon-3', symbol: 'ornamen-floral' },
-        { element: 'event-bottom-1', symbol: 'ornamen-border' },
-        { element: 'event-bottom-2', symbol: 'ornamen-border' },
-        { element: 'event-bottom-3', symbol: 'ornamen-border' },
-        
-        // Galeri ornaments
-        { element: 'galeri-top-ornament', symbol: 'ornamen-border' },
-        { element: 'galeri-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'galeri-title-ornament', symbol: 'ornamen-border' },
-        { element: 'gallery-frame-1', symbol: 'ornamen-floral' },
-        { element: 'gallery-frame-2', symbol: 'ornamen-floral' },
-        { element: 'gallery-frame-3', symbol: 'ornamen-floral' },
-        { element: 'gallery-frame-4', symbol: 'ornamen-floral' },
-        
-        // Hitung mundur ornaments
-        { element: 'mundur-top-ornament', symbol: 'ornamen-border' },
-        { element: 'mundur-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'mundur-title-ornament', symbol: 'ornamen-border' },
-        { element: 'countdown-ornament-1', symbol: 'ornamen-heart' },
-        { element: 'countdown-ornament-2', symbol: 'ornamen-heart' },
-        { element: 'countdown-ornament-3', symbol: 'ornamen-heart' },
-        { element: 'countdown-ornament-4', symbol: 'ornamen-heart' },
-        { element: 'message-ornament', symbol: 'ornamen-border' },
-        
-        // Penutup ornaments
-        { element: 'penutup-top-ornament', symbol: 'ornamen-border' },
-        { element: 'penutup-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'penutup-title-ornament', symbol: 'ornamen-border' },
-        { element: 'closing-ornament-1', symbol: 'ornamen-border' },
-        { element: 'arabic-ornament', symbol: 'ornamen-border' },
-        { element: 'closing-ornament-2', symbol: 'ornamen-border' },
-        { element: 'signature-ornament', symbol: 'ornamen-border' },
-        
-        // Amplop ornaments
-        { element: 'amplop-top-ornament', symbol: 'ornamen-border' },
-        { element: 'amplop-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'amplop-title-ornament', symbol: 'ornamen-border' },
-        { element: 'bank-frame-1', symbol: 'ornamen-floral' },
-        { element: 'bank-frame-2', symbol: 'ornamen-floral' },
-        { element: 'bank-frame-3', symbol: 'ornamen-floral' },
-        { element: 'bank-icon-ornament-1', symbol: 'ornamen-floral' },
-        { element: 'bank-icon-ornament-2', symbol: 'ornamen-floral' },
-        { element: 'bank-icon-ornament-3', symbol: 'ornamen-floral' },
-        { element: 'bank-bottom-1', symbol: 'ornamen-border' },
-        { element: 'bank-bottom-2', symbol: 'ornamen-border' },
-        { element: 'bank-bottom-3', symbol: 'ornamen-border' },
-        
-        // Ucapan ornaments
-        { element: 'ucapan-top-ornament', symbol: 'ornamen-border' },
-        { element: 'ucapan-bottom-ornament', symbol: 'ornamen-border' },
-        { element: 'ucapan-title-ornament', symbol: 'ornamen-border' },
-        { element: 'form-frame', symbol: 'ornamen-floral' },
-        { element: 'form-bottom', symbol: 'ornamen-border' },
-        
-        // Music ornament
-        { element: 'music-ornament', symbol: 'ornamen-floral' }
-    ];
-    
-    // Isi setiap elemen ornamen dengan SVG
-    ornamentMappings.forEach(mapping => {
-        const element = document.getElementById(mapping.element);
-        if (element && !element.querySelector('svg')) {
-            const svgNS = 'http://www.w3.org/2000/svg';
-            const svg = document.createElementNS(svgNS, 'svg');
-            svg.setAttribute('class', 'ornamen-svg');
-            svg.setAttribute('viewBox', '0 0 100 100');
-            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-            
-            const use = document.createElementNS(svgNS, 'use');
-            use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#${mapping.symbol}`);
-            
-            svg.appendChild(use);
-            element.appendChild(svg);
-        }
-    });
-}
-
-// Fungsi untuk membuat floating particles
-function createFloatingParticles() {
-    const container = document.getElementById('floating-particles');
-    if (!container) return;
-    
-    // Bersihkan existing particles
-    container.innerHTML = '';
-    
-    // Buat 20 particles
-    for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Random properties
-        const size = Math.random() * 4 + 2;
-        const left = Math.random() * 100;
-        const duration = Math.random() * 20 + 10;
-        const delay = Math.random() * 10;
-        
-        // Set styles
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${left}%`;
-        particle.style.animationDuration = `${duration}s`;
-        particle.style.animationDelay = `${delay}s`;
-        
-        // Random color from theme
-        const colors = ['#d4af37', '#c19a6b', '#f9e076', '#ffffff'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.backgroundColor = color;
-        
-        container.appendChild(particle);
-    }
-}
-
-// Fungsi untuk mengatur animasi ornamen berdasarkan scroll
-function setupOrnamentScrollAnimations() {
-    const ornaments = document.querySelectorAll('.svg-ornament, .cover-ornament, .section-ornament, .title-ornament');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Aktifkan animasi
-                entry.target.style.animationPlayState = 'running';
-                entry.target.style.opacity = '0.8';
-                
-                // Trigger efek khusus untuk beberapa ornamen
-                if (entry.target.classList.contains('cover-ornament')) {
-                    entry.target.style.transform = 'translateY(0) rotate(0deg)';
-                }
-            } else {
-                // Nonaktifkan animasi untuk optimasi
-                entry.target.style.animationPlayState = 'paused';
-                entry.target.style.opacity = '0.4';
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    });
-    
-    ornaments.forEach(ornament => {
-        observer.observe(ornament);
-    });
-}
-
-// Fungsi untuk mengatur efek hover pada cards
-function setupCardHoverEffects() {
-    const cards = document.querySelectorAll('.couple-card, .event-card, .bank-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            const frame = card.querySelector('.card-ornament.frame');
-            if (frame) {
-                frame.style.opacity = '0.9';
-                frame.style.transform = 'scale(1.02)';
-            }
-            
-            const photo = card.querySelector('.photo-ornament');
-            if (photo) {
-                photo.style.transform = 'rotate(15deg) scale(1.1)';
-            }
-            
-            const icon = card.querySelector('.icon-ornament, .bank-icon-ornament');
-            if (icon) {
-                icon.style.transform = 'scale(1.2)';
-                icon.style.opacity = '0.9';
-            }
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            const frame = card.querySelector('.card-ornament.frame');
-            if (frame) {
-                frame.style.opacity = '0';
-                frame.style.transform = 'scale(1)';
-            }
-            
-            const photo = card.querySelector('.photo-ornament');
-            if (photo) {
-                photo.style.transform = 'rotate(0) scale(1)';
-            }
-            
-            const icon = card.querySelector('.icon-ornament, .bank-icon-ornament');
-            if (icon) {
-                icon.style.transform = 'scale(1)';
-                icon.style.opacity = '0.6';
-            }
-        });
-    });
-}
-
-// Fungsi untuk mengatur efek gallery hover
-function setupGalleryHoverEffects() {
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    galleryItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const frame = item.querySelector('.gallery-frame-ornament');
-            if (frame) {
-                frame.style.opacity = '1';
-                frame.style.borderImageSlice = '1';
-            }
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            const frame = item.querySelector('.gallery-frame-ornament');
-            if (frame) {
-                frame.style.opacity = '0';
-            }
-        });
-    });
-}
-
-// Fungsi untuk mengatur animasi countdown ornaments
-function setupCountdownOrnamentAnimations() {
-    let lastSeconds = null;
-    
-    function updateCountdownOrnaments() {
-        const seconds = parseInt(document.getElementById('seconds').textContent);
-        
-        if (seconds !== lastSeconds) {
-            const ornaments = document.querySelectorAll('.countdown-ornament');
-            ornaments.forEach(ornament => {
-                ornament.style.animation = 'none';
-                setTimeout(() => {
-                    ornament.style.animation = 'pulse 2s ease-in-out infinite';
-                }, 10);
-            });
-            
-            lastSeconds = seconds;
-        }
-    }
-    
-    // Check setiap 100ms
-    setInterval(updateCountdownOrnaments, 100);
-}
-
-// Fungsi untuk mengatur animasi music ornament
-function setupMusicOrnamentAnimation() {
-    const musicToggle = document.getElementById('music-toggle');
-    const musicOrnament = document.querySelector('.music-ornament');
-    
-    if (!musicToggle || !musicOrnament) return;
-    
-    let isPlaying = false;
-    
-    musicToggle.addEventListener('click', () => {
-        isPlaying = !isPlaying;
-        
-        if (isPlaying) {
-            musicOrnament.style.animation = 'rotate 10s linear infinite';
-            musicOrnament.style.opacity = '0.9';
-        } else {
-            musicOrnament.style.animation = 'rotate 20s linear infinite';
-            musicOrnament.style.opacity = '0.6';
-        }
-    });
-}
-
-// Fungsi untuk inisialisasi semua ornamen
-async function initializeOrnaments() {
-    try {
-        console.log('Initializing SVG ornaments...');
-        
-        // Populate SVG definitions
-        await populateSVGDefinitions();
-        
-        // Beri waktu untuk SVG definitions dimuat
-        setTimeout(() => {
-            // Populate ornaments dengan SVG
-            populateOrnamentsWithSVG();
-            
-            // Buat floating particles
-            createFloatingParticles();
-            
-            // Setup scroll animations
-            setupOrnamentScrollAnimations();
-            
-            // Setup hover effects
-            setupCardHoverEffects();
-            setupGalleryHoverEffects();
-            
-            // Setup countdown ornament animations
-            setupCountdownOrnamentAnimations();
-            
-            // Setup music ornament animation
-            setupMusicOrnamentAnimation();
-            
-            console.log('SVG ornaments initialized successfully');
-        }, 500);
-    } catch (error) {
-        console.error('Error initializing ornaments:', error);
-    }
-}
-
-// ============ KODE ASLI ============
-
 // Inisialisasi AOS
 AOS.init({
     duration: 800,
@@ -453,6 +17,150 @@ lightbox.option({
 let currentGuestName = '';
 let database;
 let commentsRef;
+let svgCache = null;
+let currentSection = '';
+
+// SVG Animation Management
+// Load SVG from URL
+async function loadSVG() {
+    if (svgCache) return svgCache;
+    
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/Yazidulahmad/Invitation-wedding/993763d2a883cedb4e441580a3ddc4331d257d12/dekor.svg');
+        const svgText = await response.text();
+        svgCache = svgText;
+        return svgText;
+    } catch (error) {
+        console.error('Error loading SVG:', error);
+        return '';
+    }
+}
+
+// Create SVG animation for a section
+async function createSVGForSection(sectionId) {
+    const svgText = await loadSVG();
+    if (!svgText) return;
+    
+    const container = document.getElementById('svg-animation-container');
+    const template = document.getElementById('svg-template');
+    
+    // Remove existing animation
+    removeAllSVGs();
+    
+    // Create new animation
+    const clone = template.content.cloneNode(true);
+    const svgAnimation = clone.querySelector('.svg-animation');
+    svgAnimation.setAttribute('data-section', sectionId);
+    svgAnimation.innerHTML = svgText;
+    
+    // Add to container
+    container.appendChild(svgAnimation);
+    
+    // Adjust opacity based on section
+    setTimeout(() => {
+        let opacity = 0.15;
+        
+        // Adjust opacity for different sections
+        switch(sectionId) {
+            case 'pembuka':
+            case 'penutup':
+                opacity = 0.1;
+                break;
+            case 'detail-pengantin':
+                opacity = 0.12;
+                break;
+            case 'hitung-mundur':
+                opacity = 0.08; // Lower opacity for dark background
+                break;
+            case 'galeri':
+                opacity = 0.1;
+                break;
+            default:
+                opacity = 0.15;
+        }
+        
+        // Adjust for mobile
+        if (window.innerWidth <= 768) {
+            opacity *= 0.8; // Reduce opacity on mobile
+        }
+        
+        svgAnimation.style.opacity = opacity;
+        currentSection = sectionId;
+    }, 50);
+}
+
+// Remove all SVG animations
+function removeAllSVGs() {
+    const container = document.getElementById('svg-animation-container');
+    const animations = container.querySelectorAll('.svg-animation');
+    
+    animations.forEach(el => {
+        el.style.opacity = '0';
+        setTimeout(() => {
+            if (el.parentNode === container) {
+                container.removeChild(el);
+            }
+        }, 800);
+    });
+}
+
+// Handle section changes
+function handleSectionChange(sectionId) {
+    // Don't create SVG for cover section
+    if (sectionId === 'cover') {
+        removeAllSVGs();
+        return;
+    }
+    
+    // Only create if it's a different section
+    if (sectionId !== currentSection) {
+        createSVGForSection(sectionId);
+    }
+}
+
+// Intersection Observer for SVG animations
+function setupSVGObserver() {
+    const sections = document.querySelectorAll('.section:not(#cover)');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+                handleSectionChange(sectionId);
+            }
+        });
+    }, observerOptions);
+    
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// Adjust SVG size and position based on content
+function adjustSVGForContent() {
+    const activeSVG = document.querySelector('.svg-animation[style*="opacity"]');
+    if (!activeSVG) return;
+    
+    const sectionId = activeSVG.getAttribute('data-section');
+    const section = document.getElementById(sectionId);
+    
+    if (section) {
+        const container = section.querySelector('.container');
+        
+        if (container) {
+            const rect = container.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Adjust SVG to fit content area
+            activeSVG.style.clipPath = `inset(${rect.top}px 0 ${windowHeight - rect.bottom}px 0)`;
+        }
+    }
+}
 
 // Tunggu Firebase siap
 function initializeFirebase() {
@@ -625,8 +333,29 @@ $(document).ready(function() {
         `);
     });
     
-    // Initialize ornaments
-    initializeOrnaments();
+    // Setup SVG animations after page loads
+    $(window).on('load', function() {
+        setTimeout(() => {
+            setupSVGObserver();
+            
+            // Check initial section
+            const initialSection = sessionStorage.getItem('undanganDibuka') === 'true' ? 
+                'pembuka' : 'cover';
+            if (initialSection !== 'cover') {
+                handleSectionChange(initialSection);
+            }
+        }, 1000);
+    });
+    
+    // Adjust SVG on resize and scroll
+    $(window).on('resize', function() {
+        adjustSVGForContent();
+    });
+    
+    // Adjust SVG on scroll
+    $(window).on('scroll', function() {
+        adjustSVGForContent();
+    });
     
     // Musik otomatis
     var audio = document.getElementById('wedding-music');
@@ -661,18 +390,8 @@ $(document).ready(function() {
     
     // Tombol buka undangan
     $('#open-invitation').click(function() {
-        // Animasikan ornamen cover sebelum menyembunyikan
-        const coverOrnaments = document.querySelectorAll('.cover-ornament');
-        coverOrnaments.forEach(ornament => {
-            ornament.style.transition = 'all 0.8s ease';
-            ornament.style.opacity = '0';
-            ornament.style.transform = 'scale(0.5) rotate(45deg)';
-        });
-        
-        // Sembunyikan cover section setelah animasi
-        setTimeout(() => {
-            $('#cover').addClass('hidden');
-        }, 500);
+        // Sembunyikan cover section
+        $('#cover').addClass('hidden');
         
         // Scroll ke section pembuka
         $('html, body').animate({
@@ -693,10 +412,10 @@ $(document).ready(function() {
         // Set status bahwa undangan sudah dibuka
         sessionStorage.setItem('undanganDibuka', 'true');
         
-        // Refresh AOS setelah membuka undangan
+        // Create SVG for pembuka section
         setTimeout(() => {
-            AOS.refresh();
-        }, 500);
+            handleSectionChange('pembuka');
+        }, 1200);
     });
     
     // Cek jika undangan sudah dibuka sebelumnya
@@ -705,10 +424,13 @@ $(document).ready(function() {
         $('#bottom-nav').show();
         preventCoverScroll();
         
-        // Initialize ornaments setelah cover disembunyikan
+        // Create SVG for current section
         setTimeout(() => {
-            initializeOrnaments();
-        }, 100);
+            const currentSectionId = window.location.hash.substring(1) || 'pembuka';
+            if (currentSectionId !== 'cover') {
+                handleSectionChange(currentSectionId);
+            }
+        }, 500);
     }
     
     // Bottom Navigation
@@ -728,6 +450,12 @@ $(document).ready(function() {
         // Update active tab
         $('.nav-tab').removeClass('active');
         $(this).addClass('active');
+        
+        // Handle SVG animation for the section
+        const sectionId = target.substring(1);
+        if (sectionId !== 'cover') {
+            handleSectionChange(sectionId);
+        }
     });
     
     // Hitung mundur
@@ -791,22 +519,6 @@ $(document).ready(function() {
     $('.btn-copy').click(function() {
         var accountNumber = $(this).data('account');
         copyToClipboard(accountNumber);
-        
-        // Animasikan ornamen bank
-        const bankCard = $(this).closest('.bank-card');
-        const bankIconOrnament = bankCard.find('.bank-icon-ornament');
-        if (bankIconOrnament.length) {
-            bankIconOrnament.css({
-                'transform': 'scale(1.3) rotate(15deg)',
-                'transition': 'transform 0.3s ease'
-            });
-            
-            setTimeout(() => {
-                bankIconOrnament.css({
-                    'transform': 'scale(1) rotate(0)'
-                });
-            }, 300);
-        }
     });
     
     // Kirim ucapan
@@ -839,22 +551,6 @@ $(document).ready(function() {
                 // Reset form
                 $('#comment-message').val('');
                 
-                // Animasikan form ornament
-                const formFrame = $('.form-ornament.frame');
-                if (formFrame.length) {
-                    formFrame.css({
-                        'border-image': 'linear-gradient(45deg, #4CAF50, #8BC34A) 1',
-                        'opacity': '0.8'
-                    });
-                    
-                    setTimeout(() => {
-                        formFrame.css({
-                            'border-image': 'linear-gradient(45deg, var(--primary), var(--secondary)) 1',
-                            'opacity': '0.5'
-                        });
-                    }, 1000);
-                }
-                
                 // Tampilkan pesan sukses
                 showSuccessMessage('Ucapan Anda telah terkirim');
             })
@@ -886,15 +582,13 @@ $(document).ready(function() {
                 $(`.nav-tab[href="#${sectionId}"]`).addClass('active');
             }
         });
+        
+        // Adjust SVG for current content
+        adjustSVGForContent();
     });
     
     // Sembunyikan bottom nav di awal (saat di cover dan belum dibuka)
     if (!sessionStorage.getItem('undanganDibuka')) {
         $('#bottom-nav').hide();
     }
-    
-    // Refresh particles pada resize
-    $(window).resize(function() {
-        createFloatingParticles();
-    });
 });
