@@ -23,6 +23,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- SVG Animation Container -->
+    <div id="svg-animation-container"></div>
+    
+    <!-- Template untuk SVG animasi per halaman -->
+    <template id="svg-template">
+        <div class="svg-animation"></div>
+    </template>
+    
     <!-- Audio Element -->
     <audio id="wedding-music" loop>
         <source src="https://raw.githubusercontent.com/Yazidulahmad/nikah-musik/a6decedda2d81eb843286508d740705000c3f845/sumpahdanmati.mp3" type="audio/mpeg">
@@ -74,52 +82,26 @@
     
     <!-- Cover Section -->
     <section id="cover" class="section cover-section">
-        <!-- SVG Background Container -->
-        <div class="svg-background cover-svg-bg" data-svg-type="cover"></div>
-        
-        <!-- SVG Overlay Elements -->
-        <div class="svg-overlay svg-top-left" data-svg-type="floral"></div>
-        <div class="svg-overlay svg-top-right" data-svg-type="floral"></div>
-        <div class="svg-overlay svg-bottom-left" data-svg-type="floral"></div>
-        <div class="svg-overlay svg-bottom-right" data-svg-type="floral"></div>
-        
         <div class="container">
             <div class="cover-content" data-aos="fade-up">
-                <!-- SVG Top Border -->
-                <div class="svg-decoration svg-top-border" data-svg-type="border"></div>
-                
                 <div class="floral-decoration top-floral">
                     <i class="fas fa-leaf"></i>
                     <i class="fas fa-leaf"></i>
                     <i class="fas fa-leaf"></i>
                 </div>
                 
-                <!-- SVG Around Title -->
-                <div class="svg-decoration svg-title-left" data-svg-type="ornament"></div>
                 <h1 class="cover-title">The Wedding</h1>
                 <div class="cover-divider">
                     <i class="fas fa-heart"></i>
                 </div>
-                <!-- SVG Around Subtitle -->
-                <div class="svg-decoration svg-title-right" data-svg-type="ornament"></div>
-                
                 <h2 class="cover-subtitle">Hartini & Ahmad Yazidul Jihad</h2>
                 
-                <!-- SVG Around Guest Name -->
-                <div class="svg-decoration svg-guest-frame" data-svg-type="frame"></div>
-                
                 <div class="to-guest" id="guest-name">Kepada Yth. Bapak/Ibu/Saudara/i</div>
-                
-                <!-- SVG Around Date -->
-                <div class="svg-decoration svg-date-frame" data-svg-type="frame"></div>
                 
                 <div class="cover-date">
                     <i class="far fa-calendar"></i>
                     <span>21 . 12 . 2025</span>
                 </div>
-                
-                <!-- SVG Around Button -->
-                <div class="svg-decoration svg-button-frame" data-svg-type="frame"></div>
                 
                 <button class="btn cover-btn" id="open-invitation">
                     <i class="fas fa-envelope-open-text"></i> Buka Undangan
@@ -130,573 +112,242 @@
                     <i class="fas fa-leaf"></i>
                     <i class="fas fa-leaf"></i>
                 </div>
-                
-                <!-- SVG Bottom Border -->
-                <div class="svg-decoration svg-bottom-border" data-svg-type="border"></div>
             </div>
         </div>
-        
-        <!-- SVG Floating Elements -->
-        <div class="svg-floating svg-floating-1" data-svg-type="floating"></div>
-        <div class="svg-floating svg-floating-2" data-svg-type="floating"></div>
-        <div class="svg-floating svg-floating-3" data-svg-type="floating"></div>
     </section>
     
     <!-- Pembuka Section -->
     <section id="pembuka" class="section">
-        <!-- SVG Background Container -->
-        <div class="svg-background pembuka-svg-bg" data-svg-type="background"></div>
-        
         <div class="container">
-            <!-- SVG Top Decoration -->
-            <div class="svg-decoration svg-section-top" data-svg-type="section-border"></div>
-            
             <div data-aos="fade-up">
-                <!-- SVG Verse Frame -->
-                <div class="svg-decoration svg-verse-frame" data-svg-type="frame"></div>
-                
                 <p class="opening-quote arabic">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ"</p>
                 <p class="opening-quote">(QS. Ar-Rum: 21)</p>
-                
-                <!-- SVG Name Separator -->
-                <div class="svg-decoration svg-name-separator" data-svg-type="separator"></div>
-                
                 <h2 class="couple-names">Hartini & Ahmad Yazidul Jihad</h2>
-                
-                <!-- SVG Text Frame -->
-                <div class="svg-decoration svg-text-frame" data-svg-type="frame"></div>
-                
                 <p class="invitation-text">Dengan penuh rasa syukur dan kebahagiaan, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami.</p>
             </div>
-            
-            <!-- SVG Bottom Decoration -->
-            <div class="svg-decoration svg-section-bottom" data-svg-type="section-border"></div>
         </div>
-        
-        <!-- SVG Corner Decorations -->
-        <div class="svg-corner svg-corner-top-left" data-svg-type="corner"></div>
-        <div class="svg-corner svg-corner-top-right" data-svg-type="corner"></div>
-        <div class="svg-corner svg-corner-bottom-left" data-svg-type="corner"></div>
-        <div class="svg-corner svg-corner-bottom-right" data-svg-type="corner"></div>
     </section>
     
     <!-- Detail Pengantin Section -->
     <section id="detail-pengantin" class="section">
-        <!-- SVG Background Container -->
-        <div class="svg-background pengantin-svg-bg" data-svg-type="background"></div>
-        
         <div class="container">
-            <!-- SVG Title Decoration -->
-            <div class="svg-decoration svg-title-decoration" data-svg-type="title"></div>
-            
             <h2 data-aos="fade-up" class="section-title">Mempelai</h2>
-            
-            <!-- SVG Section Separator -->
-            <div class="svg-decoration svg-section-separator" data-svg-type="separator"></div>
-            
             <div class="couple-container">
                 <div class="couple-card" data-aos="fade-right">
-                    <!-- SVG Card Background -->
-                    <div class="svg-card-bg svg-card-bg-1" data-svg-type="card-bg"></div>
-                    
                     <div class="couple-img-container">
                         <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/59ac14e43997a2891ad1884dd0cff423daf67301/poto%20single%20atin.png" alt="Hartini" class="couple-img">
                         <div class="img-overlay"></div>
-                        
-                        <!-- SVG Photo Frame -->
-                        <div class="svg-decoration svg-photo-frame" data-svg-type="photo-frame"></div>
                     </div>
-                    
-                    <!-- SVG Name Underline -->
-                    <div class="svg-decoration svg-name-underline" data-svg-type="underline"></div>
-                    
                     <h3 class="couple-name">Hartini</h3>
                     <p class="couple-parents">Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
-                    
-                    <!-- SVG Icon Frame -->
-                    <div class="svg-decoration svg-icon-frame" data-svg-type="icon-frame"></div>
-                    
                     <div class="couple-icon">
                         <i class="fas fa-female"></i>
                     </div>
-                    
-                    <!-- SVG Card Border -->
-                    <div class="svg-decoration svg-card-border" data-svg-type="card-border"></div>
                 </div>
                 
                 <div class="couple-card" data-aos="fade-left">
-                    <!-- SVG Card Background -->
-                    <div class="svg-card-bg svg-card-bg-2" data-svg-type="card-bg"></div>
-                    
                     <div class="couple-img-container">
                         <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/poto%20single%20yazid.png" alt="Ahmad Yazidul Jihad" class="couple-img">
                         <div class="img-overlay"></div>
-                        
-                        <!-- SVG Photo Frame -->
-                        <div class="svg-decoration svg-photo-frame" data-svg-type="photo-frame"></div>
                     </div>
-                    
-                    <!-- SVG Name Underline -->
-                    <div class="svg-decoration svg-name-underline" data-svg-type="underline"></div>
-                    
                     <h3 class="couple-name">Ahmad Yazidul Jihad</h3>
                     <p class="couple-parents">Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
-                    
-                    <!-- SVG Icon Frame -->
-                    <div class="svg-decoration svg-icon-frame" data-svg-type="icon-frame"></div>
-                    
                     <div class="couple-icon">
                         <i class="fas fa-male"></i>
                     </div>
-                    
-                    <!-- SVG Card Border -->
-                    <div class="svg-decoration svg-card-border" data-svg-type="card-border"></div>
                 </div>
             </div>
         </div>
-        
-        <!-- SVG Pattern Overlay -->
-        <div class="svg-pattern svg-pattern-1" data-svg-type="pattern"></div>
-        <div class="svg-pattern svg-pattern-2" data-svg-type="pattern"></div>
     </section>
     
     <!-- Detail Acara Section -->
     <section id="detail-acara" class="section">
-        <!-- SVG Background Container -->
-        <div class="svg-background acara-svg-bg" data-svg-type="background"></div>
-        
         <div class="container">
-            <!-- SVG Title Decoration -->
-            <div class="svg-decoration svg-title-decoration" data-svg-type="title"></div>
-            
             <h2 data-aos="fade-up" class="section-title">Detail Acara</h2>
-            
             <div class="event-details">
                 <div class="event-card" data-aos="zoom-in" data-aos-delay="100">
-                    <!-- SVG Card Background -->
-                    <div class="svg-card-bg svg-event-bg-1" data-svg-type="card-bg"></div>
-                    
-                    <!-- SVG Icon Background -->
-                    <div class="svg-decoration svg-event-icon" data-svg-type="icon-bg"></div>
-                    
                     <div class="event-icon">
                         <i class="fas fa-mosque"></i>
                     </div>
                     <h3 class="event-title">Akad Nikah</h3>
-                    
-                    <!-- SVG Info Separator -->
-                    <div class="svg-decoration svg-info-separator" data-svg-type="separator"></div>
-                    
                     <p class="event-info"><i class="far fa-calendar"></i> Sabtu, 21 Desember 2025</p>
                     <p class="event-info"><i class="far fa-clock"></i> 09:00 WIB</p>
                     <p class="event-info"><i class="fas fa-map-marker-alt"></i> Kediaman Mempelai Wanita</p>
-                    
-                    <!-- SVG Button Frame -->
-                    <div class="svg-decoration svg-button-frame" data-svg-type="button-frame"></div>
-                    
                     <button class="btn btn-outline mt-3 calendar-btn" id="save-akad">
                         <i class="far fa-calendar-plus"></i> Simpan ke Kalender
                     </button>
-                    
-                    <!-- SVG Card Border -->
-                    <div class="svg-decoration svg-card-border" data-svg-type="card-border"></div>
                 </div>
                 
                 <div class="event-card" data-aos="zoom-in" data-aos-delay="200">
-                    <!-- SVG Card Background -->
-                    <div class="svg-card-bg svg-event-bg-2" data-svg-type="card-bg"></div>
-                    
-                    <!-- SVG Icon Background -->
-                    <div class="svg-decoration svg-event-icon" data-svg-type="icon-bg"></div>
-                    
                     <div class="event-icon">
                         <i class="fas fa-glass-cheers"></i>
                     </div>
                     <h3 class="event-title">Resepsi</h3>
-                    
-                    <!-- SVG Info Separator -->
-                    <div class="svg-decoration svg-info-separator" data-svg-type="separator"></div>
-                    
                     <p class="event-info"><i class="far fa-calendar"></i> Sabtu, 21 Desember 2025</p>
                     <p class="event-info"><i class="far fa-clock"></i> 11:00 - 14:00 WIB</p>
                     <p class="event-info"><i class="fas fa-map-marker-alt"></i> Gedung Serba Guna</p>
-                    
-                    <!-- SVG Button Frame -->
-                    <div class="svg-decoration svg-button-frame" data-svg-type="button-frame"></div>
-                    
                     <button class="btn btn-outline mt-3 calendar-btn" id="save-resepsi">
                         <i class="far fa-calendar-plus"></i> Simpan ke Kalender
                     </button>
-                    
-                    <!-- SVG Card Border -->
-                    <div class="svg-decoration svg-card-border" data-svg-type="card-border"></div>
                 </div>
                 
                 <div class="event-card" data-aos="zoom-in" data-aos-delay="300">
-                    <!-- SVG Card Background -->
-                    <div class="svg-card-bg svg-event-bg-3" data-svg-type="card-bg"></div>
-                    
-                    <!-- SVG Icon Background -->
-                    <div class="svg-decoration svg-event-icon" data-svg-type="icon-bg"></div>
-                    
                     <div class="event-icon">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
                     <h3 class="event-title">Lokasi Acara</h3>
-                    
-                    <!-- SVG Info Separator -->
-                    <div class="svg-decoration svg-info-separator" data-svg-type="separator"></div>
-                    
                     <p class="event-info"><i class="fas fa-location-dot"></i> Jl. Merdeka No. 123, Jakarta Pusat</p>
                     <div class="map-placeholder">
                         <i class="fas fa-map-location-dot"></i>
                         <p>Peta Lokasi</p>
-                        
-                        <!-- SVG Map Frame -->
-                        <div class="svg-decoration svg-map-frame" data-svg-type="frame"></div>
                     </div>
-                    
-                    <!-- SVG Button Frame -->
-                    <div class="svg-decoration svg-button-frame" data-svg-type="button-frame"></div>
-                    
                     <button class="btn btn-outline mt-3" id="open-map">
                         <i class="fas fa-directions"></i> Buka di Google Maps
                     </button>
-                    
-                    <!-- SVG Card Border -->
-                    <div class="svg-decoration svg-card-border" data-svg-type="card-border"></div>
                 </div>
             </div>
         </div>
-        
-        <!-- SVG Pattern Overlay -->
-        <div class="svg-pattern svg-pattern-3" data-svg-type="pattern"></div>
-        <div class="svg-pattern svg-pattern-4" data-svg-type="pattern"></div>
     </section>
     
     <!-- Galeri Section -->
     <section id="galeri" class="section">
-        <!-- SVG Background Container -->
-        <div class="svg-background galeri-svg-bg" data-svg-type="background"></div>
-        
         <div class="container">
-            <!-- SVG Title Decoration -->
-            <div class="svg-decoration svg-title-decoration" data-svg-type="title"></div>
-            
             <h2 data-aos="fade-up" class="section-title">Galeri Kami</h2>
-            
             <div class="gallery-grid">
                 <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up">
-                    <!-- SVG Gallery Frame -->
-                    <div class="svg-decoration svg-gallery-frame" data-svg-type="gallery-frame"></div>
-                    
                     <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd.png" alt="Prewedding 1">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
-                    
-                    <!-- SVG Gallery Corner -->
-                    <div class="svg-decoration svg-gallery-corner-1" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-2" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-3" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-4" data-svg-type="corner"></div>
                 </a>
                 <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%202.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                    <!-- SVG Gallery Frame -->
-                    <div class="svg-decoration svg-gallery-frame" data-svg-type="gallery-frame"></div>
-                    
                     <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%202.png" alt="Prewedding 2">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
-                    
-                    <!-- SVG Gallery Corner -->
-                    <div class="svg-decoration svg-gallery-corner-1" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-2" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-3" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-4" data-svg-type="corner"></div>
                 </a>
                 <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%203.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                    <!-- SVG Gallery Frame -->
-                    <div class="svg-decoration svg-gallery-frame" data-svg-type="gallery-frame"></div>
-                    
                     <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%203.png" alt="Prewedding 3">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
-                    
-                    <!-- SVG Gallery Corner -->
-                    <div class="svg-decoration svg-gallery-corner-1" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-2" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-3" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-4" data-svg-type="corner"></div>
                 </a>
                 <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/prewwed%205.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="300">
-                    <!-- SVG Gallery Frame -->
-                    <div class="svg-decoration svg-gallery-frame" data-svg-type="gallery-frame"></div>
-                    
                     <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/prewwed%205.png" alt="Prewedding 4">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
-                    
-                    <!-- SVG Gallery Corner -->
-                    <div class="svg-decoration svg-gallery-corner-1" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-2" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-3" data-svg-type="corner"></div>
-                    <div class="svg-decoration svg-gallery-corner-4" data-svg-type="corner"></div>
                 </a>
             </div>
         </div>
-        
-        <!-- SVG Pattern Overlay -->
-        <div class="svg-pattern svg-pattern-5" data-svg-type="pattern"></div>
-        <div class="svg-pattern svg-pattern-6" data-svg-type="pattern"></div>
     </section>
     
     <!-- Hitung Mundur Section -->
     <section id="hitung-mundur" class="section">
-        <!-- SVG Background Container -->
-        <div class="svg-background countdown-svg-bg" data-svg-type="background"></div>
-        
         <div class="container">
-            <!-- SVG Title Decoration -->
-            <div class="svg-decoration svg-title-decoration" data-svg-type="title"></div>
-            
             <h2 data-aos="fade-up" class="section-title">Hitung Mundur</h2>
-            
-            <!-- SVG Countdown Container Background -->
-            <div class="svg-decoration svg-countdown-bg" data-svg-type="countdown-bg"></div>
-            
             <div class="countdown-container" data-aos="fade-up" data-aos-delay="200">
                 <div class="countdown-item">
-                    <!-- SVG Countdown Item Frame -->
-                    <div class="svg-decoration svg-countdown-frame" data-svg-type="countdown-frame"></div>
-                    
                     <div class="countdown-number" id="days">00</div>
                     <div class="countdown-label">Hari</div>
                 </div>
                 <div class="countdown-item">
-                    <!-- SVG Countdown Item Frame -->
-                    <div class="svg-decoration svg-countdown-frame" data-svg-type="countdown-frame"></div>
-                    
                     <div class="countdown-number" id="hours">00</div>
                     <div class="countdown-label">Jam</div>
                 </div>
                 <div class="countdown-item">
-                    <!-- SVG Countdown Item Frame -->
-                    <div class="svg-decoration svg-countdown-frame" data-svg-type="countdown-frame"></div>
-                    
                     <div class="countdown-number" id="minutes">00</div>
                     <div class="countdown-label">Menit</div>
                 </div>
                 <div class="countdown-item">
-                    <!-- SVG Countdown Item Frame -->
-                    <div class="svg-decoration svg-countdown-frame" data-svg-type="countdown-frame"></div>
-                    
                     <div class="countdown-number" id="seconds">00</div>
                     <div class="countdown-label">Detik</div>
                 </div>
             </div>
-            
-            <!-- SVG Message Frame -->
-            <div class="svg-decoration svg-message-frame" data-svg-type="frame"></div>
-            
             <p class="countdown-message" data-aos="fade-up" data-aos-delay="400">
                 Menuju hari bahagia kami
             </p>
         </div>
-        
-        <!-- SVG Floating Hearts -->
-        <div class="svg-floating svg-floating-heart-1" data-svg-type="floating-heart"></div>
-        <div class="svg-floating svg-floating-heart-2" data-svg-type="floating-heart"></div>
-        <div class="svg-floating svg-floating-heart-3" data-svg-type="floating-heart"></div>
     </section>
     
     <!-- Penutup Section -->
     <section id="penutup" class="section">
-        <!-- SVG Background Container -->
-        <div class="svg-background penutup-svg-bg" data-svg-type="background"></div>
-        
         <div class="container">
-            <!-- SVG Title Decoration -->
-            <div class="svg-decoration svg-title-decoration" data-svg-type="title"></div>
-            
             <div data-aos="fade-up">
                 <h2 class="section-title">Terima Kasih</h2>
-                
-                <!-- SVG Text Frame -->
-                <div class="svg-decoration svg-text-frame" data-svg-type="frame"></div>
-                
                 <p class="closing-message">Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih. Semoga Allah SWT senantiasa meridhoi pernikahan kami dan memberikan keberkahan dalam rumah tangga yang akan kami bangun.</p>
-                
-                <!-- SVG Arabic Frame -->
-                <div class="svg-decoration svg-arabic-frame" data-svg-type="arabic-frame"></div>
-                
                 <p class="closing-message arabic">وَالسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
                 <p class="closing-message">Kami yang berbahagia,</p>
-                
-                <!-- SVG Name Separator -->
-                <div class="svg-decoration svg-name-separator" data-svg-type="separator"></div>
-                
                 <h3 class="couple-names">Hartini & Ahmad Yazidul Jihad</h3>
-                
-                <!-- SVG Signature Line -->
-                <div class="svg-decoration svg-signature-line" data-svg-type="signature"></div>
             </div>
         </div>
-        
-        <!-- SVG Corner Decorations -->
-        <div class="svg-corner svg-corner-top-left" data-svg-type="corner"></div>
-        <div class="svg-corner svg-corner-top-right" data-svg-type="corner"></div>
-        <div class="svg-corner svg-corner-bottom-left" data-svg-type="corner"></div>
-        <div class="svg-corner svg-corner-bottom-right" data-svg-type="corner"></div>
     </section>
     
     <!-- Amplop Digital Section -->
     <section id="amplop-digital" class="section">
-        <!-- SVG Background Container -->
-        <div class="svg-background amplop-svg-bg" data-svg-type="background"></div>
-        
         <div class="container">
-            <!-- SVG Title Decoration -->
-            <div class="svg-decoration svg-title-decoration" data-svg-type="title"></div>
-            
             <h2 data-aos="fade-up" class="section-title">Amplop Digital</h2>
-            
             <p data-aos="fade-up" class="amplop-text">Untuk yang ingin memberikan tanda kasih, dapat melalui transfer ke:</p>
-            
             <div class="bank-options">
                 <div class="bank-card" data-aos="fade-right">
-                    <!-- SVG Card Background -->
-                    <div class="svg-card-bg svg-bank-bg-1" data-svg-type="card-bg"></div>
-                    
-                    <!-- SVG Bank Icon Frame -->
-                    <div class="svg-decoration svg-bank-icon-frame" data-svg-type="icon-frame"></div>
-                    
                     <div class="bank-icon">
                         <i class="fas fa-university"></i>
                     </div>
                     <h3 class="bank-name">Bank BCA</h3>
                     <p class="account-number">123 456 7890</p>
                     <p class="account-name">Hartini</p>
-                    
-                    <!-- SVG Button Frame -->
-                    <div class="svg-decoration svg-button-frame" data-svg-type="button-frame"></div>
-                    
                     <button class="btn-copy" data-account="1234567890">
                         <i class="far fa-copy"></i> Salin Nomor
                     </button>
-                    
-                    <!-- SVG Card Border -->
-                    <div class="svg-decoration svg-card-border" data-svg-type="card-border"></div>
                 </div>
                 <div class="bank-card" data-aos="fade-up">
-                    <!-- SVG Card Background -->
-                    <div class="svg-card-bg svg-bank-bg-2" data-svg-type="card-bg"></div>
-                    
-                    <!-- SVG Bank Icon Frame -->
-                    <div class="svg-decoration svg-bank-icon-frame" data-svg-type="icon-frame"></div>
-                    
                     <div class="bank-icon">
                         <i class="fas fa-landmark"></i>
                     </div>
                     <h3 class="bank-name">Bank Mandiri</h3>
                     <p class="account-number">098 765 4321</p>
                     <p class="account-name">Ahmad Yazidul Jihad</p>
-                    
-                    <!-- SVG Button Frame -->
-                    <div class="svg-decoration svg-button-frame" data-svg-type="button-frame"></div>
-                    
                     <button class="btn-copy" data-account="0987654321">
                         <i class="far fa-copy"></i> Salin Nomor
                     </button>
-                    
-                    <!-- SVG Card Border -->
-                    <div class="svg-decoration svg-card-border" data-svg-type="card-border"></div>
                 </div>
                 <div class="bank-card" data-aos="fade-left">
-                    <!-- SVG Card Background -->
-                    <div class="svg-card-bg svg-bank-bg-3" data-svg-type="card-bg"></div>
-                    
-                    <!-- SVG Bank Icon Frame -->
-                    <div class="svg-decoration svg-bank-icon-frame" data-svg-type="icon-frame"></div>
-                    
                     <div class="bank-icon">
                         <i class="fas fa-piggy-bank"></i>
                     </div>
                     <h3 class="bank-name">Bank BRI</h3>
                     <p class="account-number">567 890 1234</p>
                     <p class="account-name">Hartini & Ahmad Yazidul Jihad</p>
-                    
-                    <!-- SVG Button Frame -->
-                    <div class="svg-decoration svg-button-frame" data-svg-type="button-frame"></div>
-                    
                     <button class="btn-copy" data-account="5678901234">
                         <i class="far fa-copy"></i> Salin Nomor
                     </button>
-                    
-                    <!-- SVG Card Border -->
-                    <div class="svg-decoration svg-card-border" data-svg-type="card-border"></div>
                 </div>
             </div>
         </div>
-        
-        <!-- SVG Envelope Elements -->
-        <div class="svg-floating svg-envelope-1" data-svg-type="envelope"></div>
-        <div class="svg-floating svg-envelope-2" data-svg-type="envelope"></div>
     </section>
     
     <!-- Ucapan Section -->
     <section id="ucapan" class="section">
-        <!-- SVG Background Container -->
-        <div class="svg-background ucapan-svg-bg" data-svg-type="background"></div>
-        
         <div class="container">
-            <!-- SVG Title Decoration -->
-            <div class="svg-decoration svg-title-decoration" data-svg-type="title"></div>
-            
             <h2 data-aos="fade-up" class="section-title">Kirim Ucapan</h2>
-            
             <div class="comment-form" data-aos="fade-up">
-                <!-- SVG Form Frame -->
-                <div class="svg-decoration svg-form-frame" data-svg-type="form-frame"></div>
-                
                 <div class="form-group">
                     <textarea class="form-control" id="comment-message" placeholder="Tulis ucapan dan doa Anda di sini..."></textarea>
                 </div>
-                
-                <!-- SVG Button Frame -->
-                <div class="svg-decoration svg-button-frame" data-svg-type="button-frame"></div>
-                
                 <button class="btn" id="submit-comment">
                     <i class="fas fa-paper-plane"></i> Kirim Ucapan
                 </button>
-                
-                <!-- SVG Form Border -->
-                <div class="svg-decoration svg-form-border" data-svg-type="border"></div>
             </div>
             <div class="comments-list" id="comments-container">
                 <!-- Komentar akan ditampilkan di sini -->
             </div>
         </div>
-        
-        <!-- SVG Floating Messages -->
-        <div class="svg-floating svg-message-1" data-svg-type="message"></div>
-        <div class="svg-floating svg-message-2" data-svg-type="message"></div>
-        <div class="svg-floating svg-message-3" data-svg-type="message"></div>
     </section>
 
     <!-- Success Message Template -->
     <div class="success-message" id="success-message">
         <i class="fas fa-check-circle"></i> 
         <span id="success-text"></span>
-    </div>
-
-    <!-- SVG Definitions Container (Tempat untuk memasukkan SVG XML) -->
-    <div id="svg-container" style="display: none;">
-        <!-- Di sini Anda bisa menempelkan kode XML/SVG Anda -->
-        <!-- Contoh: <svg> ... </svg> -->
     </div>
 
     <!-- Firebase SDK -->
