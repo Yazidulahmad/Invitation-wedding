@@ -16,21 +16,46 @@
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- Lightbox -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
-    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- SVG Styles -->
+    <style>
+        .svg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+        
+        .svg-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
-    <!-- SVG Animation Container -->
-    <div id="svg-animation-container"></div>
-    
-    <!-- Template untuk SVG animasi per halaman -->
-    <template id="svg-template">
-        <div class="svg-animation"></div>
-    </template>
-    
     <!-- Audio Element -->
     <audio id="wedding-music" loop>
         <source src="https://raw.githubusercontent.com/Yazidulahmad/nikah-musik/a6decedda2d81eb843286508d740705000c3f845/sumpahdanmati.mp3" type="audio/mpeg">
@@ -58,14 +83,6 @@
             <i class="fas fa-calendar-day"></i>
             <span>Acara</span>
         </a>
-        <a href="#galeri" class="nav-tab" data-section="galeri">
-            <i class="fas fa-images"></i>
-            <span>Galeri</span>
-        </a>
-        <a href="#hitung-mundur" class="nav-tab" data-section="mundur">
-            <i class="fas fa-hourglass-half"></i>
-            <span>Hitung Mundur</span>
-        </a>
         <a href="#penutup" class="nav-tab" data-section="penutup">
             <i class="fas fa-hands"></i>
             <span>Penutup</span>
@@ -80,9 +97,16 @@
         </a>
     </nav>
     
-    <!-- Cover Section -->
+    <!-- Cover Section dengan SVG -->
     <section id="cover" class="section cover-section">
-        <div class="container">
+        <!-- SVG Background -->
+        <div class="svg-background" id="cover-svg-bg"></div>
+        <!-- SVG Layer -->
+        <svg class="svg-layer" id="cover-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+            <!-- SVG akan dimuat via JavaScript -->
+        </svg>
+        
+        <div class="container content-wrapper">
             <div class="cover-content" data-aos="fade-up">
                 <div class="floral-decoration top-floral">
                     <i class="fas fa-leaf"></i>
@@ -116,10 +140,15 @@
         </div>
     </section>
     
-    <!-- Pembuka Section -->
+    <!-- Pembuka Section dengan SVG -->
     <section id="pembuka" class="section">
-        <div class="container">
-            <div data-aos="fade-up">
+        <!-- SVG Background -->
+        <div class="svg-background" id="pembuka-svg-bg"></div>
+        <!-- SVG Layer -->
+        <svg class="svg-layer" id="pembuka-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
+        
+        <div class="container content-wrapper">
+            <div data-aos="fade-up" data-aos-delay="200">
                 <p class="opening-quote arabic">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ"</p>
                 <p class="opening-quote">(QS. Ar-Rum: 21)</p>
                 <h2 class="couple-names">Hartini & Ahmad Yazidul Jihad</h2>
@@ -128,30 +157,35 @@
         </div>
     </section>
     
-    <!-- Detail Pengantin Section -->
+    <!-- Detail Pengantin Section dengan SVG -->
     <section id="detail-pengantin" class="section">
-        <div class="container">
+        <!-- SVG Background -->
+        <div class="svg-background" id="pengantin-svg-bg"></div>
+        <!-- SVG Layer -->
+        <svg class="svg-layer" id="pengantin-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
+        
+        <div class="container content-wrapper">
             <h2 data-aos="fade-up" class="section-title">Mempelai</h2>
             <div class="couple-container">
-                <div class="couple-card" data-aos="fade-right">
+                <div class="couple-card" data-aos="fade-right" data-aos-delay="200">
                     <div class="couple-img-container">
                         <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/59ac14e43997a2891ad1884dd0cff423daf67301/poto%20single%20atin.png" alt="Hartini" class="couple-img">
                         <div class="img-overlay"></div>
                     </div>
                     <h3 class="couple-name">Hartini</h3>
-                    <p class="couple-parents">Bapak Supriyadi & Ibu Maesaroh/Ibu Sumarni</p>
+                    <p class="couple-parents">Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
                     <div class="couple-icon">
                         <i class="fas fa-female"></i>
                     </div>
                 </div>
                 
-                <div class="couple-card" data-aos="fade-left">
+                <div class="couple-card" data-aos="fade-left" data-aos-delay="200">
                     <div class="couple-img-container">
                         <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/poto%20single%20yazid.png" alt="Ahmad Yazidul Jihad" class="couple-img">
                         <div class="img-overlay"></div>
                     </div>
                     <h3 class="couple-name">Ahmad Yazidul Jihad</h3>
-                    <p class="couple-parents">Bapak Suhada (Alm) & Ibu Didah Saidah</p>
+                    <p class="couple-parents">Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
                     <div class="couple-icon">
                         <i class="fas fa-male"></i>
                     </div>
@@ -160,43 +194,76 @@
         </div>
     </section>
     
-    <!-- Detail Acara Section -->
+    <!-- Detail Acara Section dengan SVG -->
     <section id="detail-acara" class="section">
-        <div class="container">
+        <!-- SVG Background -->
+        <div class="svg-background" id="acara-svg-bg"></div>
+        <!-- SVG Layer -->
+        <svg class="svg-layer" id="acara-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
+        
+        <div class="container content-wrapper">
             <h2 data-aos="fade-up" class="section-title">Detail Acara</h2>
             <div class="event-details">
-                <div class="event-card" data-aos="zoom-in" data-aos-delay="100">
+                <!-- Card gabungan Akad Nikah dan Resepsi -->
+                <div class="event-card combined-card" data-aos="zoom-in" data-aos-delay="200">
                     <div class="event-icon">
-                        <i class="fas fa-mosque"></i>
+                        <i class="fas fa-heart"></i>
                     </div>
-                    <h3 class="event-title">Akad Nikah</h3>
+                    <h3 class="event-title">Akad Nikah & Resepsi</h3>
                     <p class="event-info"><i class="far fa-calendar"></i> Sabtu, 21 Desember 2025</p>
-                    <p class="event-info"><i class="far fa-clock"></i> 09:00 WIB</p>
-                    <p class="event-info"><i class="fas fa-map-marker-alt"></i> Kediaman Mempelai Wanita</p>
-                    <button class="btn btn-outline mt-3 calendar-btn" id="save-akad">
-                        <i class="far fa-calendar-plus"></i> Simpan ke Kalender
+                    
+                    <div class="event-timeline">
+                        <div class="timeline-item">
+                            <h4><i class="fas fa-mosque"></i> Akad Nikah</h4>
+                            <p><i class="far fa-clock"></i> 09:00 WIB</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4><i class="fas fa-glass-cheers"></i> Resepsi</h4>
+                            <p><i class="far fa-clock"></i> 11:00 - 14:00 WIB</p>
+                        </div>
+                    </div>
+                    
+                    <p class="event-info"><i class="fas fa-map-marker-alt"></i> Kediaman Mempelai Wanita & Gedung Serba Guna</p>
+                    
+                    <button class="btn btn-outline mt-3 calendar-btn" id="save-all-events">
+                        <i class="far fa-calendar-plus"></i> Simpan Semua ke Kalender
                     </button>
                 </div>
                 
-                <div class="event-card" data-aos="zoom-in" data-aos-delay="200">
+                <!-- Card Hitung Mundur -->
+                <div class="event-card countdown-card" data-aos="zoom-in" data-aos-delay="300">
                     <div class="event-icon">
-                        <i class="fas fa-glass-cheers"></i>
+                        <i class="fas fa-hourglass-half"></i>
                     </div>
-                    <h3 class="event-title">Resepsi</h3>
-                    <p class="event-info"><i class="far fa-calendar"></i> Sabtu, 21 Desember 2025</p>
-                    <p class="event-info"><i class="far fa-clock"></i> 11:00 - 14:00 WIB</p>
-                    <p class="event-info"><i class="fas fa-map-marker-alt"></i> Gedung Serba Guna</p>
-                    <button class="btn btn-outline mt-3 calendar-btn" id="save-resepsi">
-                        <i class="far fa-calendar-plus"></i> Simpan ke Kalender
-                    </button>
+                    <h3 class="event-title">Hitung Mundur</h3>
+                    <div class="countdown-container-inner">
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="days">00</div>
+                            <div class="countdown-label">Hari</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="hours">00</div>
+                            <div class="countdown-label">Jam</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="minutes">00</div>
+                            <div class="countdown-label">Menit</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="seconds">00</div>
+                            <div class="countdown-label">Detik</div>
+                        </div>
+                    </div>
+                    <p class="countdown-message">Menuju hari bahagia kami</p>
                 </div>
                 
-                <div class="event-card" data-aos="zoom-in" data-aos-delay="300">
+                <!-- Card Lokasi -->
+                <div class="event-card" data-aos="zoom-in" data-aos-delay="400">
                     <div class="event-icon">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
                     <h3 class="event-title">Lokasi Acara</h3>
-                    <p class="event-info"><i class="fas fa-location-dot"></i> Dsun Krajan 1 Desa Sukapura Kec. Rawamerta</p>
+                    <p class="event-info"><i class="fas fa-location-dot"></i> Jl. Merdeka No. 123, Jakarta Pusat</p>
                     <div class="map-placeholder">
                         <i class="fas fa-map-location-dot"></i>
                         <p>Peta Lokasi</p>
@@ -209,71 +276,15 @@
         </div>
     </section>
     
-    <!-- Galeri Section -->
-    <section id="galeri" class="section">
-        <div class="container">
-            <h2 data-aos="fade-up" class="section-title">Galeri Kami</h2>
-            <div class="gallery-grid">
-                <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up">
-                    <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd.png" alt="Prewedding 1">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%202.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%202.png" alt="Prewedding 2">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%203.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/7cdb6d5810c821093de83792d5c54215d19fb482/prewedd%203.png" alt="Prewedding 3">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a href="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/prewwed%205.png" data-lightbox="gallery" class="gallery-item" data-aos="fade-up" data-aos-delay="300">
-                    <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/prewwed%205.png" alt="Prewedding 4">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Hitung Mundur Section -->
-    <section id="hitung-mundur" class="section">
-        <div class="container">
-            <h2 data-aos="fade-up" class="section-title">Hitung Mundur</h2>
-            <div class="countdown-container" data-aos="fade-up" data-aos-delay="200">
-                <div class="countdown-item">
-                    <div class="countdown-number" id="days">00</div>
-                    <div class="countdown-label">Hari</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="hours">00</div>
-                    <div class="countdown-label">Jam</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="minutes">00</div>
-                    <div class="countdown-label">Menit</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="seconds">00</div>
-                    <div class="countdown-label">Detik</div>
-                </div>
-            </div>
-            <p class="countdown-message" data-aos="fade-up" data-aos-delay="400">
-                Menuju hari bahagia kami
-            </p>
-        </div>
-    </section>
-    
-    <!-- Penutup Section -->
+    <!-- Penutup Section dengan SVG -->
     <section id="penutup" class="section">
-        <div class="container">
-            <div data-aos="fade-up">
+        <!-- SVG Background -->
+        <div class="svg-background" id="penutup-svg-bg"></div>
+        <!-- SVG Layer -->
+        <svg class="svg-layer" id="penutup-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
+        
+        <div class="container content-wrapper">
+            <div data-aos="fade-up" data-aos-delay="200">
                 <h2 class="section-title">Terima Kasih</h2>
                 <p class="closing-message">Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih. Semoga Allah SWT senantiasa meridhoi pernikahan kami dan memberikan keberkahan dalam rumah tangga yang akan kami bangun.</p>
                 <p class="closing-message arabic">وَالسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
@@ -283,24 +294,29 @@
         </div>
     </section>
     
-    <!-- Amplop Digital Section -->
+    <!-- Amplop Digital Section dengan SVG -->
     <section id="amplop-digital" class="section">
-        <div class="container">
+        <!-- SVG Background -->
+        <div class="svg-background" id="amplop-svg-bg"></div>
+        <!-- SVG Layer -->
+        <svg class="svg-layer" id="amplop-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
+        
+        <div class="container content-wrapper">
             <h2 data-aos="fade-up" class="section-title">Amplop Digital</h2>
-            <p data-aos="fade-up" class="amplop-text">Untuk yang ingin memberikan tanda kasih, dapat melalui transfer ke:</p>
+            <p data-aos="fade-up" data-aos-delay="100" class="amplop-text">Untuk yang ingin memberikan tanda kasih, dapat melalui transfer ke:</p>
             <div class="bank-options">
-                <div class="bank-card" data-aos="fade-right">
+                <div class="bank-card" data-aos="fade-right" data-aos-delay="200">
                     <div class="bank-icon">
                         <i class="fas fa-university"></i>
                     </div>
-                    <h3 class="bank-name">Bank Mandiri</h3>
-                    <p class="account-number">1730019788653</p>
-                    <p class="account-name">Ahmad Yazidul Jihad</p>
+                    <h3 class="bank-name">Bank BCA</h3>
+                    <p class="account-number">123 456 7890</p>
+                    <p class="account-name">Hartini</p>
                     <button class="btn-copy" data-account="1234567890">
                         <i class="far fa-copy"></i> Salin Nomor
                     </button>
                 </div>
-                <div class="bank-card" data-aos="fade-up">
+                <div class="bank-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="bank-icon">
                         <i class="fas fa-landmark"></i>
                     </div>
@@ -311,7 +327,7 @@
                         <i class="far fa-copy"></i> Salin Nomor
                     </button>
                 </div>
-                <div class="bank-card" data-aos="fade-left">
+                <div class="bank-card" data-aos="fade-left" data-aos-delay="200">
                     <div class="bank-icon">
                         <i class="fas fa-piggy-bank"></i>
                     </div>
@@ -326,11 +342,16 @@
         </div>
     </section>
     
-    <!-- Ucapan Section -->
+    <!-- Ucapan Section dengan SVG -->
     <section id="ucapan" class="section">
-        <div class="container">
+        <!-- SVG Background -->
+        <div class="svg-background" id="ucapan-svg-bg"></div>
+        <!-- SVG Layer -->
+        <svg class="svg-layer" id="ucapan-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
+        
+        <div class="container content-wrapper">
             <h2 data-aos="fade-up" class="section-title">Kirim Ucapan</h2>
-            <div class="comment-form" data-aos="fade-up">
+            <div class="comment-form" data-aos="fade-up" data-aos-delay="200">
                 <div class="form-group">
                     <textarea class="form-control" id="comment-message" placeholder="Tulis ucapan dan doa Anda di sini..."></textarea>
                 </div>
@@ -388,7 +409,6 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
