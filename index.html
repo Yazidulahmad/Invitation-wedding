@@ -16,46 +16,30 @@
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <!-- Lightbox -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- SVG Styles -->
-    <style>
-        .svg-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.1;
-        }
-        
-        .svg-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            pointer-events: none;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .section {
-            position: relative;
-            overflow: hidden;
-        }
-    </style>
 </head>
 <body>
+    <!-- SVG Background Container -->
+    <div id="svg-background-container">
+        <!-- Tempat untuk memasukkan kode SVG buatan Anda -->
+        <!-- Ganti kode di bawah ini dengan SVG Anda sendiri -->
+        <svg id="custom-svg-bg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <!-- Contoh SVG placeholder - GANTI DENGAN SVG BUATAN ANDA -->
+            <defs>
+                <pattern id="floral-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M50,0 C60,10 70,20 50,40 C30,20 40,10 50,0 Z" fill="rgba(212, 175, 55, 0.05)" />
+                    <circle cx="50" cy="50" r="15" fill="rgba(139, 115, 85, 0.03)" />
+                    <path d="M30,70 L70,70 L50,90 Z" fill="rgba(193, 154, 107, 0.04)" />
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#floral-pattern)" opacity="0.3" />
+        </svg>
+    </div>
+    
     <!-- Audio Element -->
     <audio id="wedding-music" loop>
         <source src="https://raw.githubusercontent.com/Yazidulahmad/nikah-musik/a6decedda2d81eb843286508d740705000c3f845/sumpahdanmati.mp3" type="audio/mpeg">
@@ -97,16 +81,10 @@
         </a>
     </nav>
     
-    <!-- Cover Section dengan SVG -->
+    <!-- Cover Section -->
     <section id="cover" class="section cover-section">
-        <!-- SVG Background -->
-        <div class="svg-background" id="cover-svg-bg"></div>
-        <!-- SVG Layer -->
-        <svg class="svg-layer" id="cover-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-            <!-- SVG akan dimuat via JavaScript -->
-        </svg>
-        
-        <div class="container content-wrapper">
+        <div class="svg-section-bg"></div>
+        <div class="container">
             <div class="cover-content" data-aos="fade-up">
                 <div class="floral-decoration top-floral">
                     <i class="fas fa-leaf"></i>
@@ -140,52 +118,44 @@
         </div>
     </section>
     
-    <!-- Pembuka Section dengan SVG -->
+    <!-- Pembuka Section -->
     <section id="pembuka" class="section">
-        <!-- SVG Background -->
-        <div class="svg-background" id="pembuka-svg-bg"></div>
-        <!-- SVG Layer -->
-        <svg class="svg-layer" id="pembuka-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
-        
-        <div class="container content-wrapper">
-            <div data-aos="fade-up" data-aos-delay="200">
+        <div class="svg-section-bg"></div>
+        <div class="container">
+            <div data-aos="fade-up" data-aos-duration="500">
                 <p class="opening-quote arabic">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ"</p>
                 <p class="opening-quote">(QS. Ar-Rum: 21)</p>
-                <h2 class="couple-names">Hartini & Ahmad Yazidul Jihad</h2>
-                <p class="invitation-text">Dengan penuh rasa syukur dan kebahagiaan, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami.</p>
+                <h2 class="couple-names text-animate">Hartini & Ahmad Yazidul Jihad</h2>
+                <p class="invitation-text text-animate">Dengan penuh rasa syukur dan kebahagiaan, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami.</p>
             </div>
         </div>
     </section>
     
-    <!-- Detail Pengantin Section dengan SVG -->
+    <!-- Detail Pengantin Section -->
     <section id="detail-pengantin" class="section">
-        <!-- SVG Background -->
-        <div class="svg-background" id="pengantin-svg-bg"></div>
-        <!-- SVG Layer -->
-        <svg class="svg-layer" id="pengantin-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
-        
-        <div class="container content-wrapper">
-            <h2 data-aos="fade-up" class="section-title">Mempelai</h2>
+        <div class="svg-section-bg"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="500" class="section-title">Mempelai</h2>
             <div class="couple-container">
-                <div class="couple-card" data-aos="fade-right" data-aos-delay="200">
+                <div class="couple-card" data-aos="fade-right" data-aos-duration="500">
                     <div class="couple-img-container">
                         <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/59ac14e43997a2891ad1884dd0cff423daf67301/poto%20single%20atin.png" alt="Hartini" class="couple-img">
                         <div class="img-overlay"></div>
                     </div>
-                    <h3 class="couple-name">Hartini</h3>
-                    <p class="couple-parents">Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
+                    <h3 class="couple-name text-animate">Hartini</h3>
+                    <p class="couple-parents text-animate">Putri dari Bapak Supriyadi & Ibu Maesaroh</p>
                     <div class="couple-icon">
                         <i class="fas fa-female"></i>
                     </div>
                 </div>
                 
-                <div class="couple-card" data-aos="fade-left" data-aos-delay="200">
+                <div class="couple-card" data-aos="fade-left" data-aos-duration="500">
                     <div class="couple-img-container">
                         <img src="https://raw.githubusercontent.com/Yazidulahmad/Foto-bahan/9c659d00adc40f2aa2c72edbe538ead42b7da9c6/poto%20single%20yazid.png" alt="Ahmad Yazidul Jihad" class="couple-img">
                         <div class="img-overlay"></div>
                     </div>
-                    <h3 class="couple-name">Ahmad Yazidul Jihad</h3>
-                    <p class="couple-parents">Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
+                    <h3 class="couple-name text-animate">Ahmad Yazidul Jihad</h3>
+                    <p class="couple-parents text-animate">Putra dari Bapak Suhada (Alm) & Ibu Didah Saidah</p>
                     <div class="couple-icon">
                         <i class="fas fa-male"></i>
                     </div>
@@ -194,164 +164,230 @@
         </div>
     </section>
     
-    <!-- Detail Acara Section dengan SVG -->
+    <!-- Detail Acara Section (Updated) -->
     <section id="detail-acara" class="section">
-        <!-- SVG Background -->
-        <div class="svg-background" id="acara-svg-bg"></div>
-        <!-- SVG Layer -->
-        <svg class="svg-layer" id="acara-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
-        
-        <div class="container content-wrapper">
-            <h2 data-aos="fade-up" class="section-title">Detail Acara</h2>
+        <div class="svg-section-bg"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="500" class="section-title">Detail Acara</h2>
+            
+            <!-- Countdown Timer -->
+            <div class="countdown-container" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Hari</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Jam</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Menit</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Detik</div>
+                </div>
+            </div>
+            <p class="countdown-message" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                Menuju hari bahagia kami
+            </p>
+            
+            <!-- Combined Wedding Event Card -->
             <div class="event-details">
-                <!-- Card gabungan Akad Nikah dan Resepsi -->
-                <div class="event-card combined-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="event-card combined-event" data-aos="zoom-in" data-aos-duration="500" data-aos-delay="300">
                     <div class="event-icon">
                         <i class="fas fa-heart"></i>
                     </div>
                     <h3 class="event-title">Akad Nikah & Resepsi</h3>
-                    <p class="event-info"><i class="far fa-calendar"></i> Sabtu, 21 Desember 2025</p>
                     
-                    <div class="event-timeline">
-                        <div class="timeline-item">
-                            <h4><i class="fas fa-mosque"></i> Akad Nikah</h4>
-                            <p><i class="far fa-clock"></i> 09:00 WIB</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h4><i class="fas fa-glass-cheers"></i> Resepsi</h4>
-                            <p><i class="far fa-clock"></i> 11:00 - 14:00 WIB</p>
+                    <div class="event-time">
+                        <p class="event-info"><i class="far fa-calendar"></i> Sabtu, 21 Desember 2025</p>
+                        <div class="time-details">
+                            <div class="time-section">
+                                <h4><i class="fas fa-mosque"></i> Akad Nikah</h4>
+                                <p><i class="far fa-clock"></i> 09:00 WIB</p>
+                            </div>
+                            <div class="time-section">
+                                <h4><i class="fas fa-glass-cheers"></i> Resepsi</h4>
+                                <p><i class="far fa-clock"></i> 11:00 - 14:00 WIB</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <p class="event-info"><i class="fas fa-map-marker-alt"></i> Kediaman Mempelai Wanita & Gedung Serba Guna</p>
+                    <div class="event-location">
+                        <h4><i class="fas fa-map-marker-alt"></i> Lokasi Acara</h4>
+                        <p>Kediaman Mempelai Wanita & Gedung Serba Guna</p>
+                        <p class="address">Jl. Merdeka No. 123, Jakarta Pusat</p>
+                    </div>
                     
-                    <button class="btn btn-outline mt-3 calendar-btn" id="save-all-events">
-                        <i class="far fa-calendar-plus"></i> Simpan Semua ke Kalender
-                    </button>
-                </div>
-                
-                <!-- Card Hitung Mundur -->
-                <div class="event-card countdown-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="event-icon">
-                        <i class="fas fa-hourglass-half"></i>
+                    <div class="event-actions">
+                        <button class="btn btn-outline calendar-btn" id="save-combined-event">
+                            <i class="far fa-calendar-plus"></i> Simpan ke Kalender
+                        </button>
+                        <button class="btn" id="open-map">
+                            <i class="fas fa-directions"></i> Buka di Google Maps
+                        </button>
                     </div>
-                    <h3 class="event-title">Hitung Mundur</h3>
-                    <div class="countdown-container-inner">
-                        <div class="countdown-item">
-                            <div class="countdown-number" id="days">00</div>
-                            <div class="countdown-label">Hari</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div class="countdown-number" id="hours">00</div>
-                            <div class="countdown-label">Jam</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div class="countdown-number" id="minutes">00</div>
-                            <div class="countdown-label">Menit</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div class="countdown-number" id="seconds">00</div>
-                            <div class="countdown-label">Detik</div>
-                        </div>
-                    </div>
-                    <p class="countdown-message">Menuju hari bahagia kami</p>
-                </div>
-                
-                <!-- Card Lokasi -->
-                <div class="event-card" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="event-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3 class="event-title">Lokasi Acara</h3>
-                    <p class="event-info"><i class="fas fa-location-dot"></i> Jl. Merdeka No. 123, Jakarta Pusat</p>
-                    <div class="map-placeholder">
-                        <i class="fas fa-map-location-dot"></i>
-                        <p>Peta Lokasi</p>
-                    </div>
-                    <button class="btn btn-outline mt-3" id="open-map">
-                        <i class="fas fa-directions"></i> Buka di Google Maps
-                    </button>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Penutup Section dengan SVG -->
+    <!-- Penutup Section -->
     <section id="penutup" class="section">
-        <!-- SVG Background -->
-        <div class="svg-background" id="penutup-svg-bg"></div>
-        <!-- SVG Layer -->
-        <svg class="svg-layer" id="penutup-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
-        
-        <div class="container content-wrapper">
-            <div data-aos="fade-up" data-aos-delay="200">
+        <div class="svg-section-bg"></div>
+        <div class="container">
+            <div data-aos="fade-up" data-aos-duration="500">
                 <h2 class="section-title">Terima Kasih</h2>
-                <p class="closing-message">Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih. Semoga Allah SWT senantiasa meridhoi pernikahan kami dan memberikan keberkahan dalam rumah tangga yang akan kami bangun.</p>
-                <p class="closing-message arabic">وَالسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
-                <p class="closing-message">Kami yang berbahagia,</p>
-                <h3 class="couple-names">Hartini & Ahmad Yazidul Jihad</h3>
+                <p class="closing-message text-animate">Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih. Semoga Allah SWT senantiasa meridhoi pernikahan kami dan memberikan keberkahan dalam rumah tangga yang akan kami bangun.</p>
+                <p class="closing-message arabic text-animate">وَالسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+                <p class="closing-message text-animate">Kami yang berbahagia,</p>
+                <h3 class="couple-names text-animate">Hartini & Ahmad Yazidul Jihad</h3>
             </div>
         </div>
     </section>
     
-    <!-- Amplop Digital Section dengan SVG -->
+    <!-- Amplop Digital Section dengan Desain Kartu ATM -->
     <section id="amplop-digital" class="section">
-        <!-- SVG Background -->
-        <div class="svg-background" id="amplop-svg-bg"></div>
-        <!-- SVG Layer -->
-        <svg class="svg-layer" id="amplop-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
-        
-        <div class="container content-wrapper">
-            <h2 data-aos="fade-up" class="section-title">Amplop Digital</h2>
-            <p data-aos="fade-up" data-aos-delay="100" class="amplop-text">Untuk yang ingin memberikan tanda kasih, dapat melalui transfer ke:</p>
-            <div class="bank-options">
-                <div class="bank-card" data-aos="fade-right" data-aos-delay="200">
-                    <div class="bank-icon">
-                        <i class="fas fa-university"></i>
+        <div class="svg-section-bg"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="500" class="section-title">Amplop Digital</h2>
+            <p data-aos="fade-up" data-aos-duration="500" class="amplop-text">Untuk yang ingin memberikan tanda kasih, dapat melalui transfer ke:</p>
+            
+            <div class="atm-cards-container">
+                <!-- ATM Card 1 -->
+                <div class="atm-card" data-aos="flip-left" data-aos-duration="500">
+                    <div class="atm-card-header">
+                        <div class="bank-logo">
+                            <i class="fas fa-university"></i>
+                            <span>BCA</span>
+                        </div>
+                        <div class="atm-chip">
+                            <i class="fas fa-microchip"></i>
+                        </div>
                     </div>
-                    <h3 class="bank-name">Bank BCA</h3>
-                    <p class="account-number">123 456 7890</p>
-                    <p class="account-name">Hartini</p>
-                    <button class="btn-copy" data-account="1234567890">
-                        <i class="far fa-copy"></i> Salin Nomor
-                    </button>
+                    
+                    <div class="atm-card-number">
+                        <span>1234</span>
+                        <span>5678</span>
+                        <span>9012</span>
+                        <span>3456</span>
+                    </div>
+                    
+                    <div class="atm-card-details">
+                        <div class="card-holder">
+                            <label>Pemilik Kartu</label>
+                            <div class="holder-name">HARTINI</div>
+                        </div>
+                        <div class="card-valid">
+                            <label>Valid Thru</label>
+                            <div class="valid-date">12/30</div>
+                        </div>
+                    </div>
+                    
+                    <div class="atm-card-footer">
+                        <div class="account-info">
+                            <p><strong>No. Rekening:</strong> 1234567890</p>
+                            <p><strong>Atas Nama:</strong> Hartini</p>
+                        </div>
+                        <button class="btn-copy atm-copy-btn" data-account="1234567890">
+                            <i class="far fa-copy"></i> Salin
+                        </button>
+                    </div>
                 </div>
-                <div class="bank-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="bank-icon">
-                        <i class="fas fa-landmark"></i>
+                
+                <!-- ATM Card 2 -->
+                <div class="atm-card" data-aos="flip-left" data-aos-duration="500" data-aos-delay="100">
+                    <div class="atm-card-header">
+                        <div class="bank-logo">
+                            <i class="fas fa-landmark"></i>
+                            <span>Mandiri</span>
+                        </div>
+                        <div class="atm-chip">
+                            <i class="fas fa-microchip"></i>
+                        </div>
                     </div>
-                    <h3 class="bank-name">Bank Mandiri</h3>
-                    <p class="account-number">098 765 4321</p>
-                    <p class="account-name">Ahmad Yazidul Jihad</p>
-                    <button class="btn-copy" data-account="0987654321">
-                        <i class="far fa-copy"></i> Salin Nomor
-                    </button>
+                    
+                    <div class="atm-card-number">
+                        <span>5678</span>
+                        <span>9012</span>
+                        <span>3456</span>
+                        <span>7890</span>
+                    </div>
+                    
+                    <div class="atm-card-details">
+                        <div class="card-holder">
+                            <label>Pemilik Kartu</label>
+                            <div class="holder-name">AHMAD YAZIDUL JIHAD</div>
+                        </div>
+                        <div class="card-valid">
+                            <label>Valid Thru</label>
+                            <div class="valid-date">12/30</div>
+                        </div>
+                    </div>
+                    
+                    <div class="atm-card-footer">
+                        <div class="account-info">
+                            <p><strong>No. Rekening:</strong> 0987654321</p>
+                            <p><strong>Atas Nama:</strong> Ahmad Yazidul Jihad</p>
+                        </div>
+                        <button class="btn-copy atm-copy-btn" data-account="0987654321">
+                            <i class="far fa-copy"></i> Salin
+                        </button>
+                    </div>
                 </div>
-                <div class="bank-card" data-aos="fade-left" data-aos-delay="200">
-                    <div class="bank-icon">
-                        <i class="fas fa-piggy-bank"></i>
+                
+                <!-- ATM Card 3 -->
+                <div class="atm-card" data-aos="flip-left" data-aos-duration="500" data-aos-delay="200">
+                    <div class="atm-card-header">
+                        <div class="bank-logo">
+                            <i class="fas fa-piggy-bank"></i>
+                            <span>BRI</span>
+                        </div>
+                        <div class="atm-chip">
+                            <i class="fas fa-microchip"></i>
+                        </div>
                     </div>
-                    <h3 class="bank-name">Bank BRI</h3>
-                    <p class="account-number">567 890 1234</p>
-                    <p class="account-name">Hartini & Ahmad Yazidul Jihad</p>
-                    <button class="btn-copy" data-account="5678901234">
-                        <i class="far fa-copy"></i> Salin Nomor
-                    </button>
+                    
+                    <div class="atm-card-number">
+                        <span>9012</span>
+                        <span>3456</span>
+                        <span>7890</span>
+                        <span>1234</span>
+                    </div>
+                    
+                    <div class="atm-card-details">
+                        <div class="card-holder">
+                            <label>Pemilik Kartu</label>
+                            <div class="holder-name">HARTINI & AHMAD</div>
+                        </div>
+                        <div class="card-valid">
+                            <label>Valid Thru</label>
+                            <div class="valid-date">12/30</div>
+                        </div>
+                    </div>
+                    
+                    <div class="atm-card-footer">
+                        <div class="account-info">
+                            <p><strong>No. Rekening:</strong> 5678901234</p>
+                            <p><strong>Atas Nama:</strong> Hartini & Ahmad Yazidul Jihad</p>
+                        </div>
+                        <button class="btn-copy atm-copy-btn" data-account="5678901234">
+                            <i class="far fa-copy"></i> Salin
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Ucapan Section dengan SVG -->
+    <!-- Ucapan Section -->
     <section id="ucapan" class="section">
-        <!-- SVG Background -->
-        <div class="svg-background" id="ucapan-svg-bg"></div>
-        <!-- SVG Layer -->
-        <svg class="svg-layer" id="ucapan-svg-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"></svg>
-        
-        <div class="container content-wrapper">
-            <h2 data-aos="fade-up" class="section-title">Kirim Ucapan</h2>
-            <div class="comment-form" data-aos="fade-up" data-aos-delay="200">
+        <div class="svg-section-bg"></div>
+        <div class="container">
+            <h2 data-aos="fade-up" data-aos-duration="500" class="section-title">Kirim Ucapan</h2>
+            <div class="comment-form" data-aos="fade-up" data-aos-duration="500">
                 <div class="form-group">
                     <textarea class="form-control" id="comment-message" placeholder="Tulis ucapan dan doa Anda di sini..."></textarea>
                 </div>
@@ -361,6 +397,9 @@
             </div>
             <div class="comments-list" id="comments-container">
                 <!-- Komentar akan ditampilkan di sini -->
+                <div class="comment-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Memuat ucapan...
+                </div>
             </div>
         </div>
     </section>
@@ -409,6 +448,7 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     
     <!-- Custom JavaScript -->
     <script src="script.js"></script>
